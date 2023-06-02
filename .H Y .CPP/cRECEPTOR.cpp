@@ -2,9 +2,8 @@
 
 using namespace std;
 
-cRECEPTOR::cRECEPTOR(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cCENTRO centro, cFLUIDO fluido_necesita, time_t fecha_ingreso, ePRIORIDAD prioridad, eESTADO estado):cPACIENTE( nombre, fecha_nacimiento, telefono, sexo, centro)
+cRECEPTOR::cRECEPTOR(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO fluido, cCENTRO centro, time_t fecha_ingreso, ePRIORIDAD prioridad, eESTADO estado):cPACIENTE( nombre, fecha_nacimiento, telefono, sexo, fluido, centro)
 {
-	this->fluido_necesita = fluido_necesita;
 	this->fecha_ingreso = fecha_ingreso;
 	this->prioridad = prioridad;
 	this->estado = estado;
@@ -22,11 +21,6 @@ void cRECEPTOR::set_prioridad(ePRIORIDAD prioridad)
 void cRECEPTOR::set_estado(eESTADO estado)
 {
 	this->estado = estado;
-}
-
-cFLUIDO cRECEPTOR::get_fluido_necesita()
-{
-	return this->fluido_necesita;
 }
 
 time_t cRECEPTOR::get_fecha_ingreso()

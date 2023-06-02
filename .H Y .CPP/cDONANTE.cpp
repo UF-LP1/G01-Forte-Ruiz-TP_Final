@@ -2,9 +2,8 @@
 
 using namespace std;
 
-cDONANTE::cDONANTE(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cCENTRO centro, cFLUIDO fluido_dona, vector<cREGISTRO> registros, unsigned int edad, float peso, cHISTORIAL historial) : cPACIENTE( nombre, fecha_nacimiento, telefono, sexo, centro) 
+cDONANTE::cDONANTE(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO fluido, cCENTRO centro, vector<cREGISTRO> registros, unsigned int edad, float peso, cHISTORIAL historial) : cPACIENTE( nombre, fecha_nacimiento, telefono, sexo, fluido, centro)
 {
-	this->fluido_dona = fluido_dona;
 	this->registros = registros;
 	this->edad = edad;
 	this->peso = peso;
@@ -16,11 +15,6 @@ cDONANTE::~cDONANTE()
 }
 
 //setters
-
-void cDONANTE::set_fluido_dona(cFLUIDO fluido_dona)
-{
-	this->fluido_dona = fluido_dona;
-}
 
 void cDONANTE::set_registros(vector<cREGISTRO> registros)
 {
@@ -43,11 +37,6 @@ void cDONANTE::set_historial(cHISTORIAL historial)
 }
 
 //getters
-
-cFLUIDO cDONANTE::get_fluido_dona()
-{
-	return this->fluido_dona;
-}
 
 vector<cREGISTRO> cDONANTE::get_registros()
 {
