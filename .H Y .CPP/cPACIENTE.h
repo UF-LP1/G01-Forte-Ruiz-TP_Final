@@ -14,11 +14,14 @@ protected:
 	time_t fecha_nacimiento;
 	string telefono;
 	eSEXO sexo;
-	cFLUIDO fluido;
+	cFLUIDO* fluido;
 	cCENTRO centro;
+	string dni;
 public:
-	cPACIENTE(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO fluido, cCENTRO centro);
+	cPACIENTE(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO centro, string dni);
 	~cPACIENTE();
+
+	void imprimir();
 
 	void set_centro(cCENTRO centro);
 
@@ -28,5 +31,5 @@ public:
 	eSEXO get_sexo();
 	cFLUIDO get_fluido();
 	cCENTRO get_centro();
-
+	string get_dni();
 };

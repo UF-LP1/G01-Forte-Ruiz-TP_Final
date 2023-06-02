@@ -13,6 +13,10 @@ cRECEPTOR::~cRECEPTOR()
 {
 }
 
+void cRECEPTOR::imprimir()
+{
+}
+
 void cRECEPTOR::set_prioridad(ePRIORIDAD prioridad)
 {
 	this->prioridad = prioridad;

@@ -15,6 +15,8 @@ public:
 	cRECEPTOR(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO fluido, cCENTRO centro, time_t fecha_ingreso, ePRIORIDAD prioridad, eESTADO estado);
 	~cRECEPTOR();
 
+	void imprimir();
+
 	void set_prioridad(ePRIORIDAD prioridad);
 	void set_estado(eESTADO estado);
 

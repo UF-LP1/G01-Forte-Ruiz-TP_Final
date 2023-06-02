@@ -1,6 +1,6 @@
 #include "cPACIENTE.h"
 
-cPACIENTE::cPACIENTE(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO fluido, cCENTRO centro)
+cPACIENTE::cPACIENTE(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO centro, string dni)
 {
 	this->nombre = nombre;
 	this-> fecha_nacimiento = fecha_nacimiento();
@@ -8,10 +8,14 @@ cPACIENTE::cPACIENTE(string nombre, time_t fecha_nacimiento, string telefono, eS
 	this->sexo = sexo;
 	this->fluido = fluido;
 	this->centro = centro;
-
+	this->dni = dni;
 }
 
 cPACIENTE::~cPACIENTE()
+{
+}
+
+void cPACIENTE::imprimir()
 {
 }
 
@@ -52,4 +56,9 @@ cFLUIDO cPACIENTE::get_fluido()
 cCENTRO cPACIENTE::get_centro()
 {
 	return this->centro;
+}
+
+string cPACIENTE::get_dni()
+{
+	return this->dni;
 }

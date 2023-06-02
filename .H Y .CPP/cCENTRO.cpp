@@ -13,6 +13,10 @@ cCENTRO::~cCENTRO()
 {
 }
 
+void cCENTRO::imprimir()
+{
+}
+
 //getters
 
 string cCENTRO::get_nombre()
