@@ -3,6 +3,9 @@
 #include "cDONANTE.h"
 #include "cRECEPTOR.h"
 #include "cCENTRO.h"
+#include "cSANGRE.h"
+#include "cMEDULA.h"
+#include "cPLASMA.h"
 
 using namespace std;
 
@@ -22,6 +25,10 @@ public:
 	vector<cRECEPTOR> get_lista_receptores();
 	vector<cCENTRO> get_lista_centros();
 
+	bool comprobar_requisitos(cDONANTE* donante);
+	cPACIENTE* elegir_receptor(vector<cRECEPTOR> posibles_receptores);
+	void agregar_paciente(vector<cPACIENTE> lista_pacientes);
 
+	bool operator==(cDONANTE* donante, cRECEPTOR* receptor); //COMPATIBILIDAD
 	
 };
