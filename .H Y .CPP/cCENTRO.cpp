@@ -13,6 +13,14 @@ cCENTRO::~cCENTRO()
 {
 }
 
+bool cCENTRO::realizar_transplante()
+{
+	bool a;
+	srand(time(NULL));
+	a = rand() % 1;// los valores bool son 0 y 1?? si no funciona hacer los if
+	return a;
+}
+
 void cCENTRO::imprimir()
 {
 }
