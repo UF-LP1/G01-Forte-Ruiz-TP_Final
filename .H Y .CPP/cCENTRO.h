@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "ePROVINCIA.h"
 
 using namespace std;
 
@@ -7,10 +8,10 @@ class cCENTRO {
 	string nombre;
 	string direccion;
 	string partido;
-	string provincia;
+	ePROVINCIA provincia;
 	string telefono;
 public:
-	cCENTRO(string nombre, string direccion, string partido, string provincia, string telefono);
+	cCENTRO(string nombre, string direccion, string partido, ePROVINCIA provincia, string telefono);
 	~cCENTRO();
 	
 	void imprimir();

@@ -1,6 +1,6 @@
 #include "cCENTRO.h"
 
-cCENTRO::cCENTRO(string nombre, string direccion, string partido, string provincia, string telefono)
+cCENTRO::cCENTRO(string nombre, string direccion, string partido, ePROVINCIA provincia, string telefono)
 {
 	this->nombre = nombre;
 	this->direccion = direccion;
