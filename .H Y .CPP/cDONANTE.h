@@ -25,5 +25,6 @@ public:
 	float get_peso();
 	cHISTORIAL get_historial();
 
+	void crear_registro(cFLUIDO fluido);
 };
 	

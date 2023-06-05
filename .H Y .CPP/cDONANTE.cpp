@@ -60,3 +60,10 @@ cHISTORIAL cDONANTE::get_historial()
 {
 	return this->historial;
 }
+
+void cDONANTE::crear_registro(cFLUIDO fluido)
+{
+	time_t f_actual = time(NULL);
+	cREGISTRO registro(fluido, f_actual, this->centro);
+	this->registros.push_back(registro);
+}
