@@ -24,12 +24,18 @@ public:
 	void imprimir();
 
 	void set_centro(cCENTRO centro);
+	void set_nombre(string nombre);
+	void set_fecha_nacimiento(time_t fecha_nac);
+	void set_telefono(string telefono);
+	void set_sexo(eSEXO sexo);
+	void set_fluido(cFLUIDO* fluido);
+	void set_dni(string dni);
 
 	string get_nombre();
 	time_t get_fecha_nacimiento();
 	string get_telefono();
 	eSEXO get_sexo();
-	cFLUIDO get_fluido();
+	cFLUIDO* get_fluido();
 	cCENTRO get_centro();
 	string get_dni();
 };

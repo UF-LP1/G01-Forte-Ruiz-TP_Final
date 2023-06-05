@@ -11,4 +11,8 @@ public:
 
 	eTIPO get_tipo();
 	bool get_Rh();
+
+	bool verificar_fecha_maxima(cREGISTRO* registro);
+	bool compatibilidad(cFLUIDO* donante);
+
 };

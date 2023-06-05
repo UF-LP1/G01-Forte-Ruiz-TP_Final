@@ -1,2 +1,2 @@
 #pragma once
-enum ePRIORIDAD{1,2,3,4,5};
+enum ePRIORIDAD{uno,dos,tres,cuatro,cinco};

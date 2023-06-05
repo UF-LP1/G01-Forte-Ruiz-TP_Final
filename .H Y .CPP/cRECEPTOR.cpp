@@ -27,6 +27,11 @@ void cRECEPTOR::set_estado(eESTADO estado)
 	this->estado = estado;
 }
 
+void cRECEPTOR::set_fecha_ingreso(stado)
+{
+	this->estado = estado;
+}
+
 time_t cRECEPTOR::get_fecha_ingreso()
 {
 	return this->fecha_ingreso;

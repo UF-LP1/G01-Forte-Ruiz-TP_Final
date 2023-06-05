@@ -25,6 +25,30 @@ void cPACIENTE::set_centro(cCENTRO centro)
 {
 	this->centro = centro;
 }
+void cPACIENTE::set_nombre(string nombre)
+{
+	this->nombre = nombre;
+}
+void cPACIENTE::set_fecha_nacimiento(time_t fecha_nac)
+{
+	this->fecha_nacimiento = fecha_nac;
+}
+void cPACIENTE::set_telefono(string telefono)
+{
+	this->telefono = telefono;
+}
+void cPACIENTE::set_sexo(eSEXO sexo)
+{
+	this->sexo = sexo;
+}
+void cPACIENTE::set_dni(string dni)
+{
+	this-dni = dni;
+}
+void cPACIENTE::set_fluido(cFLUIDO* fluido)
+{
+	this->fluido = fluido;
+}
 
 //getters
 

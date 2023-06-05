@@ -17,12 +17,10 @@ void cBSA::set_lista_donantes(vector<cDONANTE> lista_donantes)
 {
 	this->lista_donantes = lista_donantes;
 }
-
 void cBSA::set_lista_receptores(vector<cRECEPTOR> lista_receptores)
 {
 	this->lista_receptores = lista_receptores;
 }
-
 void cBSA::set_lista_centros(vector<cCENTRO> lista_centros)
 {
 	this->lista_centros = lista_centros;
@@ -33,16 +31,15 @@ vector<cDONANTE> cBSA::get_lista_donantes()
 {
 	return this->lista_donantes;
 }
-
 vector<cRECEPTOR> cBSA::get_lista_receptores()
 {
 	return this->lista_receptores;
 }
-
 vector<cCENTRO> cBSA::get_lista_centros()
 {
 	return this->lista_centros;
 }
+
 
 bool cBSA::comprobar_requisitos(cDONANTE* donante)
 {
@@ -112,26 +109,58 @@ void cBSA::agregar_paciente(vector<cPACIENTE> lista_pacientes) //FALTA VERIFICAR
 	return;
 }
 
-bool cBSA::operator==(cDONANTE* donante, cRECEPTOR* receptor)
+
+void cBSA::protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor) //falta sobrecarga del -
 {
-	cSANGRE* ptr1 = dynamic_cast<cSANGRE*>(donante->get_fluido());
-	cSANGRE* ptr2 = dynamic_cast<cSANGRE*>(receptor->get_fluido());
+	int i = donante->get_registros().size(); //posicion del ultimo registro
+	bool b1,b2;
+	b1 = donante->get_fluido()->verificar_fecha_maxima(&donante->get_registros()[i]);//dynamic cast
+	if (!b)
+		this->lista_donantes= this->lista_donantes-*donante;
+	//se borra de la lista, sobrecarga del -
+	
+	if (!(b1 && donante->get_centro().get_provincia() == receptor->get_centro().get_provincia() && donante->get_centro().get_partido() == receptor->get_centro().get_partido()))//sobrecarga en centro del ==
+		return;//si alguna condicion es falsa, se hace verdadera y entra al if
+	
+	b2 = receptor->get_centro().realizar_transplante(*donante, *receptor);
+	if (b2)
+	{
+		receptor->set_estado(RECIBIO);
+		//this->lista_receptores= this->lista_receptores - receptor; //sobrecarga del -
+	}
+	else
+	{
+		receptor->set_estado(INESTABLE);
+		receptor->set_prioridad(cinco);
+	}
 
+	this->lista_donantes = this->lista_donantes - *donante;
+	//si se realizo el trasnplante hay borrar el donante de la lista
+	//o cambiar la disponibilidad en el registro, no es mucho borrarlo?
+}
+vector<cRECEPTOR> cBSA::buscar_posibles_receptores(cDONANTE* donante)
+{
+	vector<cRECEPTOR> sublista;
 
-	if (ptr1 != nullptr && ptr2 != nullptr && ptr1->get_tipo() == ptr2->get_tipo() && ptr1->get_Rh() == ptr2->get_Rh())
-		return true;
+	for (int i = 0; i < this->lista_receptores.size(); i++)
+	{
+		if (&lista_receptores[i] == donante) // creo que me toma la sobrecarga
+			sublista.push_back();
+	}
+	return sublista;
+}
+void cBSA::iniciar_analisis()// funcion madre que abarca varios metodos
+{
+	vector<cRECEPTOR> sublista;
+	cPACIENTE* pac;
 
-	cMEDULA* ptr3 = dynamic_cast<cMEDULA*>(donante->get_fluido()); 
-	cMEDULA* ptr4 = dynamic_cast<cMEDULA*>(receptor->get_fluido());
+	for (int i = 0; i < this->lista_donantes.size(); i++)
+	{
+		sublista = buscar_posibles_receptores(&this->lista_donantes[i]);
+		pac = elegir_receptor(sublista);
+		if (pac != nullptr)
+			protocolo_transplante(this-> & lista_donantes[i], ptr);
 
-	if (ptr3 != nullptr && ptr4 != nullptr) // checkear condiciones
-		return true;
-
-	cPLASMA* ptr5 = dynamic_cast<cPLASMA*>(donante->get_fluido());
-	cPLASMA* ptr6 = dynamic_cast<cPLASMA*>(receptor->get_fluido());
-
-	if (ptr5 != nullptr && ptr6 != nullptr && ptr5->get_tipo() == ptr6->get_tipo())
-		return true;
-
-	return false;
+	}
+	return 0;
 }

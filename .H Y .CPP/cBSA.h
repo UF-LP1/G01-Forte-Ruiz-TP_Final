@@ -6,7 +6,7 @@
 #include "cSANGRE.h"
 #include "cMEDULA.h"
 #include "cPLASMA.h"
-
+#include "funciones.h"
 using namespace std;
 
 class cBSA {
@@ -29,6 +29,11 @@ public:
 	cPACIENTE* elegir_receptor(vector<cRECEPTOR> posibles_receptores);
 	void agregar_paciente(vector<cPACIENTE> lista_pacientes);
 
-	bool operator==(cDONANTE* donante, cRECEPTOR* receptor); //COMPATIBILIDAD
-	
+	friend vector<cRECEPTOR> operator-(vector<cRECEPTOR> lista, cRECEPTOR elemento);
+	friend vector<cDONANTE> operator-(vector<cDONANTE> lista, cDONANTE elemento);
+	friend bool operator==(cDONANTE* donante, cRECEPTOR* receptor); //COMPATIBILIDAD
+
+	void protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor);
+	vector<cRECEPTOR> buscar_posibles_receptores(cDONANTE* donante);
+	void iniciar_analisis();
 };

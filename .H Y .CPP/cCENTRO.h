@@ -2,6 +2,9 @@
 #include <string>
 #include "ePROVINCIA.h"
 #include <ctime>
+#include "cDONANTE.h"
+#include "cRECEPTOR.h"
+#include "cTRANSPLANTE.h"
 using namespace std;
 
 class cCENTRO {
@@ -15,7 +18,7 @@ public:
 	~cCENTRO();
 	 
 	void imprimir();
-
+	bool realizar_transplante(cDONANTE donante, cRECEPTOR receptor);
 	//Que pasa si el paciente se debe mudar? Deberia poder modificarse
 
 	string get_nombre();

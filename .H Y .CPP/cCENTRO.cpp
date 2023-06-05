@@ -13,12 +13,14 @@ cCENTRO::~cCENTRO()
 {
 }
 
-bool cCENTRO::realizar_transplante()
+bool cCENTRO::realizar_transplante(cDONANTE donante, cRECEPTOR receptor)
 {
 	bool a;
 	srand(time(NULL));
-	a = rand() % 1;// los valores bool son 0 y 1?? si no funciona hacer los if
+	a = rand() % 1;// los valores bool son 0 y 1, si no funciona hacer los if
 	return a;
+	cTRANSPLANTE transplante(time(NULL), receptor, receptor.get_centro(), receptor.get_fluido(), a);
+	transplante.imprimir();
 }
 
 void cCENTRO::imprimir()
