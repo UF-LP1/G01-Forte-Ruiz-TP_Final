@@ -15,6 +15,8 @@ public:
 	cDONANTE(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO fluido, cCENTRO centro, vector<cREGISTRO> registros, unsigned int edad, float peso, cHISTORIAL historial);
 	~cDONANTE();
 	void imprimir();
+	void escribir();
+
 	void set_registros(vector<cREGISTRO> registros);
 	void set_edad(unsigned int edad);// DETALLE: si cae la fecha de nacimiento la tiene que updatear
 	void set_peso(float peso);// nie

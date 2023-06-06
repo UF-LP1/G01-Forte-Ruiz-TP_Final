@@ -84,13 +84,13 @@ cPACIENTE* cBSA::elegir_receptor(vector<cRECEPTOR> posibles_receptores)
 
 	}
 
-	cPACIENTE* ptr = dynamic_cast<cPACIENTE*>( posibles_receptores[max]);
+	cPACIENTE* ptr = dynamic_cast<cPACIENTE*>(&posibles_receptores[max]);
 	
 	return ptr;
 
 }
 
-void cBSA::agregar_paciente(vector<cPACIENTE> lista_pacientes) //FALTA VERIFICAR SI NO ESTA EN OTRA LISTA O SI YA ESTABA
+void cBSA::agregar_paciente(vector<cPACIENTE*> lista_pacientes) //FALTA VERIFICAR SI NO ESTA EN OTRA LISTA O SI YA ESTABA
 {
 	cDONANTE* ptr1;
 	cRECEPTOR* ptr2;
@@ -101,9 +101,9 @@ void cBSA::agregar_paciente(vector<cPACIENTE> lista_pacientes) //FALTA VERIFICAR
 		ptr2 = dynamic_cast<cRECEPTOR*>(lista_pacientes[i]);
 
 		if (ptr1 != nullptr)
-			this->lista_donantes.push_back(lista_pacientes[i]);
+			this->lista_donantes.push_back(*ptr1);
 		if (ptr2 != nullptr)
-			this->lista_receptores.push_back(lista_pacientes[i]);
+			this->lista_receptores.push_back(*ptr2);
 	}
 
 	return;
@@ -115,7 +115,7 @@ void cBSA::protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor) //falta
 	int i = donante->get_registros().size(); //posicion del ultimo registro
 	bool b1,b2;
 	b1 = donante->get_fluido()->verificar_fecha_maxima(&donante->get_registros()[i]);//dynamic cast
-	if (!b)
+	if (!b1)
 		this->lista_donantes= this->lista_donantes-*donante;
 	//se borra de la lista, sobrecarga del -
 	
@@ -145,7 +145,7 @@ vector<cRECEPTOR> cBSA::buscar_posibles_receptores(cDONANTE* donante)
 	for (int i = 0; i < this->lista_receptores.size(); i++)
 	{
 		if (&lista_receptores[i] == donante) // creo que me toma la sobrecarga
-			sublista.push_back();
+			sublista.push_back(this->lista_receptores[i]);
 	}
 	return sublista;
 }
@@ -159,8 +159,8 @@ void cBSA::iniciar_analisis()// funcion madre que abarca varios metodos
 		sublista = buscar_posibles_receptores(&this->lista_donantes[i]);
 		pac = elegir_receptor(sublista);
 		if (pac != nullptr)
-			protocolo_transplante(this-> & lista_donantes[i], ptr);
+			protocolo_transplante(&(this->lista_donantes[i]), dynamic_cast<cRECEPTOR*>(pac));
 
 	}
-	return 0;
+	return;
 }

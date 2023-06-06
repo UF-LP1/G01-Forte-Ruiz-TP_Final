@@ -3,7 +3,7 @@
 cPACIENTE::cPACIENTE(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO centro, string dni)
 {
 	this->nombre = nombre;
-	this-> fecha_nacimiento = fecha_nacimiento();
+	this-> fecha_nacimiento = fecha_nacimiento;
 	this->telefono = telefono;
 	this->sexo = sexo;
 	this->fluido = fluido;

@@ -27,11 +27,11 @@ public:
 
 	bool comprobar_requisitos(cDONANTE* donante);
 	cPACIENTE* elegir_receptor(vector<cRECEPTOR> posibles_receptores);
-	void agregar_paciente(vector<cPACIENTE> lista_pacientes);
+	void agregar_paciente(vector<cPACIENTE*> lista_pacientes);
 
-	friend vector<cRECEPTOR> operator-(vector<cRECEPTOR> lista, cRECEPTOR elemento);
-	friend vector<cDONANTE> operator-(vector<cDONANTE> lista, cDONANTE elemento);
-	friend bool operator==(cDONANTE* donante, cRECEPTOR* receptor); //COMPATIBILIDAD
+	friend vector<cRECEPTOR> operator-(vector<cRECEPTOR> *lista, cRECEPTOR elemento);
+	friend vector<cDONANTE> operator-(vector<cDONANTE> *lista, cDONANTE elemento);
+	friend bool operator==(cDONANTE donante, cRECEPTOR receptor); //COMPATIBILIDAD
 
 	void protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor);
 	vector<cRECEPTOR> buscar_posibles_receptores(cDONANTE* donante);

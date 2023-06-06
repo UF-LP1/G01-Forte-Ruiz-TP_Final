@@ -16,6 +16,7 @@ public:
 	~cRECEPTOR();
 
 	void imprimir();
+	void escribir();
 
 	void set_prioridad(ePRIORIDAD prioridad);
 	void set_estado(eESTADO estado);

@@ -17,6 +17,9 @@ cDONANTE::~cDONANTE()
 void cDONANTE:: imprimir() {
 
 }
+void cDONANTE::escribir()
+{
+}
 //setters
 
 void cDONANTE::set_registros(vector<cREGISTRO> registros)

@@ -17,6 +17,10 @@ void cRECEPTOR::imprimir()
 {
 }
 
+void cRECEPTOR::escribir()
+{
+}
+
 void cRECEPTOR::set_prioridad(ePRIORIDAD prioridad)
 {
 	this->prioridad = prioridad;
@@ -27,10 +31,11 @@ void cRECEPTOR::set_estado(eESTADO estado)
 	this->estado = estado;
 }
 
-void cRECEPTOR::set_fecha_ingreso(stado)
+void cRECEPTOR::set_fecha(time_t fecha)
 {
-	this->estado = estado;
+	this->fecha_ingreso = fecha;
 }
+
 
 time_t cRECEPTOR::get_fecha_ingreso()
 {
