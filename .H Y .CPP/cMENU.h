@@ -7,12 +7,12 @@
 using namespace std;
 
 class cMENU {
-	cBSA BSA;
+	cBSA* BSA;
 public:
-	cMENU(cBSA bsa);
+	cMENU(cBSA* bsa);
 	~cMENU();
 	void ejecutar();
-	void buscar_centro(string nombre, string provincia, string partido);
+	void buscar_centro(string nombre, string provincia, ePROVINCIA partido);
 	cRECEPTOR* buscar_receptor(string dni);
 	void imprimir_listado_donantes();
 	void imprimir_listado_receptores();

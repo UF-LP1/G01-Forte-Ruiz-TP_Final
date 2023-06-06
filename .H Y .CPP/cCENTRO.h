@@ -21,9 +21,14 @@ public:
 	bool realizar_transplante(cDONANTE donante, cRECEPTOR receptor);
 	//Que pasa si el paciente se debe mudar? Deberia poder modificarse
 
+	void set_nombre(string nombre);
+	void set_direccion(string direccion);
+	void set_partido(string partido);
+	void set_provincia(ePROVINCIA provincia);
+	void set_telefono(string telefono);
 	string get_nombre();
 	string get_direccion();
 	string get_partido();
-	string get_provincia();
+	ePROVINCIA get_provincia();
 	string get_telefono();
 };

@@ -23,6 +23,31 @@ bool cCENTRO::realizar_transplante(cDONANTE donante, cRECEPTOR receptor)
 	transplante.imprimir();
 }
 
+void cCENTRO::set_nombre(string nombre)
+{ 
+	this->nombre = nombre;
+}
+
+void cCENTRO::set_direccion(string direccion)
+{
+	this->direccion = direccion;
+}
+
+void cCENTRO::set_partido(string partido)
+{
+	this->partido = partido;
+}
+
+void cCENTRO::set_provincia(ePROVINCIA provincia)
+{
+	this->provincia = provincia;
+}
+
+void cCENTRO::set_telefono(string telefono)
+{
+	this->telefono = telefono;
+}
+
 void cCENTRO::imprimir()
 {
 }
@@ -44,7 +69,7 @@ string cCENTRO::get_partido()
 	return this->partido;
 }
 
-string cCENTRO::get_provincia()
+ePROVINCIA cCENTRO::get_provincia()
 {
 	return this->provincia;
 }
