@@ -162,6 +162,7 @@
     <ClInclude Include=".H Y .CPP\eSEXO.h" />
     <ClInclude Include=".H Y .CPP\eTIPO.h" />
     <ClInclude Include=".H Y .CPP\funciones.h" />
+    <ClInclude Include=".H Y .CPP\VECTOR.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

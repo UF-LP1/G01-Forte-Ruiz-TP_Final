@@ -116,7 +116,7 @@ void cBSA::protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor) //falta
 	bool b1,b2;
 	b1 = donante->get_fluido()->verificar_fecha_maxima(&donante->get_registros()[i]);//dynamic cast
 	if (!b1)
-		this->lista_donantes= this->lista_donantes-*donante;
+		&(this->lista_donantes)-*donante;
 	//se borra de la lista, sobrecarga del -
 	
 	if (!(b1 && donante->get_centro().get_provincia() == receptor->get_centro().get_provincia() && donante->get_centro().get_partido() == receptor->get_centro().get_partido()))//sobrecarga en centro del ==
@@ -126,7 +126,7 @@ void cBSA::protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor) //falta
 	if (b2)
 	{
 		receptor->set_estado(RECIBIO);
-		//this->lista_receptores= this->lista_receptores - receptor; //sobrecarga del -
+		&(this->lista_receptores) - *receptor; //sobrecarga del -
 	}
 	else
 	{
@@ -134,7 +134,7 @@ void cBSA::protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor) //falta
 		receptor->set_prioridad(cinco);
 	}
 
-	this->lista_donantes = this->lista_donantes - *donante;
+	this->lista_donantes = &(this->lista_donantes) - *donante;
 	//si se realizo el trasnplante hay borrar el donante de la lista
 	//o cambiar la disponibilidad en el registro, no es mucho borrarlo?
 }
@@ -144,7 +144,7 @@ vector<cRECEPTOR> cBSA::buscar_posibles_receptores(cDONANTE* donante)
 
 	for (int i = 0; i < this->lista_receptores.size(); i++)
 	{
-		if (&lista_receptores[i] == donante) // creo que me toma la sobrecarga
+		if ( *donante == this->lista_receptores[i]) 
 			sublista.push_back(this->lista_receptores[i]);
 	}
 	return sublista;

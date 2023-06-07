@@ -47,7 +47,7 @@ std::vector<cDONANTE> operator-(std::vector<cDONANTE> *lista, cDONANTE elemento)
 {
 	for (int i = 0; i < lista->size(); i++) 
 	{
-		if (lista[i] == elemento)
+		if (lista->at(i)==elemento)//hacer sobrecarga del ==, estas comparando dos objetos
 			lista->erase(lista->begin() + i);//si tira error hay que hacer como hicimos en el TP3
 	}
 	return *lista;

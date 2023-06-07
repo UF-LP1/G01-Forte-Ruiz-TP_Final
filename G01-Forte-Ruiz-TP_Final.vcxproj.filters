@@ -116,5 +116,8 @@
     <ClInclude Include=".H Y .CPP\funciones.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include=".H Y .CPP\VECTOR.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
