@@ -15,16 +15,16 @@ protected:
 	string telefono;
 	eSEXO sexo;
 	cFLUIDO* fluido;
-	cCENTRO centro;
+	cCENTRO* centro;
 	string dni;
 public:
-	cPACIENTE(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO centro, string dni);
+	cPACIENTE(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO* centro, string dni);
 	~cPACIENTE();
 
 	void imprimir();
-	virtual void escribir() = 0;
+	virtual void escribir() = 0;  //HAY QUE ENCONTRAR OTRO METODO VIRTUAL
 
-	void set_centro(cCENTRO centro);
+	void set_centro(cCENTRO* centro);
 	void set_nombre(string nombre);
 	void set_fecha_nacimiento(time_t fecha_nac);
 	void set_telefono(string telefono);
@@ -37,6 +37,6 @@ public:
 	string get_telefono();
 	eSEXO get_sexo();
 	cFLUIDO* get_fluido();
-	cCENTRO get_centro();
+	cCENTRO* get_centro();
 	string get_dni();
 };

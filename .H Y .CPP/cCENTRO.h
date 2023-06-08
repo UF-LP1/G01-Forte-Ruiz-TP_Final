@@ -5,6 +5,7 @@
 #include "cDONANTE.h"
 #include "cRECEPTOR.h"
 #include "cTRANSPLANTE.h"
+
 using namespace std;
 
 class cCENTRO {
@@ -19,7 +20,7 @@ public:
 	 
 	void imprimir();
 	bool realizar_transplante(cDONANTE donante, cRECEPTOR receptor);
-	//Que pasa si el paciente se debe mudar? Deberia poder modificarse
+	//Que pasa si el paciente se debe mudar? Deberia poder modificarse.
 
 	void set_nombre(string nombre);
 	void set_direccion(string direccion);

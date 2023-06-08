@@ -60,7 +60,7 @@ bool cSANGRE:: compatibilidad(cFLUIDO* donante)
 		return true;
 	if (this->tipo == B && !(this->Rh) && !(ptr->get_Rh()) && ptr->get_tipo() == B || ptr->get_tipo() == O) //B- recibe B- y O-
 		return true;
-	if (this->tipo == AB && !(this->Rh) && !(ptr->get_Rh()) //AB- recibe AB- y O- B- A-
+	if (this->tipo == AB && !(this->Rh) && !(ptr->get_Rh())) //AB- recibe AB- y O- B- A-
 		return true;
 	else
 		return false;

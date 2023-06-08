@@ -2,7 +2,7 @@
 
 using namespace std;
 
-cDONANTE::cDONANTE(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO fluido, cCENTRO centro, vector<cREGISTRO> registros, unsigned int edad, float peso, cHISTORIAL historial) : cPACIENTE( nombre, fecha_nacimiento, telefono, sexo, fluido, centro)
+cDONANTE::cDONANTE(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO* centro, string dni, vector<cREGISTRO> registros, unsigned int edad, float peso, cHISTORIAL* historial) : cPACIENTE( nombre, fecha_nacimiento, telefono, sexo, fluido, centro, dni)
 {
 	this->registros = registros;
 	this->edad = edad;
@@ -37,7 +37,7 @@ void cDONANTE::set_peso(float peso)
 	this->peso = peso;
 }
 
-void cDONANTE::set_historial(cHISTORIAL historial)
+void cDONANTE::set_historial(cHISTORIAL* historial)
 {
 	this->historial = historial;
 }
@@ -59,12 +59,12 @@ float cDONANTE::get_peso()
 	return this->peso;
 }
 
-cHISTORIAL cDONANTE::get_historial()
+cHISTORIAL* cDONANTE::get_historial()
 {
 	return this->historial;
 }
 
-void cDONANTE::crear_registro(cFLUIDO fluido)
+void cDONANTE::crear_registro(cFLUIDO* fluido)
 {
 	time_t f_actual = time(NULL);
 	cREGISTRO registro(fluido, f_actual, this->centro);
