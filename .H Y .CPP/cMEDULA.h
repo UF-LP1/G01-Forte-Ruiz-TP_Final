@@ -10,6 +10,8 @@ public:
 
 	bool compatibilidad(cFLUIDO* donante);// bool operator==(cFLUIDO* donante, cFLUIDO* receptor)
 	bool verificar_fecha_maxima(cREGISTRO* registro);
+
+	string to_string_MED();
 };
 	
 	

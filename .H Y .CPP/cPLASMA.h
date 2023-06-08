@@ -11,5 +11,6 @@ public:
 	bool compatibilidad(cFLUIDO* donante);// bool operator==(cFLUIDO* donante, cFLUIDO* receptor)
 	bool verificar_fecha_maxima(cREGISTRO* registro);
 	eTIPO get_tipo();
+	string to_string_PLASMA();
 };
 	

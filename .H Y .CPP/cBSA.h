@@ -36,4 +36,7 @@ public:
 	void protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor);
 	vector<cRECEPTOR> buscar_posibles_receptores(cDONANTE* donante);
 	void iniciar_analisis();
+
+	//string to_string_BSA(); //PASO A STRING TODAS LAS LISTAS?
+	//void imprimir_BSA();
 };

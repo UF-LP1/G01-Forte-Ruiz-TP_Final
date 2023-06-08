@@ -85,3 +85,23 @@ string cCENTRO::get_telefono()
 {
 	return this->telefono;
 }
+
+string cCENTRO::to_string_CENTRO()
+{
+	string c, prov;
+	const char* provincias[] = { "BuenosAires", "CABA","Catamarca", "Chaco", "Chubut", "Cordoba", "Corrientes", "EntreRios", "Formosa", "Jujuy", "LaPampa", "LaRioja", "Mendoza", "Misiones", "Neuquen", "RioNegro","Salta", "SanJuan", "SanLuis", "SantaCruz", "SantaFe", "SantiagoDelEstero","TierraDelFuego","Tucuman" };
+	prov = provincias[this->provincia]; //PE
+
+	c.append(this->nombre);
+	c.append(", "); c.append(this->direccion);
+	c.append(", "); c.append(this->partido);
+	c.append(", "); c.append(prov);
+	c.append(", "); c.append(this->telefono);
+
+	return c;
+}
+
+void cCENTRO::imprimir_CENTRO()
+{
+	cout << this->to_string_CENTRO() << endl;
+}

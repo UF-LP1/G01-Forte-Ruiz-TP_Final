@@ -36,3 +36,20 @@ bool cHISTORIAL::get_enfermedades()
 {
 	return this->enfermedades;
 }
+
+string cHISTORIAL::to_string_HIST()
+{
+	string c;
+	struct tm fecha;
+	localtime_s(&fecha, (const time_t*)this->ult_tattoo);
+
+	c.append("Tiene enfermedades sanguineas: ");
+	if (this->get_enfermedades())
+		c.append("SI");
+	else
+		c.append("NO");
+	c.append(", FECHA DE ULTIMO TATUAJE: ");
+	c.append(to_string(fecha.tm_mday)); c.append("/"); c.append(to_string(fecha.tm_mon + 1)); c.append("/"); c.append(to_string(fecha.tm_year + 1900));
+
+	return c;
+}

@@ -13,6 +13,15 @@ eTIPO cPLASMA::get_tipo()
 	return this->tipo;
 }
 
+string cPLASMA::to_string_PLASMA()
+{
+	string c, type;
+	const char* tipo[] = { "A","AB","B","O" };
+	type = tipo[this->tipo];
+
+	c.append("PLASMA, TIPO: "); c.append(type); c.append(".");
+}
+
 bool cPLASMA:: verificar_fecha_maxima(cREGISTRO* registro) // 1 año
 {
 	const time_t fecha_act = (const time_t)time(NULL);

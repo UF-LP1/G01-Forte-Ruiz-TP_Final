@@ -15,4 +15,5 @@ public:
 	bool verificar_fecha_maxima(cREGISTRO* registro);
 	bool compatibilidad(cFLUIDO* donante);
 
+	string to_string_SANGRE();
 };

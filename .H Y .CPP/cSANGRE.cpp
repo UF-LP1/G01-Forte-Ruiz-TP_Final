@@ -66,3 +66,17 @@ bool cSANGRE:: compatibilidad(cFLUIDO* donante)
 		return false;
 
 }
+
+string cSANGRE::to_string_SANGRE()
+{
+	string c, type, signo;
+	const char* tipo[] = { "A","AB","B","O" };
+	type = tipo[this->tipo];
+
+	if (this->Rh)
+		signo = "+";
+	else
+		signo = "-";
+
+	c.append("SANGRE, TIPO: "); c.append(type); c.append(signo); c.append(".");
+}

@@ -1,10 +1,12 @@
 #pragma once
 #include <string>
-#include "ePROVINCIA.h"
 #include <ctime>
+#include <iostream>
+#include "ePROVINCIA.h"
 #include "cDONANTE.h"
 #include "cRECEPTOR.h"
 #include "cTRANSPLANTE.h"
+
 
 using namespace std;
 
@@ -32,4 +34,7 @@ public:
 	string get_partido();
 	ePROVINCIA get_provincia();
 	string get_telefono();
+
+	string to_string_CENTRO();
+	void imprimir_CENTRO();
 };

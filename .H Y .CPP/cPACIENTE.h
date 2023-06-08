@@ -22,7 +22,7 @@ public:
 	~cPACIENTE();
 
 	void imprimir();
-	virtual void escribir() = 0;  //HAY QUE ENCONTRAR OTRO METODO VIRTUAL
+	//virtual void escribir() = 0;  //HAY QUE ENCONTRAR OTRO METODO VIRTUAL
 
 	void set_centro(cCENTRO* centro);
 	void set_nombre(string nombre);

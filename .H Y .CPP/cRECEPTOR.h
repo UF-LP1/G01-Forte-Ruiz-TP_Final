@@ -16,7 +16,7 @@ public:
 	~cRECEPTOR();
 
 	void imprimir();
-	void escribir(); //NO VALE COMO METODO VIRTUAL
+	//void escribir(); //NO VALE COMO METODO VIRTUAL
 
 	void set_prioridad(ePRIORIDAD prioridad);
 	void set_estado(eESTADO estado);

@@ -70,3 +70,24 @@ void cDONANTE::crear_registro(cFLUIDO* fluido)
 	cREGISTRO registro(fluido, f_actual, this->centro);
 	this->registros.push_back(registro);
 }
+
+string cDONANTE::to_string_DONANTE()
+{
+	string c;
+
+	c.append(to_string(this->edad));
+	c.append(", "); c.append(to_string(this->peso));
+	c.append(" kg.\n");
+	c.append("REGISTROS:\n");
+	for (int i = 0; i < this->registros.size(); i++) //Voy a guardar todos los registros
+	{
+		this->registros[i].to_string_REGIS();
+		c.append("\n"); //Para que imprima un registro abajo de otro.
+	}
+
+	c.append("HISTORIAL:\n");
+	c.append(this->historial->to_string_HIST());
+
+	c.append("\n");
+	return c;
+}

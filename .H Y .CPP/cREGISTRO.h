@@ -16,4 +16,6 @@ public:
 	cFLUIDO* get_fluido();
 	time_t get_fecha_extraccion();
 	cCENTRO* get_centro();
+
+	string to_string_REGIS();
 };
