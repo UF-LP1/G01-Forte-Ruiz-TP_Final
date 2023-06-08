@@ -21,12 +21,12 @@ bool cCENTRO::realizar_transplante(cDONANTE donante, cRECEPTOR receptor)
 	a = rand() % 1;// los valores bool son 0 y 1, si no funciona hacer los if
 	if (a == 1)
 		b = true;
-	else if (a == 0)
+	else if (a == 0) //HICE LO DE LOS IFS POR LAS DUDAS
 		b = false;
 	time_t t = time(NULL);
 
 	return a;
-	cTRANSPLANTE transplante(t, receptor, receptor.get_centro(), receptor.get_fluido(), b);
+	cTRANSPLANTE transplante(t, &receptor, receptor.get_centro(), receptor.get_fluido(), b);
 	transplante.imprimir();
 }
 

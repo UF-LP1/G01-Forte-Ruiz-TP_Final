@@ -47,7 +47,7 @@ bool cBSA::comprobar_requisitos(cDONANTE* donante)
 		return false;
 	if (donante->get_peso() <= 50)
 		return false;
-	if (donante->get_historial().get_enfermedades() == true)
+	if (donante->get_historial()->get_enfermedades() == true)
 		return false;
 
 	const time_t f_actual = (const time_t)time(NULL);
@@ -56,7 +56,7 @@ bool cBSA::comprobar_requisitos(cDONANTE* donante)
 	fecha.tm_mon -= 2;
 	time_t f_a = mktime(&fecha);
 
-	if (donante->get_historial().get_ult_tattoo() >= f_a)
+	if (donante->get_historial()->get_ult_tattoo() >= f_a)
 		return false;
 
 	if (donante->get_registros().back().get_fecha_extraccion() >= f_a)
@@ -119,10 +119,10 @@ void cBSA::protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor) //falta
 		&(this->lista_donantes)-*donante;
 	//se borra de la lista, sobrecarga del -
 	
-	if (!(b1 && donante->get_centro().get_provincia() == receptor->get_centro().get_provincia() && donante->get_centro().get_partido() == receptor->get_centro().get_partido()))//sobrecarga en centro del ==
+	if (!(b1 && donante->get_centro()->get_provincia() == receptor->get_centro()->get_provincia() && donante->get_centro()->get_partido() == receptor->get_centro()->get_partido()))//sobrecarga en centro del ==
 		return;//si alguna condicion es falsa, se hace verdadera y entra al if
 	
-	b2 = receptor->get_centro().realizar_transplante(*donante, *receptor);
+	b2 = receptor->get_centro()->realizar_transplante(*donante, *receptor);
 	if (b2)
 	{
 		receptor->set_estado(RECIBIO);

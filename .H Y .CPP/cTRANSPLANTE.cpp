@@ -1,6 +1,6 @@
 #include "cTRANSPLANTE.h"
 
-cTRANSPLANTE::cTRANSPLANTE(time_t fecha, cRECEPTOR paciente, cCENTRO centro, cFLUIDO* fluido, bool resultado)
+cTRANSPLANTE::cTRANSPLANTE(time_t fecha, cRECEPTOR* paciente, cCENTRO* centro, cFLUIDO* fluido, bool resultado)
 {
 	this->fecha = fecha;
 	this->paciente = paciente;

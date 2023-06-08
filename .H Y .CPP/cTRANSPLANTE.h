@@ -8,12 +8,12 @@
 
 class cTRANSPLANTE {
 	time_t fecha;
-	cRECEPTOR paciente;
-	cCENTRO centro;
+	cRECEPTOR* paciente;
+	cCENTRO* centro;
 	cFLUIDO* fluido;
 	bool resultado;
 public:
-	cTRANSPLANTE(time_t fecha, cRECEPTOR paciente, cCENTRO centro, cFLUIDO* fluido, bool resultado);
+	cTRANSPLANTE(time_t fecha, cRECEPTOR* paciente, cCENTRO* centro, cFLUIDO* fluido, bool resultado);
 	~cTRANSPLANTE();
 	void imprimir();
 };
