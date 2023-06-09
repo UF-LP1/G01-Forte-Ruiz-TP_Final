@@ -24,7 +24,7 @@ bool cMEDULA::verificar_fecha_maxima(cREGISTRO* registro) //1 dia
 		return false;
 }
 
-string cMEDULA::to_string_MED()
+string cMEDULA::to_string_MED() const
 {
 	string c;
 

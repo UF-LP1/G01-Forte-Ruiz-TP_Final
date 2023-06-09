@@ -71,7 +71,7 @@ void cDONANTE::crear_registro(cFLUIDO* fluido)
 	this->registros.push_back(registro);
 }
 
-string cDONANTE::to_string_DONANTE()
+string cDONANTE::to_string_DONANTE() const
 {
 	string c;
 

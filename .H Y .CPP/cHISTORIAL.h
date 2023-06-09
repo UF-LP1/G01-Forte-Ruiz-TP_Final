@@ -18,7 +18,7 @@ public:
 	time_t get_ult_tattoo();
 	bool get_enfermedades();
 
-	string to_string_HIST();
+	string to_string_HIST() const;
 
 
 };

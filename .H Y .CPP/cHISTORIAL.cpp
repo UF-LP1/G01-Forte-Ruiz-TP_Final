@@ -37,7 +37,7 @@ bool cHISTORIAL::get_enfermedades()
 	return this->enfermedades;
 }
 
-string cHISTORIAL::to_string_HIST()
+string cHISTORIAL::to_string_HIST() const
 {
 	string c;
 	struct tm fecha;

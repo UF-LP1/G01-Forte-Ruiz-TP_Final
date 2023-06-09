@@ -18,6 +18,36 @@
 #include "eTIPO.h"
 #include "cMENU.h"
 
+//SOBRECARGA DE <<
+ostream& operator<<(ostream& out, const vector<cRECEPTOR>& lista_receptores)
+{
+	for (int i = 0; i < lista_receptores.size(); i++)
+	{
+		//out << lista_receptores[i].to_string_RECEPTOR()<<endl;
+		out << "----------------------" << endl;
+	}
+	return out;
+}
+ostream& operator<<(ostream& out, const vector<cDONANTE>& lista_donantes)
+{
+	for (int i = 0; i < lista_donantes.size(); i++)
+	{
+		out << lista_donantes[i].to_string_DONANTE()<<endl;
+		out << "----------------------" << endl;
+	}
+	return out;
+}
+ostream& operator<<(ostream& out, const vector<cCENTRO>& lista_centros)
+{
+	for (int i = 0; i < lista_centros.size(); i++) 
+	{
+		out << lista_centros[i].to_string_CENTRO()<<endl; 
+		out << "----------------------" << endl;
+	}
+	return out;
+}
+
+
 bool operator==(cDONANTE donante, cRECEPTOR receptor)
 {
 	cSANGRE* ptr1 = dynamic_cast<cSANGRE*>(donante.get_fluido());

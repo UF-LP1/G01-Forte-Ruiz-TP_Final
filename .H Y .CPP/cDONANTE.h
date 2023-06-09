@@ -29,7 +29,7 @@ public:
 
 	void crear_registro(cFLUIDO* fluido);
 
-	string to_string_DONANTE();
+	string to_string_DONANTE() const;
 	void imprimir_DONANTE();
 };
 	

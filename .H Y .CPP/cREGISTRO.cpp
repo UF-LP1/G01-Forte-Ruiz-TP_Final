@@ -28,7 +28,7 @@ cCENTRO* cREGISTRO::get_centro()
 	return this->centro;
 }
 
-string cREGISTRO::to_string_REGIS()
+string cREGISTRO::to_string_REGIS() const
 {
 	string c;
 	struct tm fecha;

@@ -35,6 +35,6 @@ public:
 	ePROVINCIA get_provincia();
 	string get_telefono();
 
-	string to_string_CENTRO();
+	string to_string_CENTRO() const;
 	void imprimir_CENTRO();
 };

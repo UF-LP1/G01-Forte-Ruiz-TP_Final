@@ -13,7 +13,7 @@ eTIPO cPLASMA::get_tipo()
 	return this->tipo;
 }
 
-string cPLASMA::to_string_PLASMA()
+string cPLASMA::to_string_PLASMA() const
 {
 	string c, type;
 	const char* tipo[] = { "A","AB","B","O" };
