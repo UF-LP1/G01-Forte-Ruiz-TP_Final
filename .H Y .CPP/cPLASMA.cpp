@@ -1,7 +1,8 @@
 #include "cPLASMA.h"
 
-cPLASMA::cPLASMA(unsigned int volumen):cFLUIDO(volumen)
+cPLASMA::cPLASMA(unsigned int volumen, eTIPO tipo):cFLUIDO(volumen)
 {
+	this->tipo = tipo;
 }
 
 cPLASMA::~cPLASMA()

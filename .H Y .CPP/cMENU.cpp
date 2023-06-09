@@ -1,5 +1,4 @@
 #include "cMENU.h"
-#include "ePROVINCIA.h"
 
 cMENU::cMENU(cBSA* bsa)
 {
@@ -12,9 +11,9 @@ cMENU::~cMENU()
 
 void cMENU::ejecutar()
 {
-	int opcion;
-
-	while (opcion != 7)
+	int opcion=0;
+		
+	do
 	{
 		char dummy;
 
@@ -22,19 +21,14 @@ void cMENU::ejecutar()
 
 		cin >> opcion;
 
-		while (opcion < 1 && opcion > 7)
-		{
-			cout << "Reingrese su eleccion (unicamente validos las opciones de 1 a 7):  ";
-			cin >> opcion;
-			cout << endl;
-		}
+		opcion = control_entradas(1, 7);
 
-		switch (opcion)
+		switch (opcion)	
 		{
-		case 1:
+		case 1: //registrar paciente, podria ser funcion, mas legible el codigo
 		{
 			int op2;
-			cPACIENTE* pac1; //ERROR: NO HAY CONSTRUCTOR POR DEFECTO
+			cPACIENTE* pac1; //ERROR: NO HAY CONSTRUCTOR POR DEFECTO, si es puntero no se llama al constructor
 			cDONANTE* donante;
 			cRECEPTOR* receptor;
 			vector<cPACIENTE*> vdonante, vreceptor;
@@ -48,228 +42,171 @@ void cMENU::ejecutar()
 
 			cin >> op2; cout << endl;
 
-			while (op2 != 1 && op2 != 2 && op2 != 3)
-			{
-				cout << "Reingrese su eleccion (unicamente validas las opciones 1 y 2): ";
-				cin >> op2; cout << endl;
-			}
-
+			op2 = control_entradas(1, 3);
+			
 			if (op2 == 1)
 			{
-				//pac1 = cDONANTE::escribir(); //LO ESTOY HACIENDO COMO ESTATICO
+				pac1 = escribir_donante(); 
 				donante = dynamic_cast<cDONANTE*>(pac1);
 				vdonante[0] = donante;
 				this->BSA->agregar_paciente(vdonante);
 			}
 			else if (op2 == 2)
 			{
-				//pac1 = cRECEPTOR:: escribir();
+				pac1 = escribir_receptor();
 				receptor = dynamic_cast<cRECEPTOR*>(pac1);
 				vreceptor[0] = receptor;
 				this->BSA->agregar_paciente(vreceptor);
 			}
 			else if (op2 == 3)
 				break;
-
+			//registrar_paciente();
 			cout << "Presione cualquier tecla para volver";
 			cin >> dummy; cout << endl;
 			break;
 		}
-		case 2:
+		case 2: //buscar centro e imprimir lista de espera
 		{
-			string nombre, partido, prov;
-			ePROVINCIA provincia;
+			cCENTRO* centro = escribir_centro();
 
-			cout << "Datos a ingresar del centro de salud: " << endl
-				<< "Nombre: ";
-			cin >> nombre; cout << endl;
-			cout << "Partido: ";
-			cin >> partido; cout << endl;
-			cout << "Provincia: ";
-			cin >> prov; cout << endl;
-			if (prov == "Buenos Aires" || prov == "buenos aires")
-				provincia = BuenosAires;
-
-			buscar_centro(nombre, partido, provincia);
+			buscar_centro(centro);
+			
 			cout << endl;
 			cout << "Presione cualquier tecla para volver";
 			cin >> dummy;
 			break;
 		}
-		case 3:
+		case 3: //buscar receptor (opcion modificar)
 		{
 			int op2;
 			string dni;
-			cout << "Ingrese DNI del paciente que desea buscar: ";
+			cout << "Ingrese DNI del paciente que desea buscar: ";//si se quiere modificar un donante?
 			cin >> dni; cout << endl;
 			cRECEPTOR* receptor = buscar_receptor(dni);
-			//
+			
 			imprimir_submenu();
-			cout << "Opcion: "; cin >> op2; cout << endl;
 
-			while (op2 != 1 && op2 != 2)
-			{
-				cout << "Reingrese su eleccion (unicamente validas las opciones 1 y 2): ";
-				cin >> op2; cout << endl;
-			}
-
+			op2 = control_entradas(1, 2);
+			
 			if (op2 == 1)
 			{
-				int op3;
+				int op3=-1;
 
-
-				while (op3 != 10)
+				do
 				{
-					cout << "¿Que datos desea modificar?" << endl;
 					imprimir_datos_receptor();
-					cout << "Opcion: "; cin >> op3; cout << endl;
-
-					while (op3 < 0 && op3 > 10)
-					{
-						cout << "Reingrese su eleccion (unicamente validas las opciones del 1 al 8): ";
-						cin >> op3; cout << endl;
-					}
+					
+					op3 = control_entradas(1, 8);
+					
 					switch (op3)
 					{
-					case 1:
+					case 1://nombre
 					{
-						string nombre;
-						cout << "Ingrese nombre: "; cin >> nombre; cout << endl;
-						//receptor->set_nombre(nombre);
+						string nombre = escribir_nombre();
+						receptor->set_nombre(nombre);
 						break;
 					}
-					case 2:
+					case 2: //fecha nacimiento
 					{
-						int dia, mes, anio;
-						cout << "Fecha de nacimiento: "; cin >> dia >> dummy >> mes >> dummy >> anio; cout << endl;
-						while (dia <= 0 || mes <= 0 || anio <= 1900) //1900 porque ya todos estan muertos ahi
-						{
-							cout << "Fecha de nacimiento invalida, vuelva a ingresar por favor: "; cin >> dia >> dummy >> mes >> dummy >> anio;
-							cout << endl;
-						}
-						struct tm f_nac;
-						f_nac.tm_mday = dia;
-						f_nac.tm_mon = mes - 1;
-						f_nac.tm_year = anio - 1900;
-
-						time_t f = mktime(&f_nac);
-						//receptor->set_fecha_nacimiento(f);
+						time_t f = escribir_fecha_nacimiento();
+						receptor->set_fecha_nacimiento(f);
 						break;
 					}
-					case 3:
+					case 3://telefono
 					{
-						string telefono;
-						cout << "Ingrese telefono: "; cin >> telefono; cout << endl;
-						//receptor->set_telefono(telefono);
+						string telefono = escribir_telefono();
+						receptor->set_telefono(telefono);
 						break;
 					}
-					case 4:
+					case 4: //sexo
 					{
-						string sexo;
-						eSEXO sex;
-						cout << "Ingrese sexo: "; cin >> sexo; cout << endl;
-						while (sexo != "femenino" && sexo != "masculino")
-						{
-							cout << "Escriba todo en minusculas: ";
-							cin >> sexo; cout << endl;
-						}
-						if (sexo == "femenino")
-						{
-							sex = FEMENINO;
-						}
-						else if (sexo == "masculino")
-						{
-							sex = MASCULINO;
-						}
-						//receptor->set_sexo(sex);
+						eSEXO sex= escribir_sexo();
+						receptor->set_sexo(sex);
 						break;
 					}
-					case 5:
-					{
-						int op4;
-						cout << "¿Que tipo de fluido es?" << endl
-							<< "1) Sangre" << endl
-							<< "2) Medula" << endl
-							<< "3) Plasma" << endl
-							<< "Opcion: "; cin >> op4; cout << endl;
-						while (op4 != 1 && op4 != 2 && op4 != 3)
-						{
-							cout << "Reingrese su eleccion (unicamente validas del 1 al 3): ";
-							cin >> op4; cout << endl;
-						}
-						if (op4 == 1)
-						{
-							unsigned int volumen = 450;
-							string tipo;
-							eTIPO type;
-							char Rh;
-							bool sign;
-							cout << "Tipo sanguíneo: "; cin >> tipo >> Rh; cout << endl;
-							while (Rh != '+' && Rh != '-')
-							{
-								cout << "Reingrese su eleccion (Ej: AB+): "; cin >> tipo >> Rh; cout << endl;
-							}
-							if (tipo == "A")
-							{
-								type = A;
-							}
-							else if (tipo == "AB")
-							{
-								type = AB;
-							}
-							else if (tipo == "B")
-							{
-								type = B;
-							}
-							else if (tipo == "O")
-							{
-								type = O;
-							}
-							if (Rh == '+')
-								sign = true;
-							else
-								sign = false;
-
-							cSANGRE sangre(volumen, type, sign);
-							//receptor->set_fluido(sangre);
-
-						}
+					case 5://fluido
+					{	cFLUIDO* fluid = escribir_fluido();
+						receptor->set_fluido(fluid);
 						break;
 					}
-
-
+					case 6://centro
+					{
+						cCENTRO* ptr = escribir_centro();
+						if(ptr != nullptr)
+							receptor->set_centro(ptr);
+						
+						cout << "Presione cualquier tecla para volver";
+						cin >> dummy;
+						
+						break;
 					}
-				}
+					case 7: //prioridad
+					{
+						ePRIORIDAD prioridad = escribir_prioridad();
+						receptor->set_prioridad(prioridad);
+						break;
+					}
+					case 8: //estado
+					{
+						eESTADO estado = escribir_estado();
+						receptor->set_estado(estado);
+						break;
+					}
+					
+					}//switch
+				}//do
+				while (op3 != 10);
+			}//if
 
-			}
-
-			//
+			//si (op2 == 2) no hace nada, deja continuar el programa que va a volver al menu principal
 			cout << endl
-				<< "Presiones cualquier tecla para volver";
+				<< "Presione cualquier tecla para volver";
+			cin >> dummy;
+			break;
+		}//case 3
+		case 4: //buscar donante (opcion de modificar) 
+		{
+			int op2;
+			string dni;
+			cout << "Ingrese DNI del paciente que desea buscar: ";//si se quiere modificar un donante?
+			cin >> dni; cout << endl;
+			cDONANTE* donante = buscar_donante(dni);
+			//
+			imprimir_submenu();
+
+			op2 = control_entradas(1, 2);
+
+			if (op2 == 1)
+			{	
+				escribir_donante();// opcion de no ingresar registro
+				
+			}
+			cout << endl
+				<< "Presione cualquier tecla para volver";
 			cin >> dummy;
 			break;
 		}
-		case 4:
+		case 5: //imprimir listado donantes
 		{
 			imprimir_listado_donantes();
 
 			cout << endl
-				<< "Presiones cualquier tecla para volver";
+				<< "Presione cualquier tecla para volver";
 			cin >> dummy;
-			ejecutar();
+		
 			break;
 		}
-		case 5:
+		case 6: //imprimir listado receptores
 		{
 			imprimir_listado_receptores();
 
 			cout << endl
-				<< "Presiones cualquier tecla para volver";
+				<< "Presione cualquier tecla para volver";
 			cin >> dummy;
-			ejecutar();
+			
 			break;
 		}
-		case 6:
+		case 7: //imprimir informe mensual
 		{
 
 			informe_mensual();
@@ -277,7 +214,7 @@ void cMENU::ejecutar()
 			cin >> dummy; cout << endl;
 			break;
 		}
-		case 7:
+		case 8: //finalizar programa
 		{
 			cout << "-----Finalizacion del programa-----";
 			break;
@@ -285,27 +222,57 @@ void cMENU::ejecutar()
 		}
 
 	}
-
+	while (opcion != 7);
 	return;
 }
 
-void cMENU::buscar_centro(string nombre, string partido, ePROVINCIA provincia)
+//funciones extras
+int cMENU::control_entradas(int inf, int sup)
+{
+	int op = -1;
+	cin >> op;
+	while (op<inf || op>sup)
+	{
+		cout << "Reingrese su eleccion (unicamente validas las opciones " << inf << " y " << sup << ")" << endl;
+		cin >> op; cout << endl;
+
+	}
+
+	return op;
+}
+cCENTRO* cMENU::verificar_centro(string nombre, string partido, ePROVINCIA provincia)
+{
+	cCENTRO* ptr = nullptr;
+	for (int i = 0; i < this->BSA->get_lista_centros().size(); i++)
+	{
+		if (this->BSA->get_lista_centros()[i].get_nombre() == nombre && this->BSA->get_lista_centros()[i].get_partido() == partido && this->BSA->get_lista_centros()[i].get_provincia() == provincia)
+			ptr = &(this->BSA->get_lista_centros()[i]);
+	}
+	if (ptr == nullptr)
+	{
+		cout << endl << "no se encontro el centro en la lista de centros habilitados" << endl; //que vuelva a ingresar los datos 
+		cout << endl;
+	}
+
+	return ptr;
+}
+
+//funciones menu principal
+void cMENU::buscar_centro(cCENTRO* centro) //imprime la lista de espera del centro
 {
 	vector<cRECEPTOR> lista_espera;
 
 	for (int i = 0; i < this->BSA->get_lista_receptores().size(); i++)
-	{
-		if (this->BSA->get_lista_receptores()[i].get_centro().get_nombre() == nombre && this->BSA->get_lista_receptores()[i].get_centro().get_partido() == partido && this->BSA->get_lista_receptores()[i].get_centro().get_provincia() == provincia)
+	{	if(*(this->BSA->get_lista_receptores()[i].get_centro()) == *centro) //sobrecarga del ==
 			lista_espera.push_back(this->BSA->get_lista_receptores()[i]);
 	}
 
-	for (int i = 0; i < lista_espera.size(); i++)
+	for (int i = 0; i < lista_espera.size(); i++) //sobrecarga cout?
 	{
 		lista_espera[i].imprimir();
 	}
 	return;
 }
-
 cRECEPTOR* cMENU::buscar_receptor(string dni)
 {
 
@@ -316,34 +283,41 @@ cRECEPTOR* cMENU::buscar_receptor(string dni)
 		if (this->BSA->get_lista_receptores()[i].get_dni() == dni)
 		{
 			cout << "El paciente: " << endl;
-				//<< this->BSA.get_lista_receptores()[i].imprimir() //imprime la prioridad tmb
+			this->BSA->get_lista_receptores()[i].imprimir(); //imprime la prioridad tmb
 			receptor = &(this->BSA->get_lista_receptores()[i]);
 		}
-		else
-		{
-			cout << "No se encontró el paciente" << endl;
-			return nullptr;
-		}
-			
 	}
+	return receptor;
 }
+cDONANTE* cMENU::buscar_donante(string dni)
+{
+	cDONANTE* donante;
 
-void cMENU::imprimir_listado_donantes() //se puede hacer sobrecarga del << (tipo cout<<BSA.get_lista_donantes())
+	for (int i = 0; i < this->BSA->get_lista_donantes().size(); i++)
+	{
+		if (this->BSA->get_lista_donantes()[i].get_dni() == dni)
+		{
+			cout << "El paciente: " << endl;
+			this->BSA->get_lista_donantes()[i].imprimir(); //
+			donante = &(this->BSA->get_lista_donantes()[i]);
+		}
+	}
+	return donante;
+}
+void cMENU::imprimir_listado_donantes() // sobrecarga de <<?
 {
 	for (int i = 0; i < this->BSA->get_lista_donantes().size(); i++)
 	{
 		this->BSA->get_lista_donantes()[i].imprimir();
 	}
 }
-
 void cMENU::imprimir_listado_receptores() //se podria hacer sobrecarga del << (tipo cout<<BSA.get_lista_donantes())
 {
 	for (int i = 0; i < this->BSA->get_lista_receptores().size(); i++)
 	{
 		this->BSA->get_lista_receptores()[i].imprimir();
 	}
-}
-
+}//sobrecarga <<?
 void cMENU::informe_mensual()
 {
 	const time_t f_actual = (const time_t)time(NULL);
@@ -361,7 +335,7 @@ void cMENU::informe_mensual()
 	for (int i = 0; i < this->BSA->get_lista_donantes().size(); i++)
 	{
 		if (this->BSA->get_lista_donantes()[i].get_registros().back().get_fecha_extraccion() >= f_a)
-			prov = this->BSA->get_lista_donantes()[i].get_centro().get_provincia();
+			prov = this->BSA->get_lista_donantes()[i].get_centro()->get_provincia();
 			cont1_x_prov[prov]; //PE
 	}
 
@@ -392,6 +366,213 @@ void cMENU::informe_mensual()
 		<< "Tucuman: " << cont1_x_prov[23] << endl;
 }
 
+//funciones escribir
+cPACIENTE* cMENU::escribir_donante()
+{
+	string nombre = escribir_nombre();
+	time_t fecha = escribir_fecha_nacimiento();
+	string tel = escribir_telefono();
+	eSEXO sex = escribir_sexo();
+	cCENTRO* centro = escribir_centro();
+	cFLUIDO* fluido = escribir_fluido();
+	string dni = escribir_dni(); //funcion escribir_paciente()? PARA NO REPETIR CODIGO
+	vector <cREGISTRO> registros = escribir_registros();
+	int edad = 1; //se puede calcular directamente
+	float peso = escribir_peso();
+	cHISTORIAL* historial = escribir_historial();
+
+	cDONANTE pac(nombre, fecha, tel, sex, fluido, centro, dni, registros,edad,peso,historial);
+
+	return &pac;
+}
+cPACIENTE* cMENU:: escribir_receptor() //sobrecarga cin era aca?
+{	
+	string nombre = escribir_nombre();
+	time_t fecha = escribir_fecha_nacimiento();
+	string tel = escribir_telefono();
+	eSEXO sex = escribir_sexo();
+	cCENTRO* centro = escribir_centro();
+	cFLUIDO* fluido = escribir_fluido();
+	string dni = escribir_dni(); //funcion escribir_paciente()? PARA NO REPETIR CODIGO
+
+	ePRIORIDAD prioridad = escribir_prioridad();
+	eESTADO estado = escribir_estado();
+
+	cRECEPTOR pac(nombre, fecha, tel, sex, fluido, centro, dni, time(NULL), prioridad, estado);
+	
+	return &pac;
+}
+
+string cMENU::escribir_nombre()
+{	
+	string nombre;
+	cout << "Ingrese nombre: "; cin >> nombre; cout << endl;
+	return nombre;
+}
+time_t cMENU::escribir_fecha_nacimiento()
+{
+	char dummy;
+	int dia, mes, anio;
+	cout << "Fecha de nacimiento: "; cin >> dia >> dummy >> mes >> dummy >> anio; cout << endl;
+	while (dia <= 0 || mes <= 0 || anio <= 1900) //1900 porque ya todos estan muertos ahi
+	{
+		cout << "Fecha de nacimiento invalida, vuelva a ingresar por favor: "; cin >> dia >> dummy >> mes >> dummy >> anio;
+		cout << endl;
+	}
+	struct tm f_nac;
+	f_nac.tm_mday = dia;
+	f_nac.tm_mon = mes - 1;
+	f_nac.tm_year = anio - 1900;
+
+	time_t f = mktime(&f_nac);
+
+	return f;
+}
+string cMENU::escribir_telefono()
+{
+	string telefono;
+	cout << "Ingrese telefono: "; cin >> telefono; cout << endl;
+	
+	return telefono;
+}
+eSEXO cMENU::escribir_sexo() 
+{
+	vector<eSEXO> sexos = { FEMENINO, MASCULINO };
+	int pos;
+	cout << "Ingrese sexo: " << endl
+		<< "1)Femenino" << endl
+		<< "2)Masculino" << endl;
+	pos = control_entradas(1, 2);
+	
+	return sexos[pos - 1];
+}
+cCENTRO* cMENU::escribir_centro()
+{
+	vector<ePROVINCIA> provincias = { BuenosAires, CABA,Catamarca, Chaco, Chubut, Cordoba, Corrientes, EntreRios, Formosa, Jujuy, LaPampa, LaRioja, Mendoza, Misiones, Neuquen, RioNegro,Salta, SanJuan, SanLuis, SantaCruz, SantaFe, SantiagoDelEstero,TierraDelFuego,Tucuman };
+	string nombre, partido;
+	int prov;
+
+	cout << "Datos a ingresar del centro de salud: " << endl
+		<< "Nombre: ";
+	cin >> nombre; cout << endl;
+	cout << "Partido: ";
+	cin >> partido; cout << endl;
+	cout << "Provincia: ";
+
+	imprimir_provincias();
+
+	prov = control_entradas(1, 24);
+
+	cCENTRO* ptr = verificar_centro(nombre, partido, provincias[prov - 1]);
+
+	return ptr;
+}
+string cMENU::escribir_dni()
+{
+
+}
+
+cFLUIDO* cMENU::escribir_fluido()
+{
+	cFLUIDO* fluid;
+	int op4;
+	cout << "¿Que tipo de fluido es?" << endl //necesita o va a donar
+		<< "1) Sangre" << endl
+		<< "2) Medula" << endl
+		<< "3) Plasma" << endl
+		<< "Opcion: "; cin >> op4; cout << endl;
+	op4 = control_entradas(1, 3);
+
+	if (op4 == 1)
+		fluid = escribir_sangre();
+
+	if (op4 == 3)
+		fluid = escribir_plasma();
+
+	if (op4 == 3)
+		fluid = escribir_plasma();
+
+	return fluid;
+}
+eTIPO cMENU::escribir_tipos()
+{
+	vector<eTIPO> tipos = { A,AB,B,O };
+
+	cout << "Tipo sanguíneo: ";
+	cout << "1)A" << endl << "2)AB" << endl << "3)B" << "4)O" << endl;
+	int type = control_entradas(1, 4);
+
+	return tipos[type - 1];
+}
+cFLUIDO* cMENU::escribir_sangre()
+{
+	char Rh= '1';
+	bool sign;
+	eTIPO type = escribir_tipos();
+
+	cout << endl << "Ingresar Rh" << endl;
+	cin >> Rh; cout << endl;
+
+	while (Rh != '+' && Rh != '-')
+	{
+		cout << "Reingrese su eleccion (Ej: AB+): "; cin >> Rh; cout << endl;
+	}
+	if (Rh == '+')
+		sign = true;
+	else
+		sign = false;
+	cSANGRE sangre(450, type, sign);
+	cFLUIDO* ptr = &sangre;
+
+	return ptr;
+}
+cFLUIDO* cMENU::escribir_plasma()
+{	
+	eTIPO type = escribir_tipos();
+	cPLASMA plasma(450,type);
+
+	return &plasma;
+}
+cFLUIDO* cMENU::escribir_medula()
+{	//pide algo mas ono
+	cMEDULA medula(450);
+
+	return &medula;
+}
+
+
+ePRIORIDAD cMENU::escribir_prioridad()
+{	
+	vector<ePRIORIDAD> prioridades = { uno,dos,tres,cuatro,cinco };
+	cout << "Ingrese la prioridad del paciente (del 1 al 5):" << endl;
+	int op = control_entradas(1, 5);
+
+	return prioridades[op - 1];
+}
+eESTADO cMENU::escribir_estado()
+{
+	vector<eESTADO> estados = { ESTABLE, INESTABLE, RECIBIO };
+	cout << "Ingrese el estado del paciente" << endl
+		<< "1)Estable" << endl << "2)Inestable" << endl << "3)Recibio" << endl;
+	int op = control_entradas(1, 3);
+
+	return estados[op - 1];
+
+}
+float cMENU::escribir_peso() //mayor a tanto (1kg) y menor a tanto(1000kg)?, 
+{
+
+}
+cHISTORIAL* cMENU::escribir_historial()
+{
+
+}
+vector <cREGISTRO> cMENU::escribir_registros() //tiene que dar la opcion de no ingresar ninguno
+{
+
+}
+
+// funciones imprimir
 void cMENU::imprimir()
 {
 	cout << "-------------------------" << endl 
@@ -400,29 +581,55 @@ void cMENU::imprimir()
 	cout << endl << "1) Registrar paciente."
 		<< endl << "2) Mostrar lista de espera de un centro de salud."
 		<< endl << "3) Buscar un paciente en lista de espera."
-		<< endl << "4) Mostrar listado de pacientes donantes."
-		<< endl << "5) Mostrar listado de pacientes receptores."
-		<< endl << "6) Informe mensual de donanciones en cada provincia."
-		<< endl << "7) CERRAR" << endl;
+		<< endl << "4) Buscar un donante."
+		<< endl << "5) Mostrar listado de pacientes donantes."
+		<< endl << "6) Mostrar listado de pacientes receptores."
+		<< endl << "7) Informe mensual de donanciones en cada provincia."
+		<< endl << "8) CERRAR" << endl<< endl; //agregar opcion comenzar analisis
 	
 }
-
 void cMENU::imprimir_submenu()
 {
 	cout << endl << "¿Desea modificar los datos?"
 		<< "1) Si" << endl << "2) No" << endl;
 }
-
 void cMENU::imprimir_datos_receptor()
 {
-	cout << "1) Nombre" << endl
+	cout << "¿Que datos desea modificar?" << endl;
+	cout << "1) Nombre" << endl 
 		<< "2) Fecha de nacimiento" << endl
 		<< "3) Telefono" << endl
-		<< "4) Sexo" << endl
+		<< "4) Sexo" << endl  
 		<< "5) Fluido que precisa" << endl
-		<< "6) Centro" << endl
-		<< "7) Fecha que ingreso" << endl
-		<< "8) Prioridad" << endl
-		<< "9) Estado" << endl
+		<< "6) Centro" << endl  
+		<< "7) Prioridad" << endl
+		<< "8) Estado" << endl
 		<< "10) VOLVER" << endl;
+}
+void cMENU:: imprimir_provincias()
+{
+	cout << "1)BuenosAires" << endl
+		<< "2)CABA" << endl
+		<< "3)Catamarca" << endl
+		<< "4)Chaco" << endl
+		<< "5)Chubut" << endl
+		<< "6)Cordoba " << endl
+		<< "7)Corrientes" << endl
+		<< "8)EntreRios" << endl
+		<< "9)Formosa" << endl
+		<< "10)Jujuy" << endl
+		<< "11)LaPampa" << endl
+		<< "12)LaRioja" << endl
+		<< "13)Mendoza" << endl
+		<< "14)Misiones" << endl
+		<< "15)Neuquen" << endl
+		<< "16)RioNegro" << endl
+		<< "17)Salta" << endl
+		<< "18)SanJuan" << endl
+		<< "19)SanLuis" << endl
+		<< "20)SantaCruz" << endl
+		<< "21)SantaFe" << endl
+		<< "22)SantiagoDelEstero" << endl
+		<< "23)TierraDelFuego" << endl
+		<< "24)Tucuman" << endl;
 }

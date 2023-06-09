@@ -104,3 +104,11 @@ void cCENTRO::imprimir_CENTRO()
 {
 	cout << this->to_string_CENTRO() << endl;
 }
+
+bool cCENTRO::operator==(cCENTRO centro)
+{
+	if (this->nombre == centro.get_nombre() && this->partido == centro.get_partido() && this->provincia == centro.get_provincia())
+		return true;
+	else
+		return false;
+}

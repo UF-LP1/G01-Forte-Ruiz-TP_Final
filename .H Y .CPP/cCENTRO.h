@@ -37,4 +37,7 @@ public:
 
 	string to_string_CENTRO() const;
 	void imprimir_CENTRO();
+
+	bool operator==(cCENTRO centro);
+	
 };
