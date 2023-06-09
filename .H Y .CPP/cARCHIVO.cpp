@@ -32,7 +32,7 @@ ofstream* cARCHIVO::get_fpout()
 	return this->fpout;
 }
 
-void cARCHIVO::leer_HISTORIALES(vector<cHISTORIAL>& historiales) //TESTEAR SI DEVUELVE EL VECTOR CARGADO
+void cARCHIVO::leer_HISTORIALES(vector<cHISTORIAL>& historiales) //TESTEAR SI DEVUELVE EL VECTOR CARGADO. A cada metodo leer le paso un vector en el que se cargaran las cosas
 {
 	string dummy;
 	int id, i, dia, mes, anio;
@@ -95,7 +95,7 @@ void cARCHIVO::leer_CENTROS()
 {
 }
 
-void cARCHIVO::escribir_HISTORIALES(cHISTORIAL historial, int pos) // pos es el identificador que tendria en el archivo (que se asocia al donante)
+void cARCHIVO::escribir_HISTORIALES(cHISTORIAL historial, int pos) // pos es el identificador que tendria en el archivo (que se asocia al donante). Le paso el objeto a cargar
 {
 
 	char coma, slash;
