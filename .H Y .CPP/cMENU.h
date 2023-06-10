@@ -30,6 +30,7 @@ public:
 	void imprimir();
 	void imprimir_submenu();
 	void imprimir_datos_receptor();
+	void imprimir_datos_donante();
 	void imprimir_provincias();
 	int control_entradas(int sup, int inf);
 
@@ -38,7 +39,7 @@ public:
 	cPACIENTE* escribir_receptor();
 	
 	string escribir_nombre();
-	time_t escribir_fecha_nacimiento();
+	time_t escribir_fecha();
 	string escribir_telefono();
 	eSEXO escribir_sexo();
 	cCENTRO* escribir_centro();

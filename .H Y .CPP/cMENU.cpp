@@ -19,8 +19,6 @@ void cMENU::ejecutar()
 
 		imprimir();
 
-		cin >> opcion;
-
 		opcion = control_entradas(1, 7);
 
 		switch (opcion)	
@@ -79,7 +77,7 @@ void cMENU::ejecutar()
 		case 3: //buscar receptor (opcion modificar)
 		{
 			int op2;
-			string dni;
+			string dni;//funcion escribir dni
 			cout << "Ingrese DNI del paciente que desea buscar: ";//si se quiere modificar un donante?
 			cin >> dni; cout << endl;
 			cRECEPTOR* receptor = buscar_receptor(dni);
@@ -108,7 +106,7 @@ void cMENU::ejecutar()
 					}
 					case 2: //fecha nacimiento
 					{
-						time_t f = escribir_fecha_nacimiento();
+						time_t f = escribir_fecha();
 						receptor->set_fecha_nacimiento(f);
 						break;
 					}
@@ -164,7 +162,7 @@ void cMENU::ejecutar()
 			cin >> dummy;
 			break;
 		}//case 3
-		case 4: //buscar donante (opcion de modificar) 
+		case 4: //buscar donante (opcion de modificar) //=case3, sobrecarga de funciones?
 		{
 			int op2;
 			string dni;
@@ -172,15 +170,88 @@ void cMENU::ejecutar()
 			cin >> dni; cout << endl;
 			cDONANTE* donante = buscar_donante(dni);
 			//
+
 			imprimir_submenu();
 
 			op2 = control_entradas(1, 2);
 
 			if (op2 == 1)
-			{	
-				escribir_donante();// opcion de no ingresar registro
-				
-			}
+			{
+				int op3 = -1;
+
+				do
+				{
+					imprimir_datos_donante();
+
+					op3 = control_entradas(1, 8);
+
+					switch (op3)
+					{
+					case 1://nombre
+					{
+						string nombre = escribir_nombre();
+						donante->set_nombre(nombre);
+						break;
+					}
+					case 2: //fecha nacimiento
+					{
+						time_t f = escribir_fecha();
+						donante->set_fecha_nacimiento(f);
+						break;
+					}
+					case 3://telefono
+					{
+						string telefono = escribir_telefono();
+						donante->set_telefono(telefono);
+						break;
+					}
+					case 4: //sexo
+					{
+						eSEXO sex = escribir_sexo();
+						donante->set_sexo(sex);
+						break;
+					}
+					case 5://fluido
+					{	cFLUIDO* fluid = escribir_fluido();
+						donante->set_fluido(fluid);
+						break;
+					}
+					case 6://centro
+					{
+						cCENTRO* ptr = escribir_centro();
+						if (ptr != nullptr)
+							donante->set_centro(ptr);
+
+						cout << "Presione cualquier tecla para volver";
+						cin >> dummy;
+
+						break;
+					}
+					case 7: //registros
+					{
+						vector <cREGISTRO> registros = escribir_registros();
+						donante->set_registros(registros);
+						break;
+					}
+					case 8: //historial
+					{
+						cHISTORIAL* hist= escribir_historial();
+						donante->set_historial(hist);
+						break;
+					}
+					case 9: //peso
+					{
+						float peso = escribir_peso();
+						donante->set_peso(peso);
+						break;
+					}
+
+					}//switch
+				}//do
+				while (op3 != 10);
+			}//if
+
+			//si (op2 == 2) no hace nada, deja continuar el programa que va a volver al menu principal
 			cout << endl
 				<< "Presione cualquier tecla para volver";
 			cin >> dummy;
@@ -370,7 +441,7 @@ void cMENU::informe_mensual()
 cPACIENTE* cMENU::escribir_donante()
 {
 	string nombre = escribir_nombre();
-	time_t fecha = escribir_fecha_nacimiento();
+	time_t fecha = escribir_fecha();
 	string tel = escribir_telefono();
 	eSEXO sex = escribir_sexo();
 	cCENTRO* centro = escribir_centro();
@@ -388,7 +459,7 @@ cPACIENTE* cMENU::escribir_donante()
 cPACIENTE* cMENU:: escribir_receptor() //sobrecarga cin era aca?
 {	
 	string nombre = escribir_nombre();
-	time_t fecha = escribir_fecha_nacimiento();
+	time_t fecha = escribir_fecha();
 	string tel = escribir_telefono();
 	eSEXO sex = escribir_sexo();
 	cCENTRO* centro = escribir_centro();
@@ -409,14 +480,14 @@ string cMENU::escribir_nombre()
 	cout << "Ingrese nombre: "; cin >> nombre; cout << endl;
 	return nombre;
 }
-time_t cMENU::escribir_fecha_nacimiento()
+time_t cMENU::escribir_fecha()
 {
 	char dummy;
 	int dia, mes, anio;
-	cout << "Fecha de nacimiento: "; cin >> dia >> dummy >> mes >> dummy >> anio; cout << endl;
+	cout << "Fecha: "; cin >> dia >> dummy >> mes >> dummy >> anio; cout << endl;
 	while (dia <= 0 || mes <= 0 || anio <= 1900) //1900 porque ya todos estan muertos ahi
 	{
-		cout << "Fecha de nacimiento invalida, vuelva a ingresar por favor: "; cin >> dia >> dummy >> mes >> dummy >> anio;
+		cout << "Fecha invalida, vuelva a ingresar por favor: "; cin >> dia >> dummy >> mes >> dummy >> anio;
 		cout << endl;
 	}
 	struct tm f_nac;
@@ -469,7 +540,10 @@ cCENTRO* cMENU::escribir_centro()
 }
 string cMENU::escribir_dni()
 {
-
+	string dni;
+	cout << "Ingrese DNI del paciente: ";
+	cin >> dni; cout << endl;
+	return dni;
 }
 
 cFLUIDO* cMENU::escribir_fluido()
@@ -561,15 +635,69 @@ eESTADO cMENU::escribir_estado()
 }
 float cMENU::escribir_peso() //mayor a tanto (1kg) y menor a tanto(1000kg)?, 
 {
-
+	float peso;
+	do
+	{
+		cout << "Ingrese el peso del paciente en kg: ";
+		cin >> peso; cout << endl;
+	} while (peso > 1.0 && peso < 1000.0);
+	return peso;
 }
 cHISTORIAL* cMENU::escribir_historial()
 {
+	int op;
+	bool enf, tat;
+	time_t fecha1;
+
+	cout << "Tiene enfermedades:" << endl
+		<< "1)No" << endl << "2)Si" << endl;
+	enf = (control_entradas(1, 2) - 1); //false=0, true=1;
+	cout << "Tiene tatuajes:" << endl
+		<< "1)No" << endl << "2)Si" << endl;
+	tat = (control_entradas(1, 2) - 1); //false=0, true=1;
+	if (tat)
+	{
+		cout << "Ingrese la fecha del ultimo tatuaje:" << endl;
+		fecha1 = escribir_fecha();
+	}
+	else
+	{
+		const time_t fecha_act = (const time_t)time(NULL);
+		struct tm fecha;
+		localtime_s(&fecha, &fecha_act);
+		fecha.tm_mon -= 6; //le resto 6 meses a la fecha actual para que cumpla con los requitos
+		time_t f_a = mktime(&fecha);
+		fecha1 = f_a;
+	}
+	cHISTORIAL historial(tat,fecha1,enf);
+	return &historial;
 
 }
 vector <cREGISTRO> cMENU::escribir_registros() //tiene que dar la opcion de no ingresar ninguno
 {
-
+	vector <cREGISTRO> registros;
+	cREGISTRO registro;
+	cFLUIDO* fluid;
+	cCENTRO* centro;
+	time_t fecha;
+	int op = 0;
+	do
+	{
+		cout << "1)Ingrese registro:" << endl;
+		cout << "2)Volver" << endl;
+		op = control_entradas(1, 2);
+		if (op == 1)
+		{
+			fluid = escribir_fluido();
+			centro = escribir_centro();
+			fecha = escribir_fecha();
+			registro.set_fluido(fluid);
+			registro.set_fecha_extraccion(fecha);
+			registro.set_centro(centro);
+			registros.push_back(registro);
+		}
+	} while (op != 2);
+	return registros;
 }
 
 // funciones imprimir
@@ -604,6 +732,21 @@ void cMENU::imprimir_datos_receptor()
 		<< "6) Centro" << endl  
 		<< "7) Prioridad" << endl
 		<< "8) Estado" << endl
+		<< "10) VOLVER" << endl;
+}
+void cMENU::imprimir_datos_donante()
+{
+
+	cout << "¿Que datos desea modificar?" << endl;
+	cout << "1) Nombre" << endl
+		<< "2) Fecha de nacimiento" << endl
+		<< "3) Telefono" << endl
+		<< "4) Sexo" << endl
+		<< "5) Fluido que dona" << endl
+		<< "6) Centro" << endl
+		<< "7) Agregar registro" << endl
+		<< "8) Modificar historial" << endl
+		<< "9) Peso" << endl
 		<< "10) VOLVER" << endl;
 }
 void cMENU:: imprimir_provincias()
