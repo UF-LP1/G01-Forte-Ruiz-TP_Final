@@ -10,7 +10,7 @@ public:
 	~cFLUIDO();
 
 	virtual bool verificar_fecha_maxima(cREGISTRO* registro) = 0;
-	virtual bool compatibilidad() = 0;// bool operator==(cFLUIDO* donante, cFLUIDO* receptor)
+	virtual bool compatibilidad(cFLUIDO* donante) = 0;// bool operator==(cFLUIDO* donante, cFLUIDO* receptor)
 
 	void set_volumen(unsigned int volumen);
 	unsigned int get_volumen();

@@ -8,8 +8,8 @@ public:
 	cPLASMA(unsigned int volumen, eTIPO tipo);
 	~cPLASMA();
 
-	virtual bool compatibilidad(cFLUIDO* donante);// bool operator==(cFLUIDO* donante, cFLUIDO* receptor)
-	virtual bool verificar_fecha_maxima(cREGISTRO* registro);
+	bool compatibilidad(cFLUIDO* donante);// bool operator==(cFLUIDO* donante, cFLUIDO* receptor)
+	bool verificar_fecha_maxima(cREGISTRO* registro);
 	eTIPO get_tipo();
 	string to_string_PLASMA() const;
 };
