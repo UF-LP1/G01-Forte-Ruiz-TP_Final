@@ -17,9 +17,30 @@ void cRECEPTOR::imprimir()
 {
 }
 
-void cRECEPTOR::escribir()
+bool cRECEPTOR::operator==(cDONANTE* donante)
 {
+	cSANGRE* ptr1 = dynamic_cast<cSANGRE*>(donante->get_fluido());
+	cSANGRE* ptr2 = dynamic_cast<cSANGRE*>(this->fluido);
+
+	if (ptr1 != nullptr && ptr2 != nullptr && ptr2->compatibilidad(ptr1))
+		return true;
+
+	cMEDULA* ptr3 = dynamic_cast<cMEDULA*>(donante->get_fluido());
+	cMEDULA* ptr4 = dynamic_cast<cMEDULA*>(this->fluido);
+
+	if (ptr3 != nullptr && ptr4 != nullptr && ptr4->compatibilidad(ptr3)) // checkear condiciones
+		return true;
+
+	cPLASMA* ptr5 = dynamic_cast<cPLASMA*>(donante->get_fluido());
+	cPLASMA* ptr6 = dynamic_cast<cPLASMA*>(this->fluido);
+
+	if (ptr5 != nullptr && ptr6 != nullptr && ptr6->compatibilidad(ptr5))
+		return true;
+
+	return false;
+	
 }
+
 
 void cRECEPTOR::set_prioridad(ePRIORIDAD prioridad)
 {

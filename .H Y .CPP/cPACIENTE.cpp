@@ -15,6 +15,14 @@ cPACIENTE::~cPACIENTE()
 {
 }
 
+bool cPACIENTE::operator==(cPACIENTE* pac2)
+{
+	if (this->dni == pac2->get_dni())
+		return true;
+	else
+		return false;
+}
+
 void cPACIENTE::imprimir()
 {
 }

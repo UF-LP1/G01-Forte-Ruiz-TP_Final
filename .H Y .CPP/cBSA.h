@@ -7,34 +7,32 @@
 #include "cMEDULA.h"
 #include "cPLASMA.h"
 #include "funciones.h"
+#include "VECTOR.h"
+
 using namespace std;
 
 class cBSA {
-	vector<cDONANTE> lista_donantes;
-	vector<cRECEPTOR> lista_receptores;
+	VECTOR<cDONANTE> lista_donantes;
+	VECTOR<cRECEPTOR> lista_receptores;
 	vector<cCENTRO> lista_centros;
 
 public:
-	cBSA(vector<cDONANTE> lista_donantes, vector<cRECEPTOR> lista_receptores, vector<cCENTRO> lista_centros);
+	cBSA(VECTOR<cDONANTE> lista_donantes, VECTOR<cRECEPTOR> lista_receptores, vector<cCENTRO> lista_centros);
 	~cBSA();
-	void set_lista_donantes(vector<cDONANTE> lista_donantes);
-	void set_lista_receptores(vector<cRECEPTOR> lista_receptores);
+	void set_lista_donantes(VECTOR<cDONANTE> lista_donantes);
+	void set_lista_receptores(VECTOR<cRECEPTOR> lista_receptores);
 	void set_lista_centros(vector<cCENTRO> lista_centros);
 
-	vector<cDONANTE> get_lista_donantes();
-	vector<cRECEPTOR> get_lista_receptores();
+	VECTOR<cDONANTE> get_lista_donantes();
+	VECTOR<cRECEPTOR> get_lista_receptores();
 	vector<cCENTRO> get_lista_centros();
 
 	bool comprobar_requisitos(cDONANTE* donante);
-	cPACIENTE* elegir_receptor(vector<cRECEPTOR> posibles_receptores);
-	void agregar_paciente(vector<cPACIENTE*> lista_pacientes);
-
-	friend vector<cRECEPTOR> operator-(vector<cRECEPTOR> *lista, cRECEPTOR elemento);
-	friend vector<cDONANTE> operator-(vector<cDONANTE> *lista, cDONANTE elemento);
-	friend bool operator==(cDONANTE donante, cRECEPTOR receptor); //COMPATIBILIDAD
+	cPACIENTE* elegir_receptor(VECTOR<cRECEPTOR> posibles_receptores);
+	void agregar_paciente(VECTOR<cPACIENTE*> lista_pacientes);
 
 	void protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor);
-	vector<cRECEPTOR> buscar_posibles_receptores(cDONANTE* donante);
+	VECTOR<cRECEPTOR> buscar_posibles_receptores(cDONANTE* donante);
 	void iniciar_analisis();
 
 	//string to_string_BSA(); //PASO A STRING TODAS LAS LISTAS?

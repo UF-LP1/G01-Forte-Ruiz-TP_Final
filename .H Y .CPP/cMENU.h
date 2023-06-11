@@ -1,4 +1,8 @@
 #pragma once
+/*#ifdef _WIN32
+	#include<Windows.h>
+#endif
+*/
 #include "cBSA.h"
 #include <iostream>
 #include <string>
@@ -13,11 +17,13 @@ public:
 	cMENU(cBSA* bsa);
 	~cMENU();
 
-	void ejecutar();
+	void ejecutar(); //funcion principal
 
 	//funciones extras
-	void buscar_centro(cCENTRO* centro);
+	
 	cCENTRO* verificar_centro(string nombre, string partido, ePROVINCIA provincia);
+	int control_entradas(int sup, int inf);
+	//void limpiar_pantalla();
 
 	//funciones principales
 	cRECEPTOR* buscar_receptor(string dni);
@@ -25,6 +31,7 @@ public:
 	void imprimir_listado_donantes();
 	void imprimir_listado_receptores();
 	void informe_mensual();
+	void buscar_centro(cCENTRO* centro);
 
 	//funciones imprimir
 	void imprimir();
@@ -32,7 +39,7 @@ public:
 	void imprimir_datos_receptor();
 	void imprimir_datos_donante();
 	void imprimir_provincias();
-	int control_entradas(int sup, int inf);
+
 
 	//funciones escribir
 	cPACIENTE* escribir_donante();

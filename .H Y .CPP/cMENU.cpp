@@ -27,9 +27,7 @@ void cMENU::ejecutar()
 		{
 			int op2;
 			cPACIENTE* pac1; //ERROR: NO HAY CONSTRUCTOR POR DEFECTO, si es puntero no se llama al constructor
-			cDONANTE* donante;
-			cRECEPTOR* receptor;
-			vector<cPACIENTE*> vdonante, vreceptor;
+			VECTOR<cPACIENTE*> pacientes;
 
 
 			cout << "¿Ingresa un donante o un receptor? " << endl
@@ -45,20 +43,20 @@ void cMENU::ejecutar()
 			if (op2 == 1)
 			{
 				pac1 = escribir_donante(); 
-				donante = dynamic_cast<cDONANTE*>(pac1);
-				vdonante[0] = donante;
-				this->BSA->agregar_paciente(vdonante);
 			}
 			else if (op2 == 2)
 			{
 				pac1 = escribir_receptor();
-				receptor = dynamic_cast<cRECEPTOR*>(pac1);
-				vreceptor[0] = receptor;
-				this->BSA->agregar_paciente(vreceptor);
+				
+			}
+			if (pac1->get_centro() != nullptr)
+			{
+				pacientes + &pac1;//OJO, PUNTERO DOBLE
+				this->BSA->agregar_paciente(pacientes);
 			}
 			else if (op2 == 3)
 				break;
-			//registrar_paciente();
+			
 			cout << "Presione cualquier tecla para volver";
 			cin >> dummy; cout << endl;
 			break;
@@ -77,7 +75,7 @@ void cMENU::ejecutar()
 		case 3: //buscar receptor (opcion modificar)
 		{
 			int op2;
-			string dni;//funcion escribir dni
+			string dni;
 			cout << "Ingrese DNI del paciente que desea buscar: ";//si se quiere modificar un donante?
 			cin >> dni; cout << endl;
 			cRECEPTOR* receptor = buscar_receptor(dni);
@@ -285,7 +283,19 @@ void cMENU::ejecutar()
 			cin >> dummy; cout << endl;
 			break;
 		}
-		case 8: //finalizar programa
+		case 8:
+		{
+			this->BSA->iniciar_analisis();
+
+			//cout << "Transplantes realizados" << endl;
+			/*for (int i = 0; i<this->BSA->get_trasplantes().size(); i++)
+			  {
+				this->BSA->get_trasplantes()[i].imprimir();
+			  }
+			//aca deberiamos informar los transplantes
+			*/
+		}
+		case 10: //finalizar programa
 		{
 			cout << "-----Finalizacion del programa-----";
 			break;
@@ -293,7 +303,7 @@ void cMENU::ejecutar()
 		}
 
 	}
-	while (opcion != 7);
+	while (opcion != 8);
 	return;
 }
 
@@ -321,7 +331,7 @@ cCENTRO* cMENU::verificar_centro(string nombre, string partido, ePROVINCIA provi
 	}
 	if (ptr == nullptr)
 	{
-		cout << endl << "no se encontro el centro en la lista de centros habilitados" << endl; //que vuelva a ingresar los datos 
+		cout << endl << "No se encontro el centro en la lista de centros habilitados." << endl; //que vuelva a ingresar los datos 
 		cout << endl;
 	}
 
@@ -448,11 +458,11 @@ cPACIENTE* cMENU::escribir_donante()
 	cFLUIDO* fluido = escribir_fluido();
 	string dni = escribir_dni(); //funcion escribir_paciente()? PARA NO REPETIR CODIGO
 	vector <cREGISTRO> registros = escribir_registros();
-	int edad = 1; //se puede calcular directamente
+
 	float peso = escribir_peso();
 	cHISTORIAL* historial = escribir_historial();
 
-	cDONANTE pac(nombre, fecha, tel, sex, fluido, centro, dni, registros,edad,peso,historial);
+	cDONANTE pac(nombre, fecha, tel, sex, fluido, centro, dni, registros,peso,historial);
 
 	return &pac;
 }
@@ -474,6 +484,7 @@ cPACIENTE* cMENU:: escribir_receptor() //sobrecarga cin era aca?
 	return &pac;
 }
 
+//paciente
 string cMENU::escribir_nombre()
 {	
 	string nombre;
@@ -495,7 +506,7 @@ time_t cMENU::escribir_fecha()
 	f_nac.tm_mon = mes - 1;
 	f_nac.tm_year = anio - 1900;
 
-	time_t f = mktime(&f_nac);
+	time_t f = mktime(&f_nac); //difftime(f, time(NULL))
 
 	return f;
 }
@@ -521,20 +532,29 @@ cCENTRO* cMENU::escribir_centro()
 {
 	vector<ePROVINCIA> provincias = { BuenosAires, CABA,Catamarca, Chaco, Chubut, Cordoba, Corrientes, EntreRios, Formosa, Jujuy, LaPampa, LaRioja, Mendoza, Misiones, Neuquen, RioNegro,Salta, SanJuan, SanLuis, SantaCruz, SantaFe, SantiagoDelEstero,TierraDelFuego,Tucuman };
 	string nombre, partido;
-	int prov;
+	int prov, op=0;
+	cCENTRO* ptr;
+	do
+	{
+		cout << "Datos a ingresar del centro de salud: " << endl
+			<< "Nombre: ";
+		cin >> nombre; cout << endl;
+		cout << "Partido: ";
+		cin >> partido; cout << endl;
+		cout << "Provincia: ";
+	
+		imprimir_provincias();
 
-	cout << "Datos a ingresar del centro de salud: " << endl
-		<< "Nombre: ";
-	cin >> nombre; cout << endl;
-	cout << "Partido: ";
-	cin >> partido; cout << endl;
-	cout << "Provincia: ";
+		prov = control_entradas(1, 24);
 
-	imprimir_provincias();
-
-	prov = control_entradas(1, 24);
-
-	cCENTRO* ptr = verificar_centro(nombre, partido, provincias[prov - 1]);
+		ptr = verificar_centro(nombre, partido, provincias[prov - 1]);
+		if (ptr == nullptr)
+		{
+			cout << "¿Desea volver a ingresar datos del centro?" << endl
+				<< "1)Si" << endl << "2)No";
+			op = control_entradas(1, 2);
+		}
+	} while (op==1);
 
 	return ptr;
 }
@@ -545,7 +565,7 @@ string cMENU::escribir_dni()
 	cin >> dni; cout << endl;
 	return dni;
 }
-
+//fluidos
 cFLUIDO* cMENU::escribir_fluido()
 {
 	cFLUIDO* fluid;
@@ -614,7 +634,7 @@ cFLUIDO* cMENU::escribir_medula()
 	return &medula;
 }
 
-
+//receptor
 ePRIORIDAD cMENU::escribir_prioridad()
 {	
 	vector<ePRIORIDAD> prioridades = { uno,dos,tres,cuatro,cinco };
@@ -633,6 +653,8 @@ eESTADO cMENU::escribir_estado()
 	return estados[op - 1];
 
 }
+
+//donante
 float cMENU::escribir_peso() //mayor a tanto (1kg) y menor a tanto(1000kg)?, 
 {
 	float peso;
@@ -713,7 +735,8 @@ void cMENU::imprimir()
 		<< endl << "5) Mostrar listado de pacientes donantes."
 		<< endl << "6) Mostrar listado de pacientes receptores."
 		<< endl << "7) Informe mensual de donanciones en cada provincia."
-		<< endl << "8) CERRAR" << endl<< endl; //agregar opcion comenzar analisis
+		<< endl << "8) Iniciar analisis."
+		<< endl << "10) CERRAR" << endl<< endl; //agregar opcion comenzar analisis
 	
 }
 void cMENU::imprimir_submenu()
@@ -776,3 +799,14 @@ void cMENU:: imprimir_provincias()
 		<< "23)TierraDelFuego" << endl
 		<< "24)Tucuman" << endl;
 }
+
+/*
+void cMENU::void limpiar_pantalla()
+{
+	#ifdef _WIN32
+		system("cls");
+	#else
+		system("clear");
+	#endif
+}
+*/

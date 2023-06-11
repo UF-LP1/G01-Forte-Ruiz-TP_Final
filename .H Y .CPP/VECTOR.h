@@ -5,15 +5,19 @@ using namespace std;
 template <class tipo>
 class VECTOR : public vector<tipo> {
 public:
-	void operator-(tipo elemento)
-	{
-		for (int i = 0; i < lista->size(); i++)
+	void operator-(tipo* elemento)
+	{	
+		for (int i = 0; i < this->size(); i++)
 		{
-			if (lista[i] == elemento)
-				lista->erase(lista->begin() + i);//si tira error hay que hacer como hicimos en el TP3
+			if (this->at(i) == elemento)
+				this->erase(this->begin() + i); //elimina el de esa posicion unicamente
+			
 		}
-		return ;
-
-	
+		return;	
+	}
+	void operator+(tipo* elemento)
+	{
+		this->push_back(*elemento);
+		return;
 	}
 };

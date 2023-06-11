@@ -21,9 +21,10 @@ public:
 	cPACIENTE(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO* centro, string dni);
 	~cPACIENTE();
 
-	void imprimir();
-	//virtual void escribir() = 0;  //HAY QUE ENCONTRAR OTRO METODO VIRTUAL
+	bool operator==(cPACIENTE* pac2);
 
+	void imprimir();
+	
 	void set_centro(cCENTRO* centro);
 	void set_nombre(string nombre);
 	void set_fecha_nacimiento(time_t fecha_nac);

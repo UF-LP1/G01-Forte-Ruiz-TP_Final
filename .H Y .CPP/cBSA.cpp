@@ -2,7 +2,7 @@
 
 using namespace std;
 
-cBSA::cBSA(vector<cDONANTE> lista_donantes, vector<cRECEPTOR> lista_receptores, vector<cCENTRO> lista_centros)
+cBSA::cBSA(VECTOR<cDONANTE> lista_donantes, VECTOR<cRECEPTOR> lista_receptores, vector<cCENTRO> lista_centros)
 {
 	this->lista_donantes = lista_donantes;
 	this->lista_receptores = lista_receptores;
@@ -13,11 +13,11 @@ cBSA::~cBSA()
 }
 
 //setters
-void cBSA::set_lista_donantes(vector<cDONANTE> lista_donantes)
+void cBSA::set_lista_donantes(VECTOR<cDONANTE> lista_donantes)
 {
 	this->lista_donantes = lista_donantes;
 }
-void cBSA::set_lista_receptores(vector<cRECEPTOR> lista_receptores)
+void cBSA::set_lista_receptores(VECTOR<cRECEPTOR> lista_receptores)
 {
 	this->lista_receptores = lista_receptores;
 }
@@ -27,11 +27,11 @@ void cBSA::set_lista_centros(vector<cCENTRO> lista_centros)
 }
 
 //getters
-vector<cDONANTE> cBSA::get_lista_donantes()
+VECTOR<cDONANTE> cBSA::get_lista_donantes()
 {
 	return this->lista_donantes;
 }
-vector<cRECEPTOR> cBSA::get_lista_receptores()
+VECTOR<cRECEPTOR> cBSA::get_lista_receptores()
 {
 	return this->lista_receptores;
 }
@@ -68,7 +68,7 @@ bool cBSA::comprobar_requisitos(cDONANTE* donante)
 	return true;
 }
 
-cPACIENTE* cBSA::elegir_receptor(vector<cRECEPTOR> posibles_receptores)
+cPACIENTE* cBSA::elegir_receptor(VECTOR<cRECEPTOR> posibles_receptores)
 {
 	if (posibles_receptores.empty())
 		return nullptr;
@@ -93,7 +93,7 @@ cPACIENTE* cBSA::elegir_receptor(vector<cRECEPTOR> posibles_receptores)
 
 }
 
-void cBSA::agregar_paciente(vector<cPACIENTE*> lista_pacientes) //Mepa que no es necesario el vector ya
+void cBSA::agregar_paciente(VECTOR<cPACIENTE*> lista_pacientes) //Mepa que no es necesario el vector ya
 {
 	cDONANTE* ptr1;
 	cRECEPTOR* ptr2;
@@ -119,9 +119,9 @@ void cBSA::agregar_paciente(vector<cPACIENTE*> lista_pacientes) //Mepa que no es
 		ptr2 = dynamic_cast<cRECEPTOR*>(lista_pacientes[i]);
 
 		if (ptr1 != nullptr)
-			this->lista_donantes.push_back(*ptr1);
+			this->lista_donantes + ptr1;
 		if (ptr2 != nullptr)
-			this->lista_receptores.push_back(*ptr2);
+			this->lista_receptores + ptr2;
 	}
 
 	return;
@@ -134,7 +134,7 @@ void cBSA::protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor) //falta
 	bool b1,b2;
 	b1 = donante->get_fluido()->verificar_fecha_maxima(&donante->get_registros()[i]);//dynamic cast
 	if (!b1)
-		&(this->lista_donantes)-*donante;
+		this->lista_donantes - donante;
 	//se borra de la lista, sobrecarga del -
 	
 	if (!(b1 && donante->get_centro()->get_provincia() == receptor->get_centro()->get_provincia() && donante->get_centro()->get_partido() == receptor->get_centro()->get_partido()))//sobrecarga en centro del ==
@@ -144,7 +144,7 @@ void cBSA::protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor) //falta
 	if (b2)
 	{
 		receptor->set_estado(RECIBIO);
-		&(this->lista_receptores) - *receptor; //sobrecarga del -
+		this->lista_receptores - receptor; //sobrecarga del -
 	}
 	else
 	{
@@ -152,24 +152,24 @@ void cBSA::protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor) //falta
 		receptor->set_prioridad(cinco);
 	}
 
-	this->lista_donantes = &(this->lista_donantes) - *donante;
+	this->lista_donantes - donante;
 	//si se realizo el trasnplante hay borrar el donante de la lista
 	//o cambiar la disponibilidad en el registro, no es mucho borrarlo?
 }
-vector<cRECEPTOR> cBSA::buscar_posibles_receptores(cDONANTE* donante)
+VECTOR<cRECEPTOR> cBSA::buscar_posibles_receptores(cDONANTE* donante)
 {
-	vector<cRECEPTOR> sublista;
+	VECTOR<cRECEPTOR> sublista;
 
 	for (int i = 0; i < this->lista_receptores.size(); i++)
 	{
-		if ( *donante == this->lista_receptores[i]) 
-			sublista.push_back(this->lista_receptores[i]);
+		if (this->lista_receptores[i] == donante) 
+			sublista + &(this->lista_receptores[i]);
 	}
 	return sublista;
 }
 void cBSA::iniciar_analisis()// funcion madre que abarca varios metodos
 {
-	vector<cRECEPTOR> sublista;
+	VECTOR<cRECEPTOR> sublista;
 	cPACIENTE* pac;
 
 	for (int i = 0; i < this->lista_donantes.size(); i++)
