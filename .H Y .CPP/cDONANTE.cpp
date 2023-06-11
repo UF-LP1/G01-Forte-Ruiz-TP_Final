@@ -2,10 +2,9 @@
 
 using namespace std;
 
-cDONANTE::cDONANTE(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO* centro, string dni, vector<cREGISTRO> registros, unsigned int edad, float peso, cHISTORIAL* historial) : cPACIENTE( nombre, fecha_nacimiento, telefono, sexo, fluido, centro, dni)
+cDONANTE::cDONANTE(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO* centro, string dni, vector<cREGISTRO> registros, float peso, cHISTORIAL* historial) : cPACIENTE( nombre, fecha_nacimiento, telefono, sexo, fluido, centro, dni)
 {
 	this->registros = registros;
-	this->edad = edad;
 	this->peso = peso;
 	this->historial = historial;
 }
@@ -17,19 +16,12 @@ cDONANTE::~cDONANTE()
 void cDONANTE:: imprimir() {
 
 }
-void cDONANTE::escribir()
-{
-}
+
 //setters
 
 void cDONANTE::set_registros(vector<cREGISTRO> registros)
 {
 	this->registros = registros;
-}
-
-void cDONANTE::set_edad(unsigned int edad)
-{
-	this->edad = edad;
 }
 
 void cDONANTE::set_peso(float peso)
@@ -47,11 +39,6 @@ void cDONANTE::set_historial(cHISTORIAL* historial)
 vector<cREGISTRO> cDONANTE::get_registros()
 {
 	return this->registros;
-}
-
-unsigned int cDONANTE::get_edad()
-{
-	return this->edad;
 }
 
 float cDONANTE::get_peso()
@@ -73,9 +60,17 @@ void cDONANTE::crear_registro(cFLUIDO* fluido)
 
 string cDONANTE::to_string_DONANTE() const
 {
-	string c;
-
-	c.append(to_string(this->edad));
+	string c, f_nac;
+	struct tm fecha_nac;
+	localtime_s(&fecha_nac, (const time_t*)this->fecha_nacimiento);
+	int mes, anio;
+	mes = fecha_nac.tm_mon + 1;
+	anio = fecha_nac.tm_year + 1900;
+	f_nac.append(to_string(fecha_nac.tm_mday));
+	f_nac.append("/"); f_nac.append(to_string(mes)); f_nac.append("/");
+	f_nac.append(to_string(anio)); 
+	/////
+	c.append(f_nac); 
 	c.append(", "); c.append(to_string(this->peso));
 	c.append(" kg.\n");
 	c.append("REGISTROS:\n");

@@ -7,29 +7,25 @@
 
 class cDONANTE : public cPACIENTE{
 	vector<cREGISTRO> registros;
-	unsigned int edad;
 	float peso;
 	cHISTORIAL* historial;
 
 public:
-	cDONANTE(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO* centro, string dni, vector<cREGISTRO> registros, unsigned int edad, float peso, cHISTORIAL* historial);
+	cDONANTE(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO* centro, string dni, vector<cREGISTRO> registros, float peso, cHISTORIAL* historial);
 	~cDONANTE();
 	void imprimir();
-	//void escribir();
 
 	void set_registros(vector<cREGISTRO> registros);
-	void set_edad(unsigned int edad);// DETALLE: si cae la fecha de nacimiento la tiene que updatear
 	void set_peso(float peso);// nie
 	void set_historial(cHISTORIAL* historial);// nie
 
 	vector<cREGISTRO> get_registros();
-	unsigned int get_edad();
 	float get_peso();
 	cHISTORIAL* get_historial();
 
 	void crear_registro(cFLUIDO* fluido);
 
 	string to_string_DONANTE() const;
-	void imprimir_DONANTE();
+	void imprimir_DONANTE(); //SOBRECARGA DEL <<?? EN CADA IMPRIMIR SERIA
 };
 	
