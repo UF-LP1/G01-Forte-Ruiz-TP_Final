@@ -59,6 +59,9 @@ bool cBSA::comprobar_requisitos(cDONANTE* donante)
 	if (donante->get_historial()->get_ult_tattoo() >= f_a)
 		return false;
 
+	if (donante->get_registros().empty())
+		return true;
+
 	if (donante->get_registros().back().get_fecha_extraccion() >= f_a)
 		return false;
 

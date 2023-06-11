@@ -9,6 +9,13 @@ cREGISTRO::cREGISTRO(cFLUIDO* fluido,time_t fecha_extraccion, cCENTRO* centro)
 	this->centro = centro;
 }
 
+cREGISTRO::cREGISTRO()
+{
+	this->fluido = nullptr;
+	this->fecha_extraccion = time(NULL);
+	this->centro = nullptr;
+}
+
 cREGISTRO::~cREGISTRO()
 {
 }
@@ -26,6 +33,22 @@ time_t cREGISTRO::get_fecha_extraccion()
 cCENTRO* cREGISTRO::get_centro()
 {
 	return this->centro;
+}
+
+void cREGISTRO::set_fluido(cFLUIDO* fluid)
+{
+	this->fluido = fluid;
+
+}
+
+void cREGISTRO::set_fecha_extraccion(time_t fecha)
+{
+	this->fecha_extraccion = fecha;
+}
+
+void cREGISTRO::set_centro(cCENTRO* centro)
+{
+	this->centro = centro;
 }
 
 string cREGISTRO::to_string_REGIS() const
