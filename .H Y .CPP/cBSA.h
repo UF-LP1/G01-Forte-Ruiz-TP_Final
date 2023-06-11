@@ -29,7 +29,7 @@ public:
 
 	bool comprobar_requisitos(cDONANTE* donante);
 	cPACIENTE* elegir_receptor(VECTOR<cRECEPTOR> posibles_receptores);
-	void agregar_paciente(VECTOR<cPACIENTE*> lista_pacientes);
+	int agregar_paciente(cPACIENTE* paciente);
 
 	void protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor);
 	VECTOR<cRECEPTOR> buscar_posibles_receptores(cDONANTE* donante);

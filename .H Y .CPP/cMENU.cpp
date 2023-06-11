@@ -26,9 +26,7 @@ void cMENU::ejecutar()
 		case 1: //registrar paciente, podria ser funcion, mas legible el codigo
 		{
 			int op2;
-			cPACIENTE* pac1; //ERROR: NO HAY CONSTRUCTOR POR DEFECTO, si es puntero no se llama al constructor
-			VECTOR<cPACIENTE*> pacientes;
-
+			cPACIENTE* pac1;
 
 			cout << "¿Ingresa un donante o un receptor? " << endl
 				<< "1) Donante." << endl
@@ -51,8 +49,11 @@ void cMENU::ejecutar()
 			}
 			if (pac1->get_centro() != nullptr)
 			{
-				pacientes + &pac1;//OJO, PUNTERO DOBLE
-				this->BSA->agregar_paciente(pacientes);
+				int d = this->BSA->agregar_paciente(pac1); 
+				if (d == -1)
+					cout << "El paciente que quiso agregar ya se encontraba en el BSA." << endl;
+				if (d == 1)
+					cout << "El paciente no paso los requisitos necesarios para ser donante." << endl;
 			}
 			else if (op2 == 3)
 				break;

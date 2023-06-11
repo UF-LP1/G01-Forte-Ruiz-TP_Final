@@ -18,6 +18,8 @@ public:
 	void imprimir();
 	bool operator==(cDONANTE* donante);
 
+	void agregar(cBSA* banco);
+
 	void set_prioridad(ePRIORIDAD prioridad);
 	void set_estado(eESTADO estado);
 	void set_fecha(time_t fecha);

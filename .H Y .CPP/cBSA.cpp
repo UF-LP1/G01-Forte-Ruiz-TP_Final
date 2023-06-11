@@ -93,40 +93,35 @@ cPACIENTE* cBSA::elegir_receptor(VECTOR<cRECEPTOR> posibles_receptores)
 
 }
 
-void cBSA::agregar_paciente(VECTOR<cPACIENTE*> lista_pacientes) //Mepa que no es necesario el vector ya
+int cBSA::agregar_paciente(cPACIENTE* paciente)
 {
-	cDONANTE* ptr1;
-	cRECEPTOR* ptr2;
-
 	//FALTA VERIFICAR SI NO ESTA EN OTRA LISTA O SI YA ESTABA
+	cRECEPTOR* receptor;
 
-	/*
-		for(int i = 0; i< this->lista_donantes.size(); i++)
-		{
-			if(paciente->get_dni() == lista_donantes[i].get_dni())
-			 //Ya estaba en la lista de donantes
-		}
-		for(int i = 0; i< this->lista_receptores.size(); i++)
-		{
-			if(paciente->get_dni() == lista_receptores[i].get_dni())
-			 //Ya estaba en la lista de receptores
-		}
-	*/
-
-	for (int i = 0; i < lista_pacientes.size(); i++)
+	for(int i = 0; i< this->lista_donantes.size(); i++)
 	{
-		ptr1 = dynamic_cast<cDONANTE*>(lista_pacientes[i]);
-		ptr2 = dynamic_cast<cRECEPTOR*>(lista_pacientes[i]);
+		if (paciente->get_dni() == lista_donantes[i].get_dni()) //SOLO NOS IMPORTA EL DNI
+			return -1;
+		//Ya estaba en la lista de donantes
 
-		if (ptr1 != nullptr)
-			this->lista_donantes + ptr1;
-		if (ptr2 != nullptr)
-			this->lista_receptores + ptr2;
 	}
+	for(int i = 0; i< this->lista_receptores.size(); i++)
+	{
+		receptor = dynamic_cast<cRECEPTOR*>(paciente);
+		if (*receptor == lista_receptores[i]) //SOBRECARGA DONDE COINCIDAN TODOS LOS ATRIBUTOS
+			return -1;
+		//Ya estaba en la lista de receptores
+	}
+	int cant = this->lista_donantes.size();
 
-	return;
+	paciente->agregar(this); //HABRIA QUE DEBUGGEAR A VER SI FUNCIONA
+
+	int cant_despues = this->lista_donantes.size();
+
+	if (cant_despues == cant)
+		return 1; //Significa que el donante no paso los requisitos.
+	return 0;
 }
-
 
 void cBSA::protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor) //falta sobrecarga del -
 {
@@ -145,6 +140,7 @@ void cBSA::protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor) //falta
 	{
 		receptor->set_estado(RECIBIO);
 		this->lista_receptores - receptor; //sobrecarga del -
+		
 	}
 	else
 	{
@@ -158,14 +154,15 @@ void cBSA::protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor) //falta
 }
 VECTOR<cRECEPTOR> cBSA::buscar_posibles_receptores(cDONANTE* donante)
 {
-	VECTOR<cRECEPTOR> sublista;
+	VECTOR<cRECEPTOR>* sublista;
 
 	for (int i = 0; i < this->lista_receptores.size(); i++)
 	{
 		if (this->lista_receptores[i] == donante) 
-			sublista + &(this->lista_receptores[i]);
+			*sublista + &(this->lista_receptores[i]);
 	}
-	return sublista;
+
+	return *sublista;
 }
 void cBSA::iniciar_analisis()// funcion madre que abarca varios metodos
 {
@@ -175,9 +172,15 @@ void cBSA::iniciar_analisis()// funcion madre que abarca varios metodos
 	for (int i = 0; i < this->lista_donantes.size(); i++)
 	{
 		sublista = buscar_posibles_receptores(&this->lista_donantes[i]);
-		pac = elegir_receptor(sublista);
-		if (pac != nullptr)
-			protocolo_transplante(&(this->lista_donantes[i]), dynamic_cast<cRECEPTOR*>(pac));
+		if (!sublista.empty())
+		{
+			pac = elegir_receptor(sublista);
+			if (pac != nullptr)
+				protocolo_transplante(&(this->lista_donantes[i]), dynamic_cast<cRECEPTOR*>(pac));
+		}
+		else;
+			//OPCIONES: o que cargue un vector con los donantes que no tienen match y lo devuelva
+			// o que vaya imprimiendolo aca en el else.
 
 	}
 	return;

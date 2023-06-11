@@ -41,6 +41,11 @@ bool cRECEPTOR::operator==(cDONANTE* donante)
 	
 }
 
+void cRECEPTOR::agregar(cBSA* banco)
+{
+	banco->get_lista_receptores() + this;
+}
+
 
 void cRECEPTOR::set_prioridad(ePRIORIDAD prioridad)
 {

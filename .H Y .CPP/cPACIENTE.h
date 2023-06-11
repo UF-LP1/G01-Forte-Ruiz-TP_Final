@@ -4,6 +4,7 @@
 #include "cCENTRO.h"
 #include "eSEXO.h"
 #include "cFLUIDO.h"
+#include "cBSA.h"
 
 using namespace std;
 
@@ -24,6 +25,8 @@ public:
 	bool operator==(cPACIENTE* pac2);
 
 	void imprimir();
+
+	virtual void agregar(cBSA* banco) = 0;  
 	
 	void set_centro(cCENTRO* centro);
 	void set_nombre(string nombre);

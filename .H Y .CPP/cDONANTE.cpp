@@ -17,6 +17,13 @@ void cDONANTE:: imprimir() {
 
 }
 
+void cDONANTE::agregar(cBSA* banco)
+{
+	bool a = banco->comprobar_requisitos(this);
+	if (a)
+		banco->get_lista_donantes() + this;
+}
+
 //setters
 
 void cDONANTE::set_registros(vector<cREGISTRO> registros)
