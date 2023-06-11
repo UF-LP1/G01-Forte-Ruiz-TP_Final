@@ -43,11 +43,11 @@ vector<cCENTRO> cBSA::get_lista_centros()
 
 bool cBSA::comprobar_requisitos(cDONANTE* donante)
 {
-	if (donante->get_edad() < 18 || donante->get_edad() > 65)
+	if (difftime(time(NULL), donante->get_fecha_nacimiento())< 567648000 || difftime(time(NULL), donante->get_fecha_nacimiento()) > 2049840000) 
 		return false;
 	if (donante->get_peso() <= 50)
 		return false;
-	if (donante->get_historial()->get_enfermedades() == true)
+	if (donante->get_historial()->get_enfermedades())
 		return false;
 
 	const time_t f_actual = (const time_t)time(NULL);
@@ -90,10 +90,25 @@ cPACIENTE* cBSA::elegir_receptor(vector<cRECEPTOR> posibles_receptores)
 
 }
 
-void cBSA::agregar_paciente(vector<cPACIENTE*> lista_pacientes) //FALTA VERIFICAR SI NO ESTA EN OTRA LISTA O SI YA ESTABA
+void cBSA::agregar_paciente(vector<cPACIENTE*> lista_pacientes) //Mepa que no es necesario el vector ya
 {
 	cDONANTE* ptr1;
 	cRECEPTOR* ptr2;
+
+	//FALTA VERIFICAR SI NO ESTA EN OTRA LISTA O SI YA ESTABA
+
+	/*
+		for(int i = 0; i< this->lista_donantes.size(); i++)
+		{
+			if(paciente->get_dni() == lista_donantes[i].get_dni())
+			 //Ya estaba en la lista de donantes
+		}
+		for(int i = 0; i< this->lista_receptores.size(); i++)
+		{
+			if(paciente->get_dni() == lista_receptores[i].get_dni())
+			 //Ya estaba en la lista de receptores
+		}
+	*/
 
 	for (int i = 0; i < lista_pacientes.size(); i++)
 	{
