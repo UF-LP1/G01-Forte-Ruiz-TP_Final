@@ -12,29 +12,26 @@ using namespace std;
 class cPACIENTE {
 protected:
 	string nombre;
-	time_t fecha_nacimiento;
+	time_t fecha_nacimiento;//struct tm
 	string telefono;
 	eSEXO sexo;
 	cFLUIDO* fluido;
 	cCENTRO* centro;
-	string dni;
+	const string dni;
 public:
-	cPACIENTE(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO* centro, string dni);
+	cPACIENTE(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO* centro, const string dni);
 	~cPACIENTE();
 
 	bool operator==(cPACIENTE* pac2);
 
-	void imprimir();
-
-	virtual void agregar(cBSA* banco) = 0;  
-	virtual string to_string() = 0;
+	virtual string to_string() const = 0;
 	void set_centro(cCENTRO* centro);
 	void set_nombre(string nombre);
 	void set_fecha_nacimiento(time_t fecha_nac);
 	void set_telefono(string telefono);
 	void set_sexo(eSEXO sexo);
 	void set_fluido(cFLUIDO* fluido);
-	void set_dni(string dni);
+	
 
 	string get_nombre();
 	time_t get_fecha_nacimiento();
@@ -44,5 +41,4 @@ public:
 	cCENTRO* get_centro();
 	string get_dni();
 
-	void imprimir();
 };

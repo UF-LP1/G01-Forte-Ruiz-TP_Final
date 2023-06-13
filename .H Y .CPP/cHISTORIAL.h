@@ -22,6 +22,6 @@ public:
 	time_t get_ult_tattoo();
 	bool get_enfermedades() const;
 
-	string to_string();
+	string to_string() const;
 
 };

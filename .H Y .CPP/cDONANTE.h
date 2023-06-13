@@ -15,7 +15,6 @@ public:
 	~cDONANTE();
 	void imprimir();
 
-	void agregar(cBSA* banco);
 
 	void set_registros(vector<cREGISTRO> registros);
 	void set_peso(float peso);// nie
@@ -25,9 +24,9 @@ public:
 	float get_peso();
 	cHISTORIAL* get_historial();
 
-	void crear_registro(cFLUIDO* fluido);
-
-	string to_string();
+	void crear_registro();
+	void imprimir();
+	string to_string() const;
 	
 };
 	

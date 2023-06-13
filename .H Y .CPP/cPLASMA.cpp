@@ -14,16 +14,7 @@ eTIPO cPLASMA::get_tipo()
 	return this->tipo;
 }
 
-string cPLASMA::to_string_PLASMA() const
-{
-	string c, type;
-	const char* tipo[] = { "A","AB","B","O" };
-	type = tipo[this->tipo];
-
-	c.append("PLASMA, TIPO: "); c.append(type); c.append(".");
-}
-
-/*string cPLASMA::to_string()
+string cPLASMA::to_string() const
 {
 	string type;
 	const char* tipo[] = { "A","AB","B","O" };
@@ -36,7 +27,7 @@ string cPLASMA::to_string_PLASMA() const
 	
 	return ss.str();
 }
-*/
+
 bool cPLASMA:: verificar_fecha_maxima(cREGISTRO* registro) // 1 año
 {
 	const time_t fecha_act = (const time_t)time(NULL);

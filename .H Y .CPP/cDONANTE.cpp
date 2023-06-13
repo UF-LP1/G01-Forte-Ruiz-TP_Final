@@ -17,12 +17,7 @@ void cDONANTE:: imprimir() {
 
 }
 
-void cDONANTE::agregar(cBSA* banco)
-{
-	bool a = banco->comprobar_requisitos(this);
-	if (a)
-		banco->get_lista_donantes() + this;
-}
+
 
 //setters
 
@@ -58,17 +53,15 @@ cHISTORIAL* cDONANTE::get_historial()
 	return this->historial;
 }
 
-void cDONANTE::crear_registro(cFLUIDO* fluido)
+void cDONANTE::crear_registro()
 {
 	time_t f_actual = time(NULL);
-	cREGISTRO registro(fluido, f_actual, this->centro);
+	cREGISTRO registro(this->fluido, f_actual, this->centro);
 	this->registros.push_back(registro);
 }
 
 
-
-
-string cDONANTE::to_string()
+string cDONANTE::to_string() const
 {
 	const time_t fecha = (const time_t)this->fecha_nacimiento;
 	struct tm aux;
@@ -104,4 +97,8 @@ string cDONANTE::to_string()
 		ss << this->registros[i].to_string();
 	}
 	return ss.str();
+}
+void cDONANTE::imprimir()
+{
+	cout << to_string() << endl;
 }

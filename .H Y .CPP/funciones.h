@@ -23,7 +23,7 @@ ostream& operator<<(ostream& out, const vector<cRECEPTOR>& lista_receptores)
 {
 	for (int i = 0; i < lista_receptores.size(); i++)
 	{
-		//out << lista_receptores[i].to_string_RECEPTOR()<<endl;
+		out << lista_receptores[i].to_string()<<endl;
 		out << "----------------------" << endl;
 	}
 	return out;
@@ -32,7 +32,7 @@ ostream& operator<<(ostream& out, const vector<cDONANTE>& lista_donantes)
 {
 	for (int i = 0; i < lista_donantes.size(); i++)
 	{
-		out << lista_donantes[i].to_string_DONANTE()<<endl;
+		out << lista_donantes[i].to_string()<<endl;
 		out << "----------------------" << endl;
 	}
 	return out;
@@ -41,33 +41,8 @@ ostream& operator<<(ostream& out, const vector<cCENTRO>& lista_centros)
 {
 	for (int i = 0; i < lista_centros.size(); i++) 
 	{
-		out << lista_centros[i].to_string_CENTRO()<<endl; 
+		out << lista_centros[i].to_string()<<endl; 
 		out << "----------------------" << endl;
 	}
 	return out;
 }
-
-
-/*
- //vuelan
-std::vector<cDONANTE> operator-(std::vector<cDONANTE> *lista, cDONANTE elemento)
-{
-	for (int i = 0; i < lista->size(); i++) 
-	{
-		if (lista->at(i).get_dni() == elemento.get_dni())//hacer sobrecarga del ==, estas comparando dos objetos
-			lista->erase(lista->begin() + i);//si tira error hay que hacer como hicimos en el TP3
-	}
-	return *lista;
-
-}
-std::vector<cRECEPTOR> operator-(std::vector<cRECEPTOR> *lista, cRECEPTOR elemento) //para que sea void tiene que recibir la direccion de lalista, no copiarla
-{
-	for (int i = 0; i < lista->size(); i++)
-	{
-		if (lista->at(i).get_dni() == elemento.get_dni())
-			lista->erase(lista->begin() + i);//si tira error hay como hicimos en el TP3
-	}
-	return *lista;
-
-}
-*/

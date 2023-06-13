@@ -66,7 +66,7 @@ bool cSANGRE:: compatibilidad(cFLUIDO* donante)
 
 }
 
-string cSANGRE::to_string()
+string cSANGRE::to_string() const
 {
 	string type, signo;
 	const char* tipo[] = { "A","AB","B","O" };

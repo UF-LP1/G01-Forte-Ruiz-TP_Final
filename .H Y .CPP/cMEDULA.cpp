@@ -1,11 +1,21 @@
 #include "cMEDULA.h"
 
-cMEDULA::cMEDULA(unsigned int volumen):cFLUIDO(volumen)
+cMEDULA::cMEDULA(unsigned int volumen, eCOLOR color):cFLUIDO(volumen)
 {
 }
 
 cMEDULA::~cMEDULA()
 {
+}
+
+void cMEDULA::set_color(eCOLOR color)
+{
+	this->color = color;
+}
+
+eCOLOR cMEDULA::get_color()
+{
+	return this->color;
 }
 
 bool cMEDULA::verificar_fecha_maxima(cREGISTRO* registro) //1 dia
@@ -25,16 +35,22 @@ bool cMEDULA::verificar_fecha_maxima(cREGISTRO* registro) //1 dia
 }
 
 
-string cMEDULA::to_string()
+string cMEDULA::to_string() const
 {
 	stringstream ss;
+	const char* colores[] = {"amarillo", "rojo"};
 	ss << "Fluido: MEDULA" << endl;
-	ss << "Volumen: " << this->volumen << endl;
-		//<< "Color: " << this->color <<endl; //(:p)
+	ss << "Volumen: " << this->volumen << endl
+	   << "Color: " << colores[this->color]<<endl; //(:p)
 	return ss.str();
 }
 
 bool cMEDULA:: compatibilidad(cFLUIDO* donante)
 {
+
+	if (this->color == dynamic_cast<cMEDULA*>(donante)->color)
+		return true;
+	else
+		return false;
 
 }

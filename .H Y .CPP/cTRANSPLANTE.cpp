@@ -1,17 +1,18 @@
 #include "cTRANSPLANTE.h"
 
-cTRANSPLANTE::cTRANSPLANTE(time_t fecha, cRECEPTOR* paciente, cCENTRO* centro, cFLUIDO* fluido, bool resultado)
+int cTRANSPLANTE::num_transplante = 0;
+
+cTRANSPLANTE::cTRANSPLANTE(time_t fecha, bool resultado)
 {
 	this->fecha = fecha;
-	this->paciente = paciente;
-	this->centro = centro;
-	this->fluido = fluido;
 	this->resultado = resultado;
+	this->num_transplante++;
 	return;
 }
 
 cTRANSPLANTE::~cTRANSPLANTE()
 {
+	this->num_transplante--;
 }
 
 void cTRANSPLANTE::imprimir()
@@ -19,26 +20,14 @@ void cTRANSPLANTE::imprimir()
 	cout << to_string() << endl;
 }
 
-string cTRANSPLANTE:: to_string()
+string cTRANSPLANTE:: to_string() const
 {
 	stringstream ss;
-	ss << "Transplante realizado:" << endl;
+	ss << "Numero de transplante realizado:" << this->num_transplante <<endl;
 	struct tm aux;
 	localtime_s(&aux, (const time_t*)fecha);
-	ss << "Fecha:" << aux.tm_mday << "/" << aux.tm_mon + 1 << "/" << aux.tm_year + 1900 << endl
-		<< this->paciente->to_string()
-		<< this->centro->to_string();
+	ss << "Fecha:" << aux.tm_mday << "/" << aux.tm_mon + 1 << "/" << aux.tm_year + 1900 << endl;
 
-	cMEDULA* ptr1 = dynamic_cast <cMEDULA*> (this->fluido);
-	cPLASMA* ptr2 = dynamic_cast <cPLASMA*> (this->fluido);
-	cSANGRE* ptr3 = dynamic_cast <cSANGRE*> (this->fluido);
-
-	if (ptr1 != nullptr)
-		ss << ptr1->to_string();
-	if (ptr2 != nullptr)
-		ss << ptr2->to_string();
-	if (ptr3 != nullptr)
-		ss << ptr3->to_string();
 
 	ss << "Resultado: ";
 	if (this->resultado)

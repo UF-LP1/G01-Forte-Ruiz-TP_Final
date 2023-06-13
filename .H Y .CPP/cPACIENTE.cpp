@@ -1,6 +1,6 @@
 #include "cPACIENTE.h"
 
-cPACIENTE::cPACIENTE(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO* centro, string dni)
+cPACIENTE::cPACIENTE(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO* centro, const string dni):dni(dni)
 {
 	this->nombre = nombre;
 	this-> fecha_nacimiento = fecha_nacimiento;
@@ -8,7 +8,6 @@ cPACIENTE::cPACIENTE(string nombre, time_t fecha_nacimiento, string telefono, eS
 	this->sexo = sexo;
 	this->fluido = fluido;
 	this->centro = centro;
-	this->dni = dni;
 }
 
 cPACIENTE::~cPACIENTE()
@@ -23,10 +22,6 @@ bool cPACIENTE::operator==(cPACIENTE* pac2)
 		return false;
 }
 
-void cPACIENTE::imprimir()
-{
-	cout << to_string();
-}
 
 //setter
 
@@ -50,10 +45,7 @@ void cPACIENTE::set_sexo(eSEXO sexo)
 {
 	this->sexo = sexo;
 }
-void cPACIENTE::set_dni(string dni)
-{
-	this->dni = dni;
-}
+
 void cPACIENTE::set_fluido(cFLUIDO* fluido)
 {
 	this->fluido = fluido;

@@ -22,7 +22,7 @@ public:
 	~cCENTRO();
 	 
 	void imprimir();
-	bool realizar_transplante(cDONANTE donante, cRECEPTOR receptor);
+	bool realizar_transplante(cRECEPTOR* receptor);
 	//Que pasa si el paciente se debe mudar? Deberia poder modificarse.
 
 	void set_nombre(string nombre);
@@ -36,7 +36,7 @@ public:
 	ePROVINCIA get_provincia();
 	string get_telefono();
 
-	string to_string();
+	string to_string() const;
 
 	void imprimir_CENTRO();
 

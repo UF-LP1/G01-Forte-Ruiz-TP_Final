@@ -44,7 +44,7 @@ bool cHISTORIAL::get_enfermedades() const
 	return this->enfermedades;
 }
 
-string cHISTORIAL::to_string()
+string cHISTORIAL::to_string() const
 {
 	struct tm fecha;
 	localtime_s(&fecha, (const time_t*)this->ult_tattoo);

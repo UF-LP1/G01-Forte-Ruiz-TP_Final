@@ -13,7 +13,7 @@ cCENTRO::~cCENTRO()
 {
 }
 
-bool cCENTRO::realizar_transplante(cDONANTE donante, cRECEPTOR receptor)
+bool cCENTRO::realizar_transplante(cRECEPTOR* receptor)
 {
 	int a;
 	bool b;
@@ -26,8 +26,10 @@ bool cCENTRO::realizar_transplante(cDONANTE donante, cRECEPTOR receptor)
 	time_t t = time(NULL);
 
 	return a;
-	cTRANSPLANTE transplante(t, &receptor, receptor.get_centro(), receptor.get_fluido(), b);
-	transplante.imprimir();
+	cTRANSPLANTE transplante(t, b); //FALTA NEW
+	receptor->set_transplante(&transplante);
+	return b;
+	
 }
 
 void cCENTRO::set_nombre(string nombre)
@@ -87,7 +89,7 @@ string cCENTRO::get_telefono()
 }
 
 
-string cCENTRO::to_string()
+string cCENTRO::to_string() const
 {
 	string prov;
 	const char* provincias[] = { "BuenosAires", "CABA","Catamarca", "Chaco", "Chubut", "Cordoba", "Corrientes", "EntreRios", "Formosa", "Jujuy", "LaPampa", "LaRioja", "Mendoza", "Misiones", "Neuquen", "RioNegro","Salta", "SanJuan", "SanLuis", "SantaCruz", "SantaFe", "SantiagoDelEstero","TierraDelFuego","Tucuman" };

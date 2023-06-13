@@ -47,7 +47,7 @@ void cREGISTRO::set_centro(cCENTRO* centro)
 	this->centro = centro;
 }
 
-string cREGISTRO::to_string()
+string cREGISTRO::to_string() const
 {
 	struct tm fecha;
 	localtime_s(&fecha, (const time_t*)this->fecha_extraccion);

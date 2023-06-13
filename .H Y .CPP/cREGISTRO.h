@@ -23,5 +23,5 @@ public:
 	void set_fecha_extraccion(time_t fecha);
 	void set_centro(cCENTRO* centro);
 
-	string to_string();
+	string to_string() const;
 };

@@ -80,8 +80,14 @@ void cMENU::ejecutar()
 			cout << "Ingrese DNI del paciente que desea buscar: ";//si se quiere modificar un donante?
 			cin >> dni; cout << endl;
 			cRECEPTOR* receptor = buscar_receptor(dni);
-			
-			imprimir_submenu();
+			if (receptor == nullptr)
+			{
+				cout << "No se encontro al receptor." << endl;
+				break;
+			}
+			cout << endl 
+				<< "¿Desea modificar los datos?" << endl
+				<< "1) Si." << endl << "2) No." << endl;
 
 			op2 = control_entradas(1, 2);
 			
@@ -169,10 +175,14 @@ void cMENU::ejecutar()
 			cin >> dni; cout << endl;
 			cDONANTE* donante = buscar_donante(dni);
 			//
-
+			if (donante == nullptr)
+			{
+				cout << "No se encontro al donante." << endl;
+				break;
+			}
 			imprimir_submenu();
 
-			op2 = control_entradas(1, 2);
+			op2 = control_entradas(1, 3);
 
 			if (op2 == 1)
 			{
@@ -250,7 +260,17 @@ void cMENU::ejecutar()
 				while (op3 != 10);
 			}//if
 
-			//si (op2 == 2) no hace nada, deja continuar el programa que va a volver al menu principal
+			if (op2 == 2 )
+			{
+
+				cPACIENTE* pac = BSA->iniciar_analisis(donante);
+				if (pac == nullptr)
+					cout << "No hubo ningun match." << endl;
+				else
+					dynamic_cast<cRECEPTOR*>(pac)->imprimir();			
+
+			}
+			//if op== 3 no hace nada, deja continuar el programa que va a volver al menu principal
 			cout << endl
 				<< "Presione cualquier tecla para volver";
 			cin >> dummy;
@@ -286,15 +306,10 @@ void cMENU::ejecutar()
 		}
 		case 8:
 		{
-			this->BSA->iniciar_analisis();
-
-			//cout << "Transplantes realizados" << endl;
-			/*for (int i = 0; i<this->BSA->get_trasplantes().size(); i++)
-			  {
-				this->BSA->get_trasplantes()[i].imprimir();
-			  }
-			//aca deberiamos informar los transplantes
-			*/
+			for (int i = 0; i < this->BSA->get_lista_donantes().size(); i++)
+			{
+				this->BSA->iniciar_analisis(&(this->BSA->get_lista_donantes()[i]));
+			}
 		}
 		case 10: //finalizar programa
 		{
@@ -311,12 +326,15 @@ void cMENU::ejecutar()
 //funciones extras
 int cMENU::control_entradas(int inf, int sup)
 {
+	string op1 = "";
 	int op = -1;
-	cin >> op;
+	cin >> op1;
 	while (op<inf || op>sup)
 	{
-		cout << "Reingrese su eleccion (unicamente validas las opciones " << inf << " y " << sup << ")" << endl;
-		cin >> op; cout << endl;
+		cout << "Reingrese su eleccion (unicamente validas las opciones del " << inf << " al " << sup << ")" << endl;
+		cin >> op1; cout << endl;
+		if(op1 == "10" || op1 == "1"|| op1 == "2"|| op1 == "3"|| op1 == "4"|| op1 == "5"|| op1 == "6"|| op1 == "7"|| op1 == "8"|| op1 == "9")
+			op = stoi(op1);
 
 	}
 
@@ -358,7 +376,7 @@ void cMENU::buscar_centro(cCENTRO* centro) //imprime la lista de espera del cent
 cRECEPTOR* cMENU::buscar_receptor(string dni)
 {
 
-	cRECEPTOR* receptor;
+	cRECEPTOR* receptor = nullptr;
 
 	for (int i = 0; i < this->BSA->get_lista_receptores().size(); i++)
 	{
@@ -373,7 +391,7 @@ cRECEPTOR* cMENU::buscar_receptor(string dni)
 }
 cDONANTE* cMENU::buscar_donante(string dni)
 {
-	cDONANTE* donante;
+	cDONANTE* donante = nullptr;
 
 	for (int i = 0; i < this->BSA->get_lista_donantes().size(); i++)
 	{
@@ -462,9 +480,10 @@ cPACIENTE* cMENU::escribir_donante()
 
 	float peso = escribir_peso();
 	cHISTORIAL* historial = escribir_historial();
+	
+	//cDONANTE* pac = new cDONANTE(nombre, fecha, tel, sex, fluido, centro, dni, registros, peso, historial);
 
 	cDONANTE pac(nombre, fecha, tel, sex, fluido, centro, dni, registros,peso,historial);
-
 	return &pac;
 }
 cPACIENTE* cMENU:: escribir_receptor() //sobrecarga cin era aca?
@@ -581,8 +600,8 @@ cFLUIDO* cMENU::escribir_fluido()
 	if (op4 == 1)
 		fluid = escribir_sangre();
 
-	if (op4 == 3)
-		fluid = escribir_plasma();
+	if (op4 == 2)
+		fluid = escribir_medula();
 
 	if (op4 == 3)
 		fluid = escribir_plasma();
@@ -629,8 +648,12 @@ cFLUIDO* cMENU::escribir_plasma()
 	return &plasma;
 }
 cFLUIDO* cMENU::escribir_medula()
-{	//pide algo mas ono
-	cMEDULA medula(450);
+{	
+	vector <eCOLOR> colores = {amarillo, rojo};
+	cout << "Ingrese tipo de medula:" << endl
+		<< "1)Amarilla" << endl << "2)Roja" << endl;
+	int op = control_entradas(1, 2);
+	cMEDULA medula(450, colores[op-1]);
 
 	return &medula;
 }
@@ -742,8 +765,10 @@ void cMENU::imprimir()
 }
 void cMENU::imprimir_submenu()
 {
-	cout << endl << "¿Desea modificar los datos?"
-		<< "1) Si" << endl << "2) No" << endl;
+	cout << endl
+		<< "1) Modificar datos" << endl
+		<< "2) Buscar match" << endl
+		<< "3) VOLVER" << endl;
 }
 void cMENU::imprimir_datos_receptor()
 {

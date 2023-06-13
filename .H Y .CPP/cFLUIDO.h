@@ -13,7 +13,7 @@ public:
 
 	virtual bool verificar_fecha_maxima(cREGISTRO* registro) = 0;
 	virtual bool compatibilidad(cFLUIDO* donante) = 0;
-	virtual string to_string()=0;
+	virtual string to_string() const =0;
 	void imprimir();//CREO que no es virtual
 
 	void set_volumen(unsigned int volumen);
