@@ -27,7 +27,7 @@ public:
 
 	void crear_registro(cFLUIDO* fluido);
 
-	string to_string_DONANTE() const;
-	void imprimir_DONANTE(); //SOBRECARGA DEL <<?? EN CADA IMPRIMIR SERIA
+	string to_string();
+	
 };
 	

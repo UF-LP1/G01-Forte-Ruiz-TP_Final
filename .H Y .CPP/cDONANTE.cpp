@@ -65,31 +65,43 @@ void cDONANTE::crear_registro(cFLUIDO* fluido)
 	this->registros.push_back(registro);
 }
 
-string cDONANTE::to_string_DONANTE() const
+
+
+
+string cDONANTE::to_string()
 {
-	string c, f_nac;
-	struct tm fecha_nac;
-	localtime_s(&fecha_nac, (const time_t*)this->fecha_nacimiento);
-	int mes, anio;
-	mes = fecha_nac.tm_mon + 1;
-	anio = fecha_nac.tm_year + 1900;
-	f_nac.append(to_string(fecha_nac.tm_mday));
-	f_nac.append("/"); f_nac.append(to_string(mes)); f_nac.append("/");
-	f_nac.append(to_string(anio)); 
-	/////
-	c.append(f_nac); 
-	c.append(", "); c.append(to_string(this->peso));
-	c.append(" kg.\n");
-	c.append("REGISTROS:\n");
-	for (int i = 0; i < this->registros.size(); i++) //Voy a guardar todos los registros
+	const time_t fecha = (const time_t)this->fecha_nacimiento;
+	struct tm aux;
+	localtime_s(&aux, &fecha);
+	stringstream ss;
+	ss << "Nombre: " << this->nombre << endl << "DNI: " << this->dni << endl
+		<< "Fecha de nacimiento: " << aux.tm_mday << "/" << aux.tm_mon + 1 << "/" << aux.tm_year + 1900 << endl
+		<< "Telefono: " << this->telefono << endl << "Sexo: ";
+	if (this->sexo == FEMENINO)
+		ss << "Femenino" << endl;
+	else
+		ss << "Masculino" << endl;
+
+	cMEDULA* ptr1 = dynamic_cast <cMEDULA*> (this->fluido);
+	cPLASMA* ptr2 = dynamic_cast <cPLASMA*> (this->fluido);
+	cSANGRE* ptr3 = dynamic_cast <cSANGRE*> (this->fluido);
+
+	if (ptr1 != nullptr)
+		ss << ptr1->to_string();
+	if (ptr2 != nullptr)
+		ss << ptr2->to_string();
+	if (ptr3 != nullptr)
+		ss << ptr3->to_string();
+
+	ss << this->centro->to_string();
+
+	//hasta aca es igual que paciente
+
+	ss << "Peso: " << this->peso << endl;
+	ss << this->historial->to_string();
+	for (int i = 0; i < this->registros.size(); i++)
 	{
-		this->registros[i].to_string_REGIS();
-		c.append("\n"); //Para que imprima un registro abajo de otro.
+		ss << this->registros[i].to_string();
 	}
-
-	c.append("HISTORIAL:\n");
-	c.append(this->historial->to_string_HIST());
-
-	c.append("\n");
-	return c;
+	return ss.str();
 }

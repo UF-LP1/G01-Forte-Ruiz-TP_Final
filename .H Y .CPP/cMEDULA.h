@@ -8,10 +8,11 @@ public:
 	cMEDULA(unsigned int volumen);
 	~cMEDULA();	
 
-	bool compatibilidad(cFLUIDO* donante);// bool operator==(cFLUIDO* donante, cFLUIDO* receptor)
+	bool compatibilidad(cFLUIDO* donante);
 	bool verificar_fecha_maxima(cREGISTRO* registro);
 
 	string to_string_MED() const;
+	//string to_string();
 };
 	
 	

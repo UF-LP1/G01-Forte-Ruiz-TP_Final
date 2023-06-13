@@ -25,6 +25,7 @@ bool cPACIENTE::operator==(cPACIENTE* pac2)
 
 void cPACIENTE::imprimir()
 {
+	cout << to_string();
 }
 
 //setter

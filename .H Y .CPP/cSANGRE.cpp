@@ -15,7 +15,6 @@ eTIPO cSANGRE::get_tipo()
 {
 	return this->tipo;
 }
-
 bool cSANGRE::get_Rh()
 {
 	return this->Rh;
@@ -29,7 +28,7 @@ bool cSANGRE::verificar_fecha_maxima(cREGISTRO* registro) //42 dias
 	fecha.tm_mday -= 42;//le resto 42 dia a la fecha actual
 	time_t f_a = mktime(&fecha);
 
-	//no tiene que pasar mas de un dia desde la fecha de extracción
+	//no tiene que pasar mas de 42 dias desde la fecha de extracción
 
 	if (difftime(registro->get_fecha_extraccion(), f_a) > 0)//la fecha de extr tiene que ser mas actual (mas grande) que la fechaActual-42dias (seria mas chica) 
 		return true;
@@ -67,9 +66,9 @@ bool cSANGRE:: compatibilidad(cFLUIDO* donante)
 
 }
 
-string cSANGRE::to_string_SANGRE() const
+string cSANGRE::to_string()
 {
-	string c, type, signo;
+	string type, signo;
 	const char* tipo[] = { "A","AB","B","O" };
 	type = tipo[this->tipo];
 
@@ -78,5 +77,10 @@ string cSANGRE::to_string_SANGRE() const
 	else
 		signo = "-";
 
-	c.append("SANGRE, TIPO: "); c.append(type); c.append(signo); c.append(".");
+	stringstream ss;
+	ss << "Fluido: SANGRE" << endl;
+	ss << "Volumen: " << this->volumen << endl
+		<< "Tipo: " << type << signo << endl;
+
+	return ss.str();
 }

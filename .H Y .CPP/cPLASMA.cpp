@@ -23,6 +23,20 @@ string cPLASMA::to_string_PLASMA() const
 	c.append("PLASMA, TIPO: "); c.append(type); c.append(".");
 }
 
+/*string cPLASMA::to_string()
+{
+	string type;
+	const char* tipo[] = { "A","AB","B","O" };
+	type = tipo[this->tipo];
+
+	stringstream ss;
+	ss << "Fluido: PLASMA" << endl;
+	ss << "Volumen: " << this->volumen << endl
+		<< "Tipo: " << type << endl; 
+	
+	return ss.str();
+}
+*/
 bool cPLASMA:: verificar_fecha_maxima(cREGISTRO* registro) // 1 año
 {
 	const time_t fecha_act = (const time_t)time(NULL);

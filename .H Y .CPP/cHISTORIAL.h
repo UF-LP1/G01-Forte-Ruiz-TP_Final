@@ -1,6 +1,7 @@
 #pragma once
 #include <ctime>
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -21,7 +22,6 @@ public:
 	time_t get_ult_tattoo();
 	bool get_enfermedades() const;
 
-	string to_string_HIST() const;
-
+	string to_string();
 
 };

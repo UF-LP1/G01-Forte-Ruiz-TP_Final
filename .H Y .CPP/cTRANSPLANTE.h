@@ -6,6 +6,7 @@
 #include "cMEDULA.h"
 #include "cCENTRO.h"
 
+//nota: no necesite añadir sstream, supongo que viene de fluido y paciente
 class cTRANSPLANTE {
 	time_t fecha;
 	cRECEPTOR* paciente;
@@ -16,4 +17,5 @@ public:
 	cTRANSPLANTE(time_t fecha, cRECEPTOR* paciente, cCENTRO* centro, cFLUIDO* fluido, bool resultado);
 	~cTRANSPLANTE();
 	void imprimir();
+	string to_string();
 };

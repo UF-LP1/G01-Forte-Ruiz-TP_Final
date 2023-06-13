@@ -15,7 +15,6 @@ public:
 	cRECEPTOR(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO* centro, string dni, time_t fecha_ingreso, ePRIORIDAD prioridad, eESTADO estado);
 	~cRECEPTOR();
 
-	void imprimir();
 	bool operator==(cDONANTE* donante);
 
 	void agregar(cBSA* banco);
@@ -28,4 +27,5 @@ public:
 	ePRIORIDAD get_prioridad();
 	eESTADO get_estado();
 
+	string to_string();
 };

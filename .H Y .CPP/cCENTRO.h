@@ -2,6 +2,7 @@
 #include <string>
 #include <ctime>
 #include <iostream>
+#include <sstream>
 #include "ePROVINCIA.h"
 #include "cDONANTE.h"
 #include "cRECEPTOR.h"
@@ -35,7 +36,8 @@ public:
 	ePROVINCIA get_provincia();
 	string get_telefono();
 
-	string to_string_CENTRO() const;
+	string to_string();
+
 	void imprimir_CENTRO();
 
 	bool operator==(cCENTRO centro);

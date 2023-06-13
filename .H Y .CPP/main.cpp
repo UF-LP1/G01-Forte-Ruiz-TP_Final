@@ -18,6 +18,12 @@
 
 int main()
 {
+	/*
+	si agregamos una lista de transplantes al bsa 
+	en menu, podemos llamar a imprimir ese listado y filtrarlo con la fecha actual
+	(imprimiria todos porque no vamos a tener un archivo de transplantes anteriores (o si?) )
+	el objetivo es que informe si hubo match o no del paciente recien registrado
+	*/
 	return 0;
 }
 

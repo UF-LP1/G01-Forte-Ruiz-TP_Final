@@ -27,7 +27,7 @@ public:
 	void imprimir();
 
 	virtual void agregar(cBSA* banco) = 0;  
-	
+	virtual string to_string() = 0;
 	void set_centro(cCENTRO* centro);
 	void set_nombre(string nombre);
 	void set_fecha_nacimiento(time_t fecha_nac);
@@ -43,4 +43,6 @@ public:
 	cFLUIDO* get_fluido();
 	cCENTRO* get_centro();
 	string get_dni();
+
+	void imprimir();
 };

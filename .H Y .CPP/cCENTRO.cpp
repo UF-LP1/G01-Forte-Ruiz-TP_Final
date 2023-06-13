@@ -86,23 +86,27 @@ string cCENTRO::get_telefono()
 	return this->telefono;
 }
 
-string cCENTRO::to_string_CENTRO() const
-{
-	string c, prov;
-	const char* provincias[] = { "BuenosAires", "CABA","Catamarca", "Chaco", "Chubut", "Cordoba", "Corrientes", "EntreRios", "Formosa", "Jujuy", "LaPampa", "LaRioja", "Mendoza", "Misiones", "Neuquen", "RioNegro","Salta", "SanJuan", "SanLuis", "SantaCruz", "SantaFe", "SantiagoDelEstero","TierraDelFuego","Tucuman" };
-	prov = provincias[this->provincia]; //PE
-	c.append(this->nombre);
-	c.append(", "); c.append(this->direccion);
-	c.append(", "); c.append(this->partido);
-	c.append(", "); c.append(prov);
-	c.append(", "); c.append(this->telefono);
 
-	return c;
+string cCENTRO::to_string()
+{
+	string prov;
+	const char* provincias[] = { "BuenosAires", "CABA","Catamarca", "Chaco", "Chubut", "Cordoba", "Corrientes", "EntreRios", "Formosa", "Jujuy", "LaPampa", "LaRioja", "Mendoza", "Misiones", "Neuquen", "RioNegro","Salta", "SanJuan", "SanLuis", "SantaCruz", "SantaFe", "SantiagoDelEstero","TierraDelFuego","Tucuman" };
+	prov = provincias[this->provincia];
+	stringstream ss;
+	ss << "Centro de salud: " << endl;
+
+	ss << "Nombre: " << this->nombre << endl
+		<< "Direccion: " << this->direccion << endl
+		<< "Partido: " << this->partido << endl
+		<< "Provincia" << prov << endl
+		<< "Telefono" << this->telefono << endl;
+
+	return ss.str();
 }
 
 void cCENTRO::imprimir_CENTRO()
 {
-	cout << this->to_string_CENTRO() << endl;
+	cout << this->to_string() << endl;
 }
 
 bool cCENTRO::operator==(cCENTRO centro)

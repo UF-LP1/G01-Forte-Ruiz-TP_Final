@@ -24,11 +24,14 @@ bool cMEDULA::verificar_fecha_maxima(cREGISTRO* registro) //1 dia
 		return false;
 }
 
-string cMEDULA::to_string_MED() const
-{
-	string c;
 
-	c.append("MEDULA.");
+string cMEDULA::to_string()
+{
+	stringstream ss;
+	ss << "Fluido: MEDULA" << endl;
+	ss << "Volumen: " << this->volumen << endl;
+		//<< "Color: " << this->color <<endl; //(:p)
+	return ss.str();
 }
 
 bool cMEDULA:: compatibilidad(cFLUIDO* donante)

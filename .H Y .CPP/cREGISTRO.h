@@ -2,6 +2,7 @@
 #include "cFLUIDO.h"
 #include "cCENTRO.h"
 #include <ctime>
+#include <sstream>
 
 using namespace std;
 
@@ -22,5 +23,5 @@ public:
 	void set_fecha_extraccion(time_t fecha);
 	void set_centro(cCENTRO* centro);
 
-	string to_string_REGIS() const;
+	string to_string();
 };

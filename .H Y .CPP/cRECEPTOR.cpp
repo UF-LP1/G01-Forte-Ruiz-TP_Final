@@ -13,9 +13,6 @@ cRECEPTOR::~cRECEPTOR()
 {
 }
 
-void cRECEPTOR::imprimir()
-{
-}
 
 bool cRECEPTOR::operator==(cDONANTE* donante)
 {
@@ -76,4 +73,43 @@ ePRIORIDAD cRECEPTOR::get_prioridad()
 eESTADO cRECEPTOR::get_estado()
 {
 	return this->estado;
+}
+
+string cRECEPTOR::to_string()
+{
+	struct tm aux;
+	localtime_s(&aux, (const time_t*)this->fecha_nacimiento);
+	stringstream ss;
+
+	ss << "Paciente:" << endl; //donante/recep
+
+	ss << "Nombre: " << this->nombre << endl << "DNI: " << this->dni << endl
+		<< "Fecha de nacimiento: " << aux.tm_mday << "/" << aux.tm_mon + 1 << "/" << aux.tm_year + 1900 << endl
+		<< "Telefono: " << this->telefono << endl << "Sexo: ";
+	if (this->sexo == FEMENINO)
+		ss << "Femenino" << endl;
+	else
+		ss << "Masculino" << endl;
+
+	cMEDULA* ptr1 = dynamic_cast <cMEDULA*> (this->fluido);
+	cPLASMA* ptr2 = dynamic_cast <cPLASMA*> (this->fluido);
+	cSANGRE* ptr3 = dynamic_cast <cSANGRE*> (this->fluido);
+
+	if (ptr1 != nullptr)
+		ss << ptr1->to_string();
+	if (ptr2 != nullptr)
+		ss << ptr2->to_string();
+	if (ptr3 != nullptr)
+		ss << ptr3->to_string();
+
+	ss << this->centro->to_string();
+
+	//hasta aca igual que el padre
+	struct tm fecha;
+	localtime_s(&fecha, (const time_t*)this->fecha_ingreso);
+	ss << "Fecha de ingreso:" << fecha.tm_mday << "/" << fecha.tm_mon + 1 << "/" << fecha.tm_year + 1900 << endl
+		<< "Estado: " << this->estado << endl
+		<< "Prioridad: " << this->prioridad << endl;
+
+	return ss.str();
 }
