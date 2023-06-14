@@ -17,6 +17,7 @@ public:
 	bool verificar_fecha_maxima(cREGISTRO* registro);
 
 	string to_string() const;
+	void imprimir();
 };
 	
 	

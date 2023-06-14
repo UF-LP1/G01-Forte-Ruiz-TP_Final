@@ -59,6 +59,7 @@ void cCENTRO::set_telefono(string telefono)
 
 void cCENTRO::imprimir()
 {
+	cout << to_string() << endl;
 }
 
 //getters
@@ -106,14 +107,14 @@ string cCENTRO::to_string() const
 	return ss.str();
 }
 
-void cCENTRO::imprimir_CENTRO()
+void cCENTRO::imprimir()
 {
 	cout << this->to_string() << endl;
 }
 
-bool cCENTRO::operator==(cCENTRO centro)
+bool cCENTRO::operator==(cCENTRO* centro)
 {
-	if (this->nombre == centro.get_nombre() && this->partido == centro.get_partido() && this->provincia == centro.get_provincia())
+	if (this->nombre == centro->get_nombre() && this->partido == centro->get_partido() && this->provincia == centro->get_provincia())
 		return true;
 	else
 		return false;

@@ -16,4 +16,5 @@ public:
 	bool compatibilidad(cFLUIDO* donante);
 
 	string to_string() const;
+	void imprimir();
 };

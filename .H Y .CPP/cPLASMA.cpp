@@ -28,6 +28,11 @@ string cPLASMA::to_string() const
 	return ss.str();
 }
 
+void cPLASMA::imprimir()
+{
+	cout << to_string() << endl;
+}
+
 bool cPLASMA:: verificar_fecha_maxima(cREGISTRO* registro) // 1 año
 {
 	const time_t fecha_act = (const time_t)time(NULL);

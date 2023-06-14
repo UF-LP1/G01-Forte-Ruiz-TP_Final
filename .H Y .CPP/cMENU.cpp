@@ -363,7 +363,7 @@ void cMENU::buscar_centro(cCENTRO* centro) //imprime la lista de espera del cent
 	vector<cRECEPTOR> lista_espera;
 
 	for (int i = 0; i < this->BSA->get_lista_receptores().size(); i++)
-	{	if(*(this->BSA->get_lista_receptores()[i].get_centro()) == *centro) //sobrecarga del ==
+	{	if(*(this->BSA->get_lista_receptores()[i].get_centro()) == centro) //sobrecarga del ==
 			lista_espera.push_back(this->BSA->get_lista_receptores()[i]);
 	}
 
@@ -469,6 +469,7 @@ void cMENU::informe_mensual()
 //funciones escribir
 cPACIENTE* cMENU::escribir_donante()
 {
+	int edad = escribir_edad();
 	string nombre = escribir_nombre();
 	time_t fecha = escribir_fecha();
 	string tel = escribir_telefono();
@@ -483,11 +484,12 @@ cPACIENTE* cMENU::escribir_donante()
 	
 	//cDONANTE* pac = new cDONANTE(nombre, fecha, tel, sex, fluido, centro, dni, registros, peso, historial);
 
-	cDONANTE pac(nombre, fecha, tel, sex, fluido, centro, dni, registros,peso,historial);
+	cDONANTE pac(edad, nombre, fecha, tel, sex, fluido, centro, dni, registros,peso,historial);
 	return &pac;
 }
 cPACIENTE* cMENU:: escribir_receptor() //sobrecarga cin era aca?
 {	
+	int edad = escribir_edad();
 	string nombre = escribir_nombre();
 	time_t fecha = escribir_fecha();
 	string tel = escribir_telefono();
@@ -499,12 +501,19 @@ cPACIENTE* cMENU:: escribir_receptor() //sobrecarga cin era aca?
 	ePRIORIDAD prioridad = escribir_prioridad();
 	eESTADO estado = escribir_estado();
 
-	cRECEPTOR pac(nombre, fecha, tel, sex, fluido, centro, dni, time(NULL), prioridad, estado);
+	cRECEPTOR pac(edad, nombre, fecha, tel, sex, fluido, centro, dni, time(NULL), prioridad, estado);
 	
 	return &pac;
 }
 
 //paciente
+int cMENU::escribir_edad()
+{
+	int edad;
+	cout << "Ingrese edad: "; cin >> edad; cout << endl;
+	return edad;
+}
+
 string cMENU::escribir_nombre()
 {	
 	string nombre;

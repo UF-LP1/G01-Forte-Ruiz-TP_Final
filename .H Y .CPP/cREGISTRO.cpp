@@ -72,3 +72,8 @@ string cREGISTRO::to_string() const
 	return ss.str();
 }
 
+void cREGISTRO::imprimir()
+{
+	cout << to_string() << endl;
+}
+

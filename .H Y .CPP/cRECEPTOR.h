@@ -13,7 +13,7 @@ class cRECEPTOR : public cPACIENTE {
 	eESTADO estado;
 	cTRANSPLANTE* transplante;
 public:
-	cRECEPTOR(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO* centro, string dni, time_t fecha_ingreso, ePRIORIDAD prioridad, eESTADO estado);
+	cRECEPTOR(int edad, string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO* centro, string dni, time_t fecha_ingreso, ePRIORIDAD prioridad, eESTADO estado);
 	~cRECEPTOR();
 
 	bool operator==(cDONANTE* donante);

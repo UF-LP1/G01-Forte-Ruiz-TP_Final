@@ -2,6 +2,7 @@
 #include <ctime>
 #include <string>
 #include <sstream>
+#include <iostream>
 
 using namespace std;
 
@@ -23,5 +24,6 @@ public:
 	bool get_enfermedades() const;
 
 	string to_string() const;
+	void imprimir();
 
 };

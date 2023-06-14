@@ -38,8 +38,8 @@ public:
 
 	string to_string() const;
 
-	void imprimir_CENTRO();
+	void imprimir();
 
-	bool operator==(cCENTRO centro);
+	bool operator==(cCENTRO* centro);
 	
 };

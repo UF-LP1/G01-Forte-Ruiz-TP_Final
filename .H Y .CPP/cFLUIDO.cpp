@@ -11,10 +11,6 @@ cFLUIDO::~cFLUIDO()
 
 //setters
 
-void cFLUIDO::imprimir()
-{
-	cout << to_string();
-}
 
 void cFLUIDO::set_volumen(unsigned int volumen)
 {

@@ -45,6 +45,7 @@ public:
 	cPACIENTE* escribir_donante();
 	cPACIENTE* escribir_receptor();
 	
+	int escribir_edad();
 	string escribir_nombre();
 	time_t escribir_fecha();
 	string escribir_telefono();

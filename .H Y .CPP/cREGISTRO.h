@@ -24,4 +24,5 @@ public:
 	void set_centro(cCENTRO* centro);
 
 	string to_string() const;
+	void imprimir();
 };

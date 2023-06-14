@@ -11,7 +11,7 @@ class cDONANTE : public cPACIENTE{
 	cHISTORIAL* historial;
 
 public:
-	cDONANTE(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO* centro, string dni, vector<cREGISTRO> registros, float peso, cHISTORIAL* historial);
+	cDONANTE(int edad, string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO* centro, string dni, vector<cREGISTRO> registros, float peso, cHISTORIAL* historial);
 	~cDONANTE();
 	void imprimir();
 

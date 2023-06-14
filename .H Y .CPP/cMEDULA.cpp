@@ -45,6 +45,11 @@ string cMEDULA::to_string() const
 	return ss.str();
 }
 
+void cMEDULA::imprimir()
+{
+	cout << to_string() << endl;
+}
+
 bool cMEDULA:: compatibilidad(cFLUIDO* donante)
 {
 

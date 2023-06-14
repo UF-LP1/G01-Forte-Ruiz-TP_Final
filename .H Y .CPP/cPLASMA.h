@@ -12,5 +12,6 @@ public:
 	bool verificar_fecha_maxima(cREGISTRO* registro);
 	eTIPO get_tipo();
 	string to_string() const;
+	void imprimir();
 };
 	

@@ -84,3 +84,8 @@ string cSANGRE::to_string() const
 
 	return ss.str();
 }
+
+void cSANGRE::imprimir()
+{
+	cout << to_string() << endl;
+}

@@ -2,7 +2,7 @@
 
 using namespace std;
 
-cDONANTE::cDONANTE(string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO* centro, string dni, vector<cREGISTRO> registros, float peso, cHISTORIAL* historial) : cPACIENTE( nombre, fecha_nacimiento, telefono, sexo, fluido, centro, dni)
+cDONANTE::cDONANTE(int edad, string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO* centro, string dni, vector<cREGISTRO> registros, float peso, cHISTORIAL* historial) : cPACIENTE(edad, nombre, fecha_nacimiento, telefono, sexo, fluido, centro, dni)
 {
 	this->registros = registros;
 	this->peso = peso;

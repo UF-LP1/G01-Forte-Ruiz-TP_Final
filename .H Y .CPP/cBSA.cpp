@@ -44,7 +44,7 @@ vector<cCENTRO> cBSA::get_lista_centros()
 bool cBSA::comprobar_requisitos(cDONANTE* donante)
 {
 
-	if (difftime(time(NULL), donante->get_fecha_nacimiento())< 567648000 || difftime(time(NULL), donante->get_fecha_nacimiento()) > 2049840000) //struct tm
+	if (donante->get_edad()<18 || donante->get_edad()>65)
 		return false;
 	if (donante->get_peso() <= 50)
 		return false;
