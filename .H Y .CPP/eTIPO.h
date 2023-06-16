@@ -1,2 +1,6 @@
 #pragma once
-enum eTIPO{A,AB,B,O};
+#ifndef _ETIPO_H
+#define _ETIPO_H
+enum eTIPO { A, AB, B, O };
+#endif // !_ETIPO_H
+

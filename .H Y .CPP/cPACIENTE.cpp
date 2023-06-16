@@ -8,6 +8,7 @@ cPACIENTE::cPACIENTE(int edad, string nombre, time_t fecha_nacimiento, string te
 	this->sexo = sexo;
 	this->fluido = fluido;
 	this->centro = centro;
+	this->edad = edad;
 }
 
 cPACIENTE::~cPACIENTE()

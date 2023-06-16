@@ -1,9 +1,12 @@
 #pragma once
+#ifndef _CRECEPTOR_H
+#define _CRECEPTOR_H
 #include <ctime>
 #include "ePRIORIDAD.h"
 #include "eESTADO.h"
 #include "cFLUIDO.h"
 #include "cPACIENTE.h"
+#include "cTRANSPLANTE.h"
 
 using namespace std;
 
@@ -31,3 +34,4 @@ public:
 	string to_string() const;
 	void imprimir();
 };
+#endif // !_CRECEPTOR_H

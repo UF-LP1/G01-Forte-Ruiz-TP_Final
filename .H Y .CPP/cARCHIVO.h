@@ -1,4 +1,6 @@
 #pragma once
+#ifndef _CARCHIVO_H
+#define _CARCHIVO_H
 #include <fstream>
 #include "cCENTRO.h"
 #include "cDONANTE.h"
@@ -45,5 +47,6 @@ public:
 	void escribir_RECEPTORES();
 	void escribir_CENTROS();
 
-	
+
 };
+#endif

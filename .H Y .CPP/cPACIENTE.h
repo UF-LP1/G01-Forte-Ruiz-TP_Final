@@ -1,10 +1,11 @@
 #pragma once
+#ifndef _CPACIENTE_H
+#define _CPACIENTE_H
 #include <string>
 #include <ctime>
 #include "cCENTRO.h"
 #include "eSEXO.h"
 #include "cFLUIDO.h"
-#include "cBSA.h"
 
 using namespace std;
 
@@ -33,7 +34,7 @@ public:
 	void set_telefono(string telefono);
 	void set_sexo(eSEXO sexo);
 	void set_fluido(cFLUIDO* fluido);
-	
+
 
 	string get_nombre();
 	int get_edad();
@@ -45,3 +46,5 @@ public:
 	string get_dni();
 
 };
+#endif // !_CPACIENTE_H
+

@@ -1,2 +1,6 @@
 #pragma once
-enum eSEXO{FEMENINO, MASCULINO};
+#ifndef _ESEXO_H
+#define _ESEXO_H
+typedef enum eSEXO { FEMENINO, MASCULINO } eSexo;
+#endif // !_ESEXO_H
+

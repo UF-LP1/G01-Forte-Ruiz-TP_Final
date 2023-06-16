@@ -1,5 +1,7 @@
 #pragma once
-#include "cFLUIDO.h"
+#ifndef _CREGISTRO_H
+#define _CREGISTRO_H
+
 #include "cCENTRO.h"
 #include <ctime>
 #include <sstream>
@@ -26,3 +28,5 @@ public:
 	string to_string() const;
 	void imprimir();
 };
+#endif // !_CREGISTRO_H
+

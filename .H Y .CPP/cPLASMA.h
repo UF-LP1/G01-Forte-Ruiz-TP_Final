@@ -1,4 +1,6 @@
 #pragma once
+#ifndef _CPLASMA_H
+#define _CPLASMA_H
 #include "cFLUIDO.h"
 #include "eTIPO.h"
 
@@ -14,4 +16,5 @@ public:
 	string to_string() const;
 	void imprimir();
 };
-	
+#endif // !_CPLASMA_H
+

@@ -1,12 +1,14 @@
 #pragma once
+#ifndef _CCENTRO_H
+#define _CCENTRO_H
+
+
 #include <string>
 #include <ctime>
 #include <iostream>
 #include <sstream>
 #include "ePROVINCIA.h"
-#include "cDONANTE.h"
-#include "cRECEPTOR.h"
-#include "cTRANSPLANTE.h"
+
 
 
 using namespace std;
@@ -20,7 +22,7 @@ class cCENTRO {
 public:
 	cCENTRO(string nombre, string direccion, string partido, ePROVINCIA provincia, string telefono);
 	~cCENTRO();
-	 
+
 	void imprimir();
 	bool realizar_transplante(cRECEPTOR* receptor);
 	//Que pasa si el paciente se debe mudar? Deberia poder modificarse.
@@ -41,5 +43,7 @@ public:
 	void imprimir();
 
 	bool operator==(cCENTRO* centro);
-	
+
 };
+#endif // !_CCENTRO_H
+

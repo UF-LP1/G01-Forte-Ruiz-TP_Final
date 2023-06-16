@@ -1,4 +1,6 @@
 #pragma once
+#ifndef _CSANGRE_H
+#define _CSANGRE_H
 #include "cFLUIDO.h"
 #include "eTIPO.h"
 
@@ -18,3 +20,5 @@ public:
 	string to_string() const;
 	void imprimir();
 };
+#endif // !_CSANGRE_H
+

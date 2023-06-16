@@ -1,4 +1,6 @@
 #pragma once
+#ifndef _CHISTORIAL_H
+#define _CHISTORIAL_H
 #include <ctime>
 #include <string>
 #include <sstream>
@@ -27,3 +29,4 @@ public:
 	void imprimir();
 
 };
+#endif // !_CHISTORIAL_H

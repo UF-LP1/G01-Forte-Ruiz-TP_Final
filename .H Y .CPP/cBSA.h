@@ -1,4 +1,6 @@
 #pragma once
+#ifndef _CBSA_H
+#define _CBSA_H
 #include <vector>
 #include "cDONANTE.h"
 #include "cRECEPTOR.h"
@@ -38,3 +40,5 @@ public:
 	//string to_string_BSA(); //PASO A STRING TODAS LAS LISTAS?
 	//void imprimir_BSA();
 };
+#endif // _CBSA_H
+

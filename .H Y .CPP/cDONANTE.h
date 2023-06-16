@@ -1,11 +1,14 @@
 #pragma once
+#ifndef _CDONANTE_H
+#define _CDONANTE_H
+
 #include "cPACIENTE.h"
 #include "cFLUIDO.h"
 #include "cREGISTRO.h" 
 #include "cHISTORIAL.h"
 #include <vector>
 
-class cDONANTE : public cPACIENTE{
+class cDONANTE : public cPACIENTE {
 	vector<cREGISTRO> registros;
 	float peso;
 	cHISTORIAL* historial;
@@ -27,6 +30,10 @@ public:
 	void crear_registro();
 	void imprimir();
 	string to_string() const;
-	
+
 };
+
+#endif // !_CDONANTE_H
+
+
 	

@@ -1,4 +1,6 @@
 #pragma once
+#ifndef _CMENU_H
+#define _CMENU_H
 /*#ifdef _WIN32
 	#include<Windows.h>
 #endif
@@ -20,7 +22,7 @@ public:
 	void ejecutar(); //funcion principal
 
 	//funciones extras
-	
+
 	cCENTRO* verificar_centro(string nombre, string partido, ePROVINCIA provincia);
 	int control_entradas(int sup, int inf);
 	//void limpiar_pantalla();
@@ -44,7 +46,7 @@ public:
 	//funciones escribir
 	cPACIENTE* escribir_donante();
 	cPACIENTE* escribir_receptor();
-	
+
 	int escribir_edad();
 	string escribir_nombre();
 	time_t escribir_fecha();
@@ -67,3 +69,5 @@ public:
 	vector <cREGISTRO> escribir_registros();
 
 };
+#endif // !_CMENU_H
+
