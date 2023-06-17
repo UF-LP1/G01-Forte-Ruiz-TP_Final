@@ -2,9 +2,12 @@
 #ifndef _CTRANSPLANTE_H
 #define _CTRANSPLANTE_H
 #include <ctime>
+#include <string>
+#include <sstream>
+#include <iostream>
 
+using namespace std;
 
-//nota: no necesite añadir sstream, supongo que viene de fluido y paciente
 class cTRANSPLANTE {
 	time_t fecha;
 	bool resultado;

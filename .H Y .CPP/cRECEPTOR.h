@@ -4,7 +4,9 @@
 #include <ctime>
 #include "ePRIORIDAD.h"
 #include "eESTADO.h"
-#include "cFLUIDO.h"
+#include "cMEDULA.h"
+#include "cSANGRE.h"
+#include "cPLASMA.h"
 #include "cPACIENTE.h"
 #include "cTRANSPLANTE.h"
 
