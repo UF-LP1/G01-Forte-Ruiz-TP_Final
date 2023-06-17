@@ -5,6 +5,9 @@
 #include "cCENTRO.h"
 #include <ctime>
 #include <sstream>
+#include "cMEDULA.h"
+#include "cSANGRE.h"
+#include "cPLASMA.h"
 
 using namespace std;
 

@@ -1,7 +1,7 @@
 #pragma once
 #ifndef _CBSA_H
 #define _CBSA_H
-#include <vector>
+
 #include "cDONANTE.h"
 #include "cRECEPTOR.h"
 #include "cCENTRO.h"

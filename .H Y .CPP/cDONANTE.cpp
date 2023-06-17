@@ -13,12 +13,6 @@ cDONANTE::~cDONANTE()
 {
 }
 
-void cDONANTE:: imprimir() {
-
-}
-
-
-
 //setters
 
 void cDONANTE::set_registros(vector<cREGISTRO> registros)
@@ -100,5 +94,5 @@ string cDONANTE::to_string() const
 }
 void cDONANTE::imprimir()
 {
-	cout << to_string() << endl;
+	cout << this->to_string() << endl;
 }

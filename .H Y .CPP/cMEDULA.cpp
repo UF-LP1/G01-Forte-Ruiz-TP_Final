@@ -2,6 +2,7 @@
 
 cMEDULA::cMEDULA(unsigned int volumen, eCOLOR color):cFLUIDO(volumen)
 {
+	this->color = color;
 }
 
 cMEDULA::~cMEDULA()

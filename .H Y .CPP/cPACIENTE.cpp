@@ -1,6 +1,6 @@
 #include "cPACIENTE.h"
 
-cPACIENTE::cPACIENTE(int edad, string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO* centro, const string dni):dni(dni)
+cPACIENTE::cPACIENTE(int edad, string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO* centro, string dni)
 {
 	this->nombre = nombre;
 	this-> fecha_nacimiento = fecha_nacimiento;

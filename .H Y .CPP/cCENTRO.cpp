@@ -55,11 +55,6 @@ void cCENTRO::set_telefono(string telefono)
 	this->telefono = telefono;
 }
 
-void cCENTRO::imprimir()
-{
-	cout << to_string() << endl;
-}
-
 //getters
 
 string cCENTRO::get_nombre()

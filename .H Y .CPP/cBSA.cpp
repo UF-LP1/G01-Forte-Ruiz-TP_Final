@@ -182,10 +182,9 @@ void cBSA::protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor) //falta
 VECTOR<cRECEPTOR> cBSA::buscar_posibles_receptores(cDONANTE* donante)
 {
 	VECTOR<cRECEPTOR>* sublista;
-
 	for (int i = 0; i < this->lista_receptores.size(); i++)
 	{
-		if (this->lista_receptores[i] == *donante) 
+		if (this->lista_receptores[i] == *donante)
 			*sublista + &(this->lista_receptores[i]);
 	}
 
@@ -194,10 +193,10 @@ VECTOR<cRECEPTOR> cBSA::buscar_posibles_receptores(cDONANTE* donante)
 cPACIENTE* cBSA::iniciar_analisis(cDONANTE* donante)// funcion madre que abarca varios metodos
 {
 	VECTOR<cRECEPTOR> sublista;
-	cPACIENTE* pac;
+	cPACIENTE* pac = nullptr;
 
 		sublista = buscar_posibles_receptores(donante);
-		if (!sublista.empty())
+		if (!(sublista.empty()))
 		{
 			pac = elegir_receptor(sublista);
 			if (pac != nullptr)

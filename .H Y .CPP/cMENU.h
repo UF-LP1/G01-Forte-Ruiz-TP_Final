@@ -6,9 +6,6 @@
 #endif
 */
 #include "cBSA.h"
-#include <iostream>
-#include <string>
-#include <ctime>
 #include "ePROVINCIA.h"
 
 using namespace std;

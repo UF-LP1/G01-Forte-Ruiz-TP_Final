@@ -26,7 +26,7 @@ void cMENU::ejecutar()
 		case 1: //registrar paciente, podria ser funcion, mas legible el codigo
 		{
 			int op2;
-			cPACIENTE* pac1;
+			cPACIENTE* pac1 =nullptr;
 
 			cout << "¿Ingresa un donante o un receptor? " << endl
 				<< "1) Donante." << endl
@@ -47,6 +47,7 @@ void cMENU::ejecutar()
 				pac1 = escribir_receptor();
 				
 			}
+
 			if (pac1->get_centro() != nullptr)
 			{
 				int d = this->BSA->agregar_paciente(pac1); 
@@ -425,7 +426,7 @@ void cMENU::informe_mensual()
 	localtime_s(&fecha1, &f_actual);
 	ePROVINCIA prov;
 
-	fecha1.tm_mday == 1; // Entonces así estamos en el dia uno del mes.
+	fecha1.tm_mday = 1; // Entonces así estamos en el dia uno del mes.
 
 	time_t f_a = mktime(&fecha1);
 
@@ -436,7 +437,7 @@ void cMENU::informe_mensual()
 	{
 		if (this->BSA->get_lista_donantes()[i].get_registros().back().get_fecha_extraccion() >= f_a)
 			prov = this->BSA->get_lista_donantes()[i].get_centro()->get_provincia();
-			cont1_x_prov[prov]; //PE
+			cont1_x_prov[prov] += 1; //PE
 	}
 
 	cout << "-------Cantidad de donaciones por provincia-------" << endl
@@ -554,8 +555,8 @@ eSEXO cMENU::escribir_sexo()
 		<< "1)Femenino" << endl
 		<< "2)Masculino" << endl;
 	pos = control_entradas(1, 2);
-	
-	return sexos[pos - 1];
+	pos--;
+	return sexos[pos];
 }
 cCENTRO* cMENU::escribir_centro()
 {
@@ -597,7 +598,7 @@ string cMENU::escribir_dni()
 //fluidos
 cFLUIDO* cMENU::escribir_fluido()
 {
-	cFLUIDO* fluid;
+	cFLUIDO* fluid = nullptr;
 	int op4;
 	cout << "¿Que tipo de fluido es?" << endl //necesita o va a donar
 		<< "1) Sangre" << endl
@@ -700,7 +701,6 @@ float cMENU::escribir_peso() //mayor a tanto (1kg) y menor a tanto(1000kg)?,
 }
 cHISTORIAL* cMENU::escribir_historial()
 {
-	int op;
 	bool enf, tat;
 	time_t fecha1;
 

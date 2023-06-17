@@ -19,9 +19,9 @@ protected:
 	eSEXO sexo;
 	cFLUIDO* fluido;
 	cCENTRO* centro;
-	const string dni;
+	string dni;
 public:
-	cPACIENTE(int edad, string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO* centro, const string dni);
+	cPACIENTE(int edad, string nombre, time_t fecha_nacimiento, string telefono, eSEXO sexo, cFLUIDO* fluido, cCENTRO* centro, string dni);
 	~cPACIENTE();
 
 	bool operator==(cPACIENTE* pac2);
