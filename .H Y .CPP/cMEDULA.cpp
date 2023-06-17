@@ -18,7 +18,7 @@ eCOLOR cMEDULA::get_color()
 	return this->color;
 }
 
-bool cMEDULA::verificar_fecha_maxima(cREGISTRO* registro) //1 dia
+bool cMEDULA::verificar_fecha_maxima(time_t fecha_extraccion) //1 dia
 {
 	const time_t fecha_act = (const time_t)time(NULL);
 	struct tm fecha;
@@ -28,7 +28,7 @@ bool cMEDULA::verificar_fecha_maxima(cREGISTRO* registro) //1 dia
 
 	//no tiene que pasar mas de un dia desde la fecha de extracción
 
-	if (difftime(registro->get_fecha_extraccion(), f_a) > 0)//la fecha de extr tiene que ser mas actual (mas grande) que la fechaActual-1dia (seria mas chica) 
+	if (difftime(fecha_extraccion, f_a) > 0)//la fecha de extr tiene que ser mas actual (mas grande) que la fechaActual-1dia (seria mas chica) 
 		return true;
 	else
 		return false;

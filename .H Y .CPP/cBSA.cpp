@@ -152,8 +152,8 @@ int cBSA::agregar_paciente(cPACIENTE* paciente)
 void cBSA::protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor) //falta sobrecarga del -
 {
 	int i = donante->get_registros().size(); //posicion del ultimo registro
-	bool b1,b2;
-	b1 = donante->get_fluido()->verificar_fecha_maxima(&donante->get_registros()[i]);//dynamic cast
+	bool b1;
+	b1 = donante->get_fluido()->verificar_fecha_maxima(donante->get_registros()[i].get_fecha_extraccion());//dynamic cast
 	if (!b1)
 		this->lista_donantes - donante;
 	//se borra de la lista, sobrecarga del -
@@ -162,6 +162,7 @@ void cBSA::protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor) //falta
 		return;//si alguna condicion es falsa, se hace verdadera y entra al if
 	
 	cTRANSPLANTE* transplante = receptor->get_centro()->realizar_transplante();
+	receptor->set_transplante(transplante);
 	if (transplante->get_resultado())
 	{
 		receptor->set_estado(RECIBIO);

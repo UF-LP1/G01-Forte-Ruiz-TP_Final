@@ -1,10 +1,13 @@
 #pragma once
 #ifndef _CFLUIDO_H
 #define _CFLUIDO_H
-#include "cREGISTRO.h"
 #include "eTIPO.h"
 #include <ctime>
 #include <sstream>
+#include <string>
+#include <iostream>
+
+using namespace std;
 
 class cFLUIDO {
 protected:
@@ -13,7 +16,7 @@ public:
 	cFLUIDO(unsigned int volumen);
 	~cFLUIDO();
 
-	virtual bool verificar_fecha_maxima(cREGISTRO* registro) = 0;
+	virtual bool verificar_fecha_maxima(time_t fecha_extraccion) = 0;
 	virtual bool compatibilidad(cFLUIDO* donante) = 0;
 	virtual string to_string() const = 0;
 

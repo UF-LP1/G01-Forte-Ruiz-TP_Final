@@ -1,5 +1,6 @@
 #include "cPLASMA.h"
 
+
 cPLASMA::cPLASMA(unsigned int volumen, eTIPO tipo):cFLUIDO(volumen)
 {
 	this->tipo = tipo;
@@ -33,7 +34,7 @@ void cPLASMA::imprimir()
 	cout << to_string() << endl;
 }
 
-bool cPLASMA:: verificar_fecha_maxima(cREGISTRO* registro) // 1 año
+bool cPLASMA:: verificar_fecha_maxima(time_t fecha_extraccion) // 1 año
 {
 	const time_t fecha_act = (const time_t)time(NULL);
 	struct tm fecha;
@@ -43,7 +44,7 @@ bool cPLASMA:: verificar_fecha_maxima(cREGISTRO* registro) // 1 año
 
 	//no tiene que pasar mas de un año desde la fecha de extracción
 
-	if (difftime(registro->get_fecha_extraccion(), f_a) > 0)//la fecha de extr tiene que ser mas actual (mas grande) que la fechaActual-1año (seria mas chica) 
+	if (difftime(fecha_extraccion, f_a) > 0)//la fecha de extr tiene que ser mas actual (mas grande) que la fechaActual-1año (seria mas chica) 
 		return true;
 	else
 		return false;

@@ -16,7 +16,7 @@ public:
 	eCOLOR get_color();
 
 	bool compatibilidad(cFLUIDO* donante);
-	bool verificar_fecha_maxima(cREGISTRO* registro);
+	bool verificar_fecha_maxima(time_t fecha_extraccion);
 
 	string to_string() const;
 	void imprimir();

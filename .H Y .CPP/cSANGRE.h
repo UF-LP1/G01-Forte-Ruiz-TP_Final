@@ -14,7 +14,7 @@ public:
 	eTIPO get_tipo();
 	bool get_Rh();
 
-	bool verificar_fecha_maxima(cREGISTRO* registro);
+	bool verificar_fecha_maxima(time_t fecha_extraccion);
 	bool compatibilidad(cFLUIDO* donante);
 
 	string to_string() const;

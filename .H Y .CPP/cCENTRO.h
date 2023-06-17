@@ -24,7 +24,6 @@ public:
 	cCENTRO(string nombre, string direccion, string partido, ePROVINCIA provincia, string telefono);
 	~cCENTRO();
 
-	void imprimir();
 	cTRANSPLANTE* realizar_transplante();
 
 	void set_nombre(string nombre);
