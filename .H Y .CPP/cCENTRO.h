@@ -8,6 +8,7 @@
 #include <iostream>
 #include <sstream>
 #include "ePROVINCIA.h"
+#include "cTRANSPLANTE.h"
 
 
 
@@ -24,8 +25,7 @@ public:
 	~cCENTRO();
 
 	void imprimir();
-	bool realizar_transplante(cRECEPTOR* receptor);
-	//Que pasa si el paciente se debe mudar? Deberia poder modificarse.
+	cTRANSPLANTE* realizar_transplante();
 
 	void set_nombre(string nombre);
 	void set_direccion(string direccion);

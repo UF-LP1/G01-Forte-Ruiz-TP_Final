@@ -15,6 +15,11 @@ cTRANSPLANTE::~cTRANSPLANTE()
 	this->num_transplante--;
 }
 
+bool cTRANSPLANTE::get_resultado()
+{
+	return this->resultado;
+}
+
 void cTRANSPLANTE::imprimir()
 {
 	cout << to_string() << endl;

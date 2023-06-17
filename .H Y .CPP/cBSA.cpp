@@ -161,8 +161,8 @@ void cBSA::protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor) //falta
 	if (!(b1 && donante->get_centro()->get_provincia() == receptor->get_centro()->get_provincia() && donante->get_centro()->get_partido() == receptor->get_centro()->get_partido()))//sobrecarga en centro del ==
 		return;//si alguna condicion es falsa, se hace verdadera y entra al if
 	
-	b2 = receptor->get_centro()->realizar_transplante(receptor);
-	if (b2)
+	cTRANSPLANTE* transplante = receptor->get_centro()->realizar_transplante();
+	if (transplante->get_resultado())
 	{
 		receptor->set_estado(RECIBIO);
 		this->lista_receptores - receptor; //sobrecarga del -
@@ -184,7 +184,7 @@ VECTOR<cRECEPTOR> cBSA::buscar_posibles_receptores(cDONANTE* donante)
 
 	for (int i = 0; i < this->lista_receptores.size(); i++)
 	{
-		if (this->lista_receptores[i] == donante) 
+		if (this->lista_receptores[i] == *donante) 
 			*sublista + &(this->lista_receptores[i]);
 	}
 

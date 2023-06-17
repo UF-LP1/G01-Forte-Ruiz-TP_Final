@@ -15,6 +15,7 @@ class cTRANSPLANTE {
 public:
 	cTRANSPLANTE(time_t fecha, bool resultado);
 	~cTRANSPLANTE();
+	bool get_resultado();
 	void imprimir();
 	string to_string() const;
 };

@@ -13,7 +13,7 @@ cCENTRO::~cCENTRO()
 {
 }
 
-bool cCENTRO::realizar_transplante(cRECEPTOR* receptor)
+cTRANSPLANTE* cCENTRO::realizar_transplante()
 {
 	int a;
 	bool b;
@@ -25,10 +25,8 @@ bool cCENTRO::realizar_transplante(cRECEPTOR* receptor)
 		b = false;
 	time_t t = time(NULL);
 
-	return a;
 	cTRANSPLANTE transplante(t, b); //FALTA NEW
-	receptor->set_transplante(&transplante);
-	return b;
+	return &transplante;
 	
 }
 
