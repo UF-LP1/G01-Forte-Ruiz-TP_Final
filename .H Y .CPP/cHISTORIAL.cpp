@@ -47,7 +47,7 @@ bool cHISTORIAL::get_enfermedades() const
 string cHISTORIAL::to_string() const
 {
 	struct tm fecha;
-	localtime_s(&fecha, (const time_t*)this->ult_tattoo);
+	localtime_s(&fecha, &this->ult_tattoo);
 
 	stringstream ss;
 	ss << "Registro: " << endl;

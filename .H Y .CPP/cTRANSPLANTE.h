@@ -14,7 +14,9 @@ class cTRANSPLANTE {
 	static int num_transplante;
 public:
 	cTRANSPLANTE(time_t fecha, bool resultado);
+
 	~cTRANSPLANTE();
+	void set_resultado(bool resultado);
 	bool get_resultado();
 	void imprimir();
 	string to_string() const;

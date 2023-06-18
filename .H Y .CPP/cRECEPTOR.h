@@ -8,7 +8,7 @@
 #include "cSANGRE.h"
 #include "cPLASMA.h"
 #include "cPACIENTE.h"
-#include "cTRANSPLANTE.h"
+
 
 using namespace std;
 
@@ -32,6 +32,7 @@ public:
 	time_t get_fecha_ingreso();
 	ePRIORIDAD get_prioridad();
 	eESTADO get_estado();
+	cTRANSPLANTE* get_transplante();
 
 	string to_string() const;
 	void imprimir();

@@ -9,7 +9,33 @@ cBSA::cBSA(VECTOR<cDONANTE> lista_donantes, VECTOR<cRECEPTOR> lista_receptores, 
 	this->lista_centros = lista_centros;
 }
 cBSA::~cBSA()
-{
+{ /*
+	for (int i = 0; i < lista_donantes.size(); i++)
+	{
+		if (this->lista_donantes[i].get_centro() != nullptr)
+			delete this->lista_donantes[i].get_centro();
+		if (this->lista_donantes[i].get_fluido() != nullptr)
+			delete this->lista_donantes[i].get_fluido();
+		if(this->lista_donantes[i].get_historial()!=nullptr)
+			delete this->lista_donantes[i].get_historial();
+		for (int j = 0; this->lista_donantes[i].get_registros().size(); j++)
+		{
+			if(this->lista_donantes[i].get_registros()[j].get_centro()!=nullptr)
+				delete this->lista_donantes[i].get_registros()[j].get_centro();
+			if(this->lista_donantes[i].get_registros()[j].get_fluido()!=nullptr)
+				delete this->lista_donantes[i].get_registros()[j].get_fluido();
+		}
+	}
+	for (int i = 0; i < lista_receptores.size(); i++)
+	{
+		if(this->lista_receptores[i].get_centro()!=nullptr)
+			delete this->lista_receptores[i].get_centro();
+		if(this->lista_receptores[i].get_fluido() != nullptr)
+			delete this->lista_receptores[i].get_fluido();
+		if(this->lista_receptores[i].get_transplante() !=nullptr)
+			delete this->lista_receptores[i].get_transplante();
+	}
+	*/
 }
 
 //setters
@@ -69,26 +95,26 @@ bool cBSA::comprobar_requisitos(cDONANTE* donante)
 	return true;
 }
 
-cPACIENTE* cBSA::elegir_receptor(VECTOR<cRECEPTOR> posibles_receptores)
+cPACIENTE* cBSA::elegir_receptor(VECTOR<cRECEPTOR*> *posibles_receptores)
 {
-	if (posibles_receptores.empty())
+	if (posibles_receptores->empty())
 		return nullptr;
 
 	int max=-1;
 
-	for (int i = 0; i < posibles_receptores.size(); i++)
+	for (int i = 0; i < posibles_receptores->size(); i++)
 	{
-		if (i == 0 || posibles_receptores[i].get_prioridad() > posibles_receptores[max].get_prioridad())
+		if (i == 0 || posibles_receptores->at(i)->get_prioridad() > posibles_receptores->at(max)->get_prioridad())
 			max = i;
-		else if (posibles_receptores[i].get_prioridad() == posibles_receptores[max].get_prioridad())
+		else if (posibles_receptores->at(i)->get_prioridad() == posibles_receptores->at(max)->get_prioridad())
 		{
-			if (posibles_receptores[i].get_fecha_ingreso() < posibles_receptores[max].get_fecha_ingreso())
+			if (posibles_receptores->at(i)->get_fecha_ingreso() < posibles_receptores->at(max)->get_fecha_ingreso())
 				max = i;
 		}
 
 	}
 
-	cPACIENTE* ptr = dynamic_cast<cPACIENTE*>(&posibles_receptores[max]);
+	cPACIENTE* ptr = dynamic_cast<cPACIENTE*>(posibles_receptores->at(max));
 	
 	return ptr;
 
@@ -106,7 +132,7 @@ int cBSA::agregar_paciente(cPACIENTE* paciente)
 	
 	if (donante != nullptr)
 	{
-		while (a!=-1 || i<this->lista_donantes.size())
+		while (a==0 && i<this->lista_donantes.size())
 		{
 			if (paciente == &(this->lista_donantes[i])) //SOLO NOS IMPORTA EL DNI
 				a = -1;
@@ -126,7 +152,7 @@ int cBSA::agregar_paciente(cPACIENTE* paciente)
 		}
 	}
 	if(receptor != nullptr && a == 0)
-		this->get_lista_receptores() + receptor;
+		this->lista_receptores + receptor;
 
 	int cant = this->lista_donantes.size();
 
@@ -135,8 +161,10 @@ int cBSA::agregar_paciente(cPACIENTE* paciente)
 		bool b = this->comprobar_requisitos(donante); 
 		if (b) 
 		{
-			this->get_lista_donantes() + donante;
 			donante->crear_registro();
+			this->lista_donantes + donante;// no se modifica la lista, se modifica la copia
+		
+
 		}
 
 
@@ -153,7 +181,8 @@ void cBSA::protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor) //falta
 {
 	int i = donante->get_registros().size(); //posicion del ultimo registro
 	bool b1;
-	b1 = donante->get_fluido()->verificar_fecha_maxima(donante->get_registros()[i].get_fecha_extraccion());//dynamic cast
+	time_t fecha = donante->get_registros()[i-1].get_fecha_extraccion();
+	b1 = donante->get_fluido()->verificar_fecha_maxima(fecha);//dynamic cast
 	if (!b1)
 		this->lista_donantes - donante;
 	//se borra de la lista, sobrecarga del -
@@ -161,7 +190,7 @@ void cBSA::protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor) //falta
 	if (!(b1 && donante->get_centro()->get_provincia() == receptor->get_centro()->get_provincia() && donante->get_centro()->get_partido() == receptor->get_centro()->get_partido()))//sobrecarga en centro del ==
 		return;//si alguna condicion es falsa, se hace verdadera y entra al if
 	
-	cTRANSPLANTE* transplante = receptor->get_centro()->realizar_transplante();
+	cTRANSPLANTE* transplante=receptor->get_centro()->realizar_transplante();
 	receptor->set_transplante(transplante);
 	if (transplante->get_resultado())
 	{
@@ -176,35 +205,37 @@ void cBSA::protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor) //falta
 	}
 
 	this->lista_donantes - donante;
-	//si se realizo el trasnplante hay borrar el donante de la lista
-	//o cambiar la disponibilidad en el registro, no es mucho borrarlo?
+	
+	
 }
-VECTOR<cRECEPTOR> cBSA::buscar_posibles_receptores(cDONANTE* donante)
+void cBSA::buscar_posibles_receptores(cDONANTE* donante, VECTOR<cRECEPTOR*> *lista)
 {
-	VECTOR<cRECEPTOR>* sublista;
 	for (int i = 0; i < this->lista_receptores.size(); i++)
 	{
 		if (this->lista_receptores[i] == *donante)
-			*sublista + &(this->lista_receptores[i]);
+			lista->push_back(& (this->lista_receptores[i]));
 	}
 
-	return *sublista;
+	return;
 }
 cPACIENTE* cBSA::iniciar_analisis(cDONANTE* donante)// funcion madre que abarca varios metodos
 {
-	VECTOR<cRECEPTOR> sublista;
+	VECTOR<cRECEPTOR*> sublista;
 	cPACIENTE* pac = nullptr;
 
-		sublista = buscar_posibles_receptores(donante);
+		buscar_posibles_receptores(donante, &sublista);
 		if (!(sublista.empty()))
 		{
-			pac = elegir_receptor(sublista);
+			pac = elegir_receptor(&sublista);
 			if (pac != nullptr)
-				protocolo_transplante(donante, dynamic_cast<cRECEPTOR*>(pac));
+			{
+				cRECEPTOR* ptr = dynamic_cast<cRECEPTOR*>(pac);
+				protocolo_transplante(donante, ptr);
+			}
 		}
-		else;
+//		else;
 			//OPCIONES: o que cargue un vector con los donantes que no tienen match y lo devuelva
 			// o que vaya imprimiendolo aca en el else.
 
-	return pac;
+	return pac;//ver si anda bien esto, esta mal devolver la direccion de memoria de un objeto creado en la funcio, una direccion de memoria no es objeto pero guarda
 }

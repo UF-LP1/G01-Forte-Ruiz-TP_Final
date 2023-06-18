@@ -2,12 +2,9 @@
 #ifndef _CBSA_H
 #define _CBSA_H
 
-#include "cDONANTE.h"
-#include "cRECEPTOR.h"
+
 #include "cCENTRO.h"
-#include "cSANGRE.h"
-#include "cMEDULA.h"
-#include "cPLASMA.h"
+
 #include "funciones.h"
 #include "VECTOR.h"
 
@@ -30,11 +27,11 @@ public:
 	vector<cCENTRO> get_lista_centros();
 
 	bool comprobar_requisitos(cDONANTE* donante);
-	cPACIENTE* elegir_receptor(VECTOR<cRECEPTOR> posibles_receptores);
+	cPACIENTE* elegir_receptor(VECTOR<cRECEPTOR*> *posibles_receptores);
 	int agregar_paciente(cPACIENTE* paciente);
 
 	void protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor);
-	VECTOR<cRECEPTOR> buscar_posibles_receptores(cDONANTE* donante);
+	void buscar_posibles_receptores(cDONANTE* donante, VECTOR<cRECEPTOR*> *lista);
 	cPACIENTE* iniciar_analisis(cDONANTE* donante);
 
 	//string to_string_BSA(); //PASO A STRING TODAS LAS LISTAS?

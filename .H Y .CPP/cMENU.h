@@ -7,6 +7,7 @@
 */
 #include "cBSA.h"
 #include "ePROVINCIA.h"
+#include <ctype.h>
 
 using namespace std;
 

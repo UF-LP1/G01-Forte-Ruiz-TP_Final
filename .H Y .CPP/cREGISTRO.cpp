@@ -50,7 +50,7 @@ void cREGISTRO::set_centro(cCENTRO* centro)
 string cREGISTRO::to_string() const
 {
 	struct tm fecha;
-	localtime_s(&fecha, (const time_t*)this->fecha_extraccion);
+	localtime_s(&fecha, &this->fecha_extraccion);
 
 	stringstream ss;
 	ss << "Donacion: " << endl;

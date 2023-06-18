@@ -23,10 +23,12 @@ cTRANSPLANTE* cCENTRO::realizar_transplante()
 		b = true;
 	else if (a == 0) //HICE LO DE LOS IFS POR LAS DUDAS
 		b = false;
-	time_t t = time(NULL);
+	//time_t t = time(NULL);//por defecto la fecha del transplante es la de hoy
 
-	cTRANSPLANTE transplante(t, b); //FALTA NEW
-	return &transplante;
+	 //FALTA NEW
+	//evito usar new al recibir por parametro la direccion de memoria donde guardar los datos
+	cTRANSPLANTE* trans = new cTRANSPLANTE(time(NULL), b);//va a ser deleteado en bsA
+	return trans;
 	
 }
 
@@ -86,16 +88,16 @@ string cCENTRO::get_telefono()
 string cCENTRO::to_string() const
 {
 	string prov;
-	const char* provincias[] = { "BuenosAires", "CABA","Catamarca", "Chaco", "Chubut", "Cordoba", "Corrientes", "EntreRios", "Formosa", "Jujuy", "LaPampa", "LaRioja", "Mendoza", "Misiones", "Neuquen", "RioNegro","Salta", "SanJuan", "SanLuis", "SantaCruz", "SantaFe", "SantiagoDelEstero","TierraDelFuego","Tucuman" };
+	const char* provincias[] = { "Buenos Aires", "CABA","Catamarca", "Chaco", "Chubut", "Cordoba", "Corrientes", "Entre Rios", "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza", "Misiones", "Neuquen", "Rio Negro","Salta", "San Juan", "San Luis", "Santa Cruz", "Santa Fe", "Santiago Del Estero","Tierra Del Fuego","Tucuman" };
 	prov = provincias[this->provincia];
 	stringstream ss;
 	ss << "Centro de salud: " << endl;
 
-	ss << "Nombre: " << this->nombre << endl
-		<< "Direccion: " << this->direccion << endl
-		<< "Partido: " << this->partido << endl
-		<< "Provincia" << prov << endl
-		<< "Telefono" << this->telefono << endl;
+	ss << "    Nombre: " << this->nombre << endl
+		<< "    Direccion: " << this->direccion << endl
+		<< "    Partido: " << this->partido << endl
+		<< "    Provincia: " << prov << endl
+		<< "    Telefono: " << this->telefono << endl;
 
 	return ss.str();
 }

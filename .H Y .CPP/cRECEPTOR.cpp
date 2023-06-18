@@ -70,10 +70,15 @@ eESTADO cRECEPTOR::get_estado()
 	return this->estado;
 }
 
+cTRANSPLANTE* cRECEPTOR::get_transplante()
+{
+	return this->transplante;
+}
+
 string cRECEPTOR::to_string() const
 {
 	struct tm aux;
-	localtime_s(&aux, (const time_t*)this->fecha_nacimiento);
+	localtime_s(&aux, &this->fecha_nacimiento);
 	stringstream ss;
 
 	ss << "Paciente:" << endl; //donante/recep
@@ -97,14 +102,17 @@ string cRECEPTOR::to_string() const
 	if (ptr3 != nullptr)
 		ss << ptr3->to_string();
 
-	ss << this->centro->to_string();
+
 
 	//hasta aca igual que el padre
 	struct tm fecha;
-	localtime_s(&fecha, (const time_t*)this->fecha_ingreso);
+	localtime_s(&fecha, &this->fecha_ingreso);
+	string estados[3]{ "ESTABLE", "INESTABLE", "RECIBIO" };
+	string prioridades[5]{ "uno", "dos", "tres", "cuatro", "cinco" };
 	ss << "Fecha de ingreso:" << fecha.tm_mday << "/" << fecha.tm_mon + 1 << "/" << fecha.tm_year + 1900 << endl
-		<< "Estado: " << this->estado << endl
-		<< "Prioridad: " << this->prioridad << endl;
+		<< "Estado: " << estados[this->estado] << endl
+		<< "Prioridad: " << prioridades[this->prioridad] << endl;
+	ss << this->centro->to_string();
 	if (transplante != nullptr)
 		ss << transplante->to_string() << endl;
 

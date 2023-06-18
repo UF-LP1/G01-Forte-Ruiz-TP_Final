@@ -3,7 +3,7 @@
 #define _CDONANTE_H
 
 #include "cPACIENTE.h"
-#include "cFLUIDO.h"
+
 #include "cREGISTRO.h" 
 #include "cHISTORIAL.h"
 #include <vector>

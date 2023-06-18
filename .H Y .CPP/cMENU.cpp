@@ -19,7 +19,7 @@ void cMENU::ejecutar()
 
 		imprimir();
 
-		opcion = control_entradas(1, 7);
+		opcion = control_entradas(1, 10);
 
 		switch (opcion)	
 		{
@@ -33,8 +33,6 @@ void cMENU::ejecutar()
 				<< "2) Receptor." << endl
 				<< "3) VOLVER" << endl
 				<< "Opcion: ";
-
-			cin >> op2; cout << endl;
 
 			op2 = control_entradas(1, 3);
 			
@@ -56,11 +54,10 @@ void cMENU::ejecutar()
 				if (d == 1)
 					cout << "El paciente no paso los requisitos necesarios para ser donante." << endl;
 			}
-			else if (op2 == 3)
-				break;
-			
-			cout << "Presione cualquier tecla para volver";
-			cin >> dummy; cout << endl;
+
+			if (pac1 != nullptr)
+				delete pac1;
+			getchar();
 			break;
 		}
 		case 2: //buscar centro e imprimir lista de espera
@@ -68,10 +65,7 @@ void cMENU::ejecutar()
 			cCENTRO* centro = escribir_centro();
 
 			buscar_centro(centro);
-			
-			cout << endl;
-			cout << "Presione cualquier tecla para volver";
-			cin >> dummy;
+			getchar();
 			break;
 		}
 		case 3: //buscar receptor (opcion modificar)
@@ -163,9 +157,7 @@ void cMENU::ejecutar()
 			}//if
 
 			//si (op2 == 2) no hace nada, deja continuar el programa que va a volver al menu principal
-			cout << endl
-				<< "Presione cualquier tecla para volver";
-			cin >> dummy;
+			getchar();
 			break;
 		}//case 3
 		case 4: //buscar donante (opcion de modificar) //=case3, sobrecarga de funciones?
@@ -231,10 +223,6 @@ void cMENU::ejecutar()
 						cCENTRO* ptr = escribir_centro();
 						if (ptr != nullptr)
 							donante->set_centro(ptr);
-
-						cout << "Presione cualquier tecla para volver";
-						cin >> dummy;
-
 						break;
 					}
 					case 7: //registros
@@ -272,37 +260,27 @@ void cMENU::ejecutar()
 
 			}
 			//if op== 3 no hace nada, deja continuar el programa que va a volver al menu principal
-			cout << endl
-				<< "Presione cualquier tecla para volver";
-			cin >> dummy;
+			cout << endl;
+			getchar();
 			break;
 		}
 		case 5: //imprimir listado donantes
 		{
 			imprimir_listado_donantes();
-
-			cout << endl
-				<< "Presione cualquier tecla para volver";
-			cin >> dummy;
-		
+			getchar();
 			break;
 		}
 		case 6: //imprimir listado receptores
 		{
 			imprimir_listado_receptores();
-
-			cout << endl
-				<< "Presione cualquier tecla para volver";
-			cin >> dummy;
-			
+			getchar();
 			break;
 		}
 		case 7: //imprimir informe mensual
 		{
 
 			informe_mensual();
-			cout << "Presione cualquier tecla para volver";
-			cin >> dummy; cout << endl;
+			getchar();
 			break;
 		}
 		case 8:
@@ -311,6 +289,8 @@ void cMENU::ejecutar()
 			{
 				this->BSA->iniciar_analisis(&(this->BSA->get_lista_donantes()[i]));
 			}
+			break;
+			getchar();
 		}
 		case 10: //finalizar programa
 		{
@@ -320,24 +300,43 @@ void cMENU::ejecutar()
 		}
 
 	}
-	while (opcion != 8);
+	while (opcion != 10);
 	return;
 }
 
 //funciones extras
 int cMENU::control_entradas(int inf, int sup)
 {
-	string op1 = "";
-	int op = -1;
-	cin >> op1;
-	while (op<inf || op>sup)
-	{
-		cout << "Reingrese su eleccion (unicamente validas las opciones del " << inf << " al " << sup << ")" << endl;
-		cin >> op1; cout << endl;
-		if(op1 == "10" || op1 == "1"|| op1 == "2"|| op1 == "3"|| op1 == "4"|| op1 == "5"|| op1 == "6"|| op1 == "7"|| op1 == "8"|| op1 == "9")
-			op = stoi(op1);
+	string aux;
+	int op = 0;
+	int ap = 0;
 
-	}
+	int k = 0;
+	int c = 0;
+	do
+	{
+		c = 0;
+		cin >> aux;
+		for (int i = aux.length() - 1; i >= 0; i--)
+		{
+			if (isdigit(aux[i]))
+			{
+				char a = aux[i];
+				ap = ap + pow(10, k) * atoi(&a);
+				k++;
+			}
+			else
+				c = -1;
+		}
+		if (c == -1)
+		{
+			cout << "Reingrese su eleccion (unicamente validas las opciones del " << inf << " al " << sup << "): ";
+
+		}
+		else
+			op = ap;
+	} while (op<inf || op>sup);
+
 
 	return op;
 }
@@ -475,6 +474,7 @@ cPACIENTE* cMENU::escribir_donante()
 	time_t fecha = escribir_fecha();
 	string tel = escribir_telefono();
 	eSEXO sex = escribir_sexo();
+
 	cCENTRO* centro = escribir_centro();
 	cFLUIDO* fluido = escribir_fluido();
 	string dni = escribir_dni(); //funcion escribir_paciente()? PARA NO REPETIR CODIGO
@@ -483,10 +483,10 @@ cPACIENTE* cMENU::escribir_donante()
 	float peso = escribir_peso();
 	cHISTORIAL* historial = escribir_historial();
 	
-	//cDONANTE* pac = new cDONANTE(nombre, fecha, tel, sex, fluido, centro, dni, registros, peso, historial);
+	cDONANTE* pac = new cDONANTE(edad,nombre, fecha, tel, sex, fluido, centro, dni, registros, peso, historial);
 
-	cDONANTE pac(edad, nombre, fecha, tel, sex, fluido, centro, dni, registros,peso,historial);
-	return &pac;
+	//cDONANTE pac(edad, nombre, fecha, tel, sex, fluido, centro, dni, registros,peso,historial);
+	return pac;
 }
 cPACIENTE* cMENU:: escribir_receptor() //sobrecarga cin era aca?
 {	
@@ -495,16 +495,18 @@ cPACIENTE* cMENU:: escribir_receptor() //sobrecarga cin era aca?
 	time_t fecha = escribir_fecha();
 	string tel = escribir_telefono();
 	eSEXO sex = escribir_sexo();
+
 	cCENTRO* centro = escribir_centro();
 	cFLUIDO* fluido = escribir_fluido();
+
 	string dni = escribir_dni(); //funcion escribir_paciente()? PARA NO REPETIR CODIGO
 
 	ePRIORIDAD prioridad = escribir_prioridad();
 	eESTADO estado = escribir_estado();
 
-	cRECEPTOR pac(edad, nombre, fecha, tel, sex, fluido, centro, dni, time(NULL), prioridad, estado);
+	cRECEPTOR* pac=new cRECEPTOR(edad, nombre, fecha, tel, sex, fluido, centro, dni, time(NULL), prioridad, estado);
 	
-	return &pac;
+	return pac;
 }
 
 //paciente
@@ -645,17 +647,17 @@ cFLUIDO* cMENU::escribir_sangre()
 		sign = true;
 	else
 		sign = false;
-	cSANGRE sangre(450, type, sign);
-	cFLUIDO* ptr = &sangre;
+	
+	cFLUIDO* ptr = new cSANGRE(450, type, sign);
 
 	return ptr;
 }
 cFLUIDO* cMENU::escribir_plasma()
 {	
 	eTIPO type = escribir_tipos();
-	cPLASMA plasma(450,type);
+	cFLUIDO* ptr = new cPLASMA(450,type);
 
-	return &plasma;
+	return ptr;
 }
 cFLUIDO* cMENU::escribir_medula()
 {	
@@ -663,9 +665,9 @@ cFLUIDO* cMENU::escribir_medula()
 	cout << "Ingrese tipo de medula:" << endl
 		<< "1)Amarilla" << endl << "2)Roja" << endl;
 	int op = control_entradas(1, 2);
-	cMEDULA medula(450, colores[op-1]);
+	cFLUIDO* ptr= new cMEDULA(450, colores[op-1]);
 
-	return &medula;
+	return ptr;
 }
 
 //receptor
@@ -724,8 +726,8 @@ cHISTORIAL* cMENU::escribir_historial()
 		time_t f_a = mktime(&fecha);
 		fecha1 = f_a;
 	}
-	cHISTORIAL historial(tat,fecha1,enf);
-	return &historial;
+	cHISTORIAL* ptr=new cHISTORIAL(tat,fecha1,enf);
+	return ptr;
 
 }
 vector <cREGISTRO> cMENU::escribir_registros() //tiene que dar la opcion de no ingresar ninguno
