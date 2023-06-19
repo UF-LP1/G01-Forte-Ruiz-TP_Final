@@ -70,16 +70,16 @@ int main()
 	lista_receptores + pac19;
 	lista_receptores + pac20;
 
-	cHISTORIAL* historial1 = new cHISTORIAL(false, false, fecha1);
-	cHISTORIAL* historial2 = new cHISTORIAL(false, true, fecha1);
-	cHISTORIAL* historial3 = new cHISTORIAL(false, false, fecha1);
-	cHISTORIAL* historial4 = new cHISTORIAL(false, true, fecha1);
-	cHISTORIAL* historial5 = new cHISTORIAL(false, true, fecha1);
-	cHISTORIAL* historial6 = new cHISTORIAL(false, true, fecha1);
-	cHISTORIAL* historial7 = new cHISTORIAL(false, false, fecha1);
-	cHISTORIAL* historial8 = new cHISTORIAL(false, false, fecha1);
-	cHISTORIAL* historial9 = new cHISTORIAL(false, true, fecha1);
-	cHISTORIAL* historial10 = new cHISTORIAL(false, true, fecha1);
+	cHISTORIAL* historial1 = new cHISTORIAL(false, fecha1, false);
+	cHISTORIAL* historial2 = new cHISTORIAL(false, fecha1, false);
+	cHISTORIAL* historial3 = new cHISTORIAL(false, fecha1, false);
+	cHISTORIAL* historial4 = new cHISTORIAL(false, fecha1, false);
+	cHISTORIAL* historial5 = new cHISTORIAL(false, fecha1, false);
+	cHISTORIAL* historial6 = new cHISTORIAL(false, fecha1, false);
+	cHISTORIAL* historial7 = new cHISTORIAL(false, fecha1, false);
+	cHISTORIAL* historial8 = new cHISTORIAL(false, fecha1, false);
+	cHISTORIAL* historial9 = new cHISTORIAL(false, fecha1, false);
+	cHISTORIAL* historial10 = new cHISTORIAL(false, fecha1, false);
 
 	vector<cREGISTRO> registros;
 

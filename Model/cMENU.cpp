@@ -1,4 +1,5 @@
 #include "cMENU.h"
+#include "Excepciones.h"
 
 cMENU::cMENU(cBSA* bsa)
 {
@@ -500,10 +501,10 @@ cPACIENTE* cMENU::escribir_donante()
 	
 	cDONANTE* pac = new cDONANTE(edad,nombre, fecha, tel, sex, fluido, centro, dni, registros, peso, historial);
 
-	//cDONANTE pac(edad, nombre, fecha, tel, sex, fluido, centro, dni, registros,peso,historial);
+
 	return pac;
 }
-cPACIENTE* cMENU:: escribir_receptor() //sobrecarga cin era aca?
+cPACIENTE* cMENU:: escribir_receptor()
 {	
 	int edad = escribir_edad();
 	string nombre = escribir_nombre();
@@ -517,7 +518,7 @@ cPACIENTE* cMENU:: escribir_receptor() //sobrecarga cin era aca?
 
 	cFLUIDO* fluido = escribir_fluido();
 
-	string dni = escribir_dni(); //funcion escribir_paciente()? PARA NO REPETIR CODIGO
+	string dni = escribir_dni();
 
 	ePRIORIDAD prioridad = escribir_prioridad();
 	eESTADO estado = escribir_estado();
@@ -546,12 +547,26 @@ time_t cMENU::escribir_fecha()
 	char dummy;
 	int dia, mes, anio;
 	cout << "Fecha: "; cin >> dia >> dummy >> mes >> dummy >> anio; cout << endl;
-	while (dia <= 0 || mes <= 0 || anio <= 1900) //1900 porque ya todos estan muertos ahi
+
+	while (dia <= 0 || mes <= 0 || anio <= 1900 || isalpha(dia) != 0 || isalpha(mes) != 0 || isalpha(anio) != 0) //cin.fail por si ingreso un char, que no lo tome 
 	{
-		cout << "Fecha invalida, vuelva a ingresar por favor: "; 
-		cin >> dia >> dummy >> mes >> dummy >> anio;
-		cout << endl;
+		try
+		{
+			//cin.clear(); //resetea el estado del cin 
+			//cin.ignore(100, '\n'); //hace que ignore todos los datos que estaban cargados anteriormente hasta el \n. La funcion hace que ignore la cantidad del parametro de la izq o hasta encontrar el \n. Como el de la izq es el maximo posible, llega primero al \n.
+			ExcepcionFecha e; 
+			throw e; 
+
+		}
+		catch (ExcepcionFecha& e) 
+		{
+			cout << e.what(); 
+			cin >> dia >> dummy >> mes >> dummy >> anio; 
+			cout << endl; 
+		}
 	}
+	
+
 	struct tm f_nac;
 	f_nac.tm_mday = dia;
 	f_nac.tm_mon = mes - 1;
@@ -584,7 +599,7 @@ cCENTRO* cMENU::escribir_centro()
 	vector<ePROVINCIA> provincias = { BuenosAires, CABA,Catamarca, Chaco, Chubut, Cordoba, Corrientes, EntreRios, Formosa, Jujuy, LaPampa, LaRioja, Mendoza, Misiones, Neuquen, RioNegro,Salta, SanJuan, SanLuis, SantaCruz, SantaFe, SantiagoDelEstero,TierraDelFuego,Tucuman };
 	string nombre, partido;
 	int prov, op=0;
-	cCENTRO* ptr;
+	cCENTRO* ptr = nullptr;
 	do
 	{
 		cout << "Datos a ingresar del centro de salud: " << endl
