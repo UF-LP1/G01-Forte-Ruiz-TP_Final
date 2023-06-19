@@ -4,12 +4,6 @@
 
 int main()
 {
-	/*
-	si agregamos una lista de transplantes al bsa 
-	en menu, podemos llamar a imprimir ese listado y filtrarlo con la fecha actual
-	(imprimiria todos porque no vamos a tener un archivo de transplantes anteriores (o si?) )
-	el objetivo es que informe si hubo match o no del paciente recien registrado
-	*/
 	time_t fecha1;
 	const time_t fecha_act = (const time_t)time(NULL);
 	struct tm fecha;
@@ -18,23 +12,108 @@ int main()
 	time_t f_a = mktime(&fecha);
 	fecha1 = f_a;
 
-	VECTOR<cRECEPTOR> lista1;
-	vector<cCENTRO> lista3;
-	cPLASMA plasma(450,O);
-	cFLUIDO* fluid = &plasma;
-	cCENTRO centro("favachoto", "paso", "coronel osales", Jujuy, "123");
-	lista3.push_back(centro);
-	cCENTRO* cent = &centro;
-	cRECEPTOR pac1(25, "juan perez",fecha1, "23", FEMENINO, fluid, cent, "4457", time(NULL), uno, ESTABLE);
-	lista1.push_back(pac1);
-	VECTOR<cDONANTE> lista2;
-	cHISTORIAL historial(false, 0, false);
-	vector <cREGISTRO> registros;
-	cDONANTE pac2(25, "juan perez", fecha1, "23", FEMENINO, fluid, cent, "123456789", registros, 75.0, &historial);
+
+	cCENTRO* centro1 = new cCENTRO("Centro de Salud San Martín", "Avenida San Martín 123", "La Matanza", BuenosAires, "+54 11 1234 - 5678");
+	cCENTRO* centro2 = new cCENTRO("Hospital Central de Córdoba", "Calle Principal 456", "Córdoba", Cordoba, "+54 351 9876 - 5432");
+	cCENTRO* centro3 = new cCENTRO("Clínica Santa Rosa", "Avenida Libertador 789", "Santa Rosa", LaPampa, "+54 2954 123 - 456");
+	cCENTRO* centro4 = new cCENTRO("Hospital Público San Juan", "Calle Principal 987", "San Juan", SanJuan, "+54 264 987 - 6543");
+	cCENTRO* centro5 = new cCENTRO("Centro de Atención Médica Rosario", "Calle Principal 321", "Rosario", SantaFe, "+54 341 6543 - 2109");
+	cCENTRO* centro6 = new cCENTRO("Hospital Regional Mendoza", "Avenida Principal 567", "Mendoza", Mendoza, "+54 261 4321 - 0987");
+	cCENTRO* centro7 = new cCENTRO("Clínica Del Valle", "Calle Principal 654", "Neuquén", Neuquen, "+54 299 2109 - 8765");
+	cCENTRO* centro8 = new cCENTRO("Hospital Público Salta", "Avenida Principal 890", "Salta", Salta, "+54 387 8765 - 4321");
+	cCENTRO* centro9 = new cCENTRO("Centro de Salud Tucumán", "Calle Principal 432", "San Miguel de Tucumán", Tucuman, "+54 381 543 - 2109");
+	cCENTRO* centro10 = new cCENTRO("Hospital Público Río Negro", "Avenida Principal 1098", " Viedma", RioNegro, " +54 2920 876 - 5432");
+	 
+	vector<cCENTRO> lista_centros;
+	lista_centros.push_back(*centro1);
+	lista_centros.push_back(*centro2);
+	lista_centros.push_back(*centro3);
+	lista_centros.push_back(*centro4);
+	lista_centros.push_back(*centro5);
+	lista_centros.push_back(*centro6);
+	lista_centros.push_back(*centro7);
+	lista_centros.push_back(*centro8);
+	lista_centros.push_back(*centro9);
+	lista_centros.push_back(*centro10);
+
+	cFLUIDO* fluido1 = new cPLASMA(450, AB);
+	cFLUIDO* fluido2 = new cSANGRE(450, B, true);
+	cFLUIDO* fluido3 = new cMEDULA(450, amarillo);
+	cFLUIDO* fluido4 = new cSANGRE(450, A, false);
+	cFLUIDO* fluido5 = new cPLASMA(450, O);
+	cFLUIDO* fluido6 = new cMEDULA(450, rojo);
+	cFLUIDO* fluido7 = new cPLASMA(450, B);
+	cFLUIDO* fluido8 = new cSANGRE(450, AB, true);
+	cFLUIDO* fluido9 = new cSANGRE(450, O, false);
+	cFLUIDO* fluido10 = new cMEDULA(450, amarillo);
+
+	cRECEPTOR* pac11 = new cRECEPTOR(32, "María García", 811334400, "123456789", FEMENINO, fluido1, centro1, "12345678", 1703622400, tres, ESTABLE);// 25 / 02 / 2024
+	cRECEPTOR* pac12 = new cRECEPTOR(41, "Juan González", 724310400, "987654321", MASCULINO, fluido2, centro2, "98765432", 1692979200, dos, ESTABLE);// 23 / 02 / 2023
+	cRECEPTOR* pac13 = new cRECEPTOR(28, "Laura Fernández", 940054400, "555555555", FEMENINO, fluido3, centro3, "55555555", 1664732800, uno, ESTABLE);
+	cRECEPTOR* pac14 = new cRECEPTOR(49, "Carlos Rodríguez", 629372800, "1111111111", MASCULINO, fluido4, centro4, "11111111", 1686803200, cinco, ESTABLE);//
+	cRECEPTOR* pac15 = new cRECEPTOR(36, "Ana Martínez", 787046400, "999999999", FEMENINO, fluido5, centro5, "99999999", 1672406400, cuatro, ESTABLE);
+	cRECEPTOR* pac16 = new cRECEPTOR(39, "Pedro López", 680851200, "777777777", MASCULINO, fluido6, centro6, "77777777", 1680576000, tres, ESTABLE);
+	cRECEPTOR* pac17 = new cRECEPTOR(45, "Andrea Ramírez", 594144000, "444444444", FEMENINO, fluido7, centro7, "44444444", 1708934400, dos, ESTABLE);
+	cRECEPTOR* pac18 = new cRECEPTOR(31, "Alejandro Torres", 827625600, "666666666",MASCULINO, fluido8, centro8, "66666666", 1697932800, uno, ESTABLE);
+	cRECEPTOR* pac19 = new cRECEPTOR(37, "Carolina Vargas", 757084800, "888888888", FEMENINO, fluido9, centro9, "88888888", 1675590400, cinco, ESTABLE);
+	cRECEPTOR* pac20 = new cRECEPTOR(43, "Sergio Herrera", 672979200, "222222222", MASCULINO, fluido10, centro10, "22222222", 1700188800, cuatro, ESTABLE);
+
+	VECTOR<cRECEPTOR> lista_receptores;
+	lista_receptores + pac11;
+	lista_receptores + pac12;
+	lista_receptores + pac13;
+	lista_receptores + pac14;
+	lista_receptores + pac15;
+	lista_receptores + pac16;
+	lista_receptores + pac17;
+	lista_receptores + pac18;
+	lista_receptores + pac19;
+	lista_receptores + pac20;
+
+	cHISTORIAL* historial1 = new cHISTORIAL(false, false, fecha1);
+	cHISTORIAL* historial2 = new cHISTORIAL(false, true, fecha1);
+	cHISTORIAL* historial3 = new cHISTORIAL(false, false, fecha1);
+	cHISTORIAL* historial4 = new cHISTORIAL(false, true, fecha1);
+	cHISTORIAL* historial5 = new cHISTORIAL(false, true, fecha1);
+	cHISTORIAL* historial6 = new cHISTORIAL(false, true, fecha1);
+	cHISTORIAL* historial7 = new cHISTORIAL(false, false, fecha1);
+	cHISTORIAL* historial8 = new cHISTORIAL(false, false, fecha1);
+	cHISTORIAL* historial9 = new cHISTORIAL(false, true, fecha1);
+	cHISTORIAL* historial10 = new cHISTORIAL(false, true, fecha1);
+
+	vector<cREGISTRO> registros;
+
+	cDONANTE* pac1 = new cDONANTE(35,"María López", 534643200, "+1 (555) 123 - 4567", FEMENINO, fluido1, centro1, "12345678", registros, 54.2, historial1);
+	cDONANTE* pac2 = new cDONANTE(25,"Juan Pérez", 630720000, "+1 (555) 987 - 6543", MASCULINO, fluido2, centro2, "87654321", registros, 68.9, historial2);
+	cDONANTE* pac3 = new cDONANTE(20,"Ana Martínez", 757382400, "+1 (555) 246 - 8109", FEMENINO, fluido3, centro3,  "65432187", registros, 62.3, historial3);
+	cDONANTE* pac4 = new cDONANTE(28,"Pedro González", 662688000, "+1 (555) 555 - 1234", MASCULINO, fluido4, centro4,  "98765432", registros, 78.6, historial4);
+	cDONANTE* pac5 = new cDONANTE(22,"Laura Rodríguez", 789331200, "+1 (555) 777 - 8888", FEMENINO, fluido5, centro5, "54321678", registros, 71.4, historial5);
+	cDONANTE* pac6 = new cDONANTE(32,"Carlos Sánchez", 703382400, "+1 (555) 444 - 3333", MASCULINO, fluido6, centro6, "87654321", registros, 56.8, historial6);
+	cDONANTE* pac7 = new cDONANTE(41,"Sofia Hernández", 576864000, "+1 (555) 222 - 9999", FEMENINO, fluido7, centro7, "76543210", registros, 64.2, historial7);
+	cDONANTE* pac8 = new cDONANTE(36,"Andrés Morales", 694310400, "+1 (555) 777 - 1111", MASCULINO, fluido8, centro8, "10293847", registros, 69.7, historial8);
+	cDONANTE* pac9 = new cDONANTE(23,"Gabriela Castro", 787948800, "+1 (555) 888 - 7777", FEMENINO, fluido9, centro9,  "93847562", registros, 75.1, historial9);
+	cDONANTE* pac10 = new cDONANTE(30,"Alejandro Fernández", 660816000, "+1 (555) 999 - 0000", MASCULINO, fluido10, centro10,  "74628391", registros, 63.5, historial10);
+
+	vector<cDONANTE*> lista_donantes;
+	lista_donantes.push_back(pac1);
+	lista_donantes.push_back(pac2);
+	lista_donantes.push_back(pac3);
+	lista_donantes.push_back(pac4);
+	lista_donantes.push_back(pac5);
+	lista_donantes.push_back(pac6);
+	lista_donantes.push_back(pac7);
+	lista_donantes.push_back(pac8);
+	lista_donantes.push_back(pac9);
+	lista_donantes.push_back(pac10);
+
+	VECTOR<cDONANTE> lista_aux;
+	cBSA banco(lista_aux, lista_receptores, lista_centros);
+
+	for (int i = 0; i < lista_donantes.size(); i++)
+	{
+		banco.agregar_paciente(lista_donantes[i]);
+	}
 	
-	//lista2.push_back(pac2);
-	cBSA banco(lista2,lista1,lista3);
-	banco.agregar_paciente(&pac2);
 	cMENU menu(&banco);
 	menu.ejecutar();
 	return 0;
