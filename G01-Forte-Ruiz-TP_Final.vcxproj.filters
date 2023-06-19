@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include=".H Y .CPP\cBSA.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include=".H Y .CPP\cCENTRO.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
@@ -57,6 +54,12 @@
     <ClCompile Include=".H Y .CPP\main.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include=".H Y .CPP\cBSA.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include=".H Y .CPP\funciones.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include=".H Y .CPP\cBSA.h">
@@ -75,9 +78,6 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include=".H Y .CPP\cMEDULA.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include=".H Y .CPP\cMENU.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include=".H Y .CPP\cPACIENTE.h">
@@ -119,5 +119,15 @@
     <ClInclude Include=".H Y .CPP\VECTOR.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include=".H Y .CPP\eCOLOR.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include=".H Y .CPP\cMENU.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include=".H Y .CPP\G01-Forte-Ruiz-TPfinal - Acceso directo.lnk" />
   </ItemGroup>
 </Project>

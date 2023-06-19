@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -140,6 +140,7 @@
     <ClCompile Include=".H Y .CPP\cREGISTRO.cpp" />
     <ClCompile Include=".H Y .CPP\cSANGRE.cpp" />
     <ClCompile Include=".H Y .CPP\cTRANSPLANTE.cpp" />
+    <ClCompile Include=".H Y .CPP\funciones.cpp" />
     <ClCompile Include=".H Y .CPP\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +157,7 @@
     <ClInclude Include=".H Y .CPP\cREGISTRO.h" />
     <ClInclude Include=".H Y .CPP\cSANGRE.h" />
     <ClInclude Include=".H Y .CPP\cTRANSPLANTE.h" />
+    <ClInclude Include=".H Y .CPP\eCOLOR.h" />
     <ClInclude Include=".H Y .CPP\eESTADO.h" />
     <ClInclude Include=".H Y .CPP\ePRIORIDAD.h" />
     <ClInclude Include=".H Y .CPP\ePROVINCIA.h" />
@@ -163,6 +165,10 @@
     <ClInclude Include=".H Y .CPP\eTIPO.h" />
     <ClInclude Include=".H Y .CPP\funciones.h" />
     <ClInclude Include=".H Y .CPP\VECTOR.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include=".H Y .CPP\G01-Forte-Ruiz-TPfinal - Acceso directo.lnk" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
