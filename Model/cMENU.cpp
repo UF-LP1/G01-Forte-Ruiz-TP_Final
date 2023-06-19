@@ -39,14 +39,17 @@ void cMENU::ejecutar()
 			if (op2 == 1)
 			{
 				pac1 = escribir_donante(); 
+				if (pac1 == nullptr)
+					cout << "Proceso cancelado" << endl;
 			}
 			else if (op2 == 2)
 			{
 				pac1 = escribir_receptor();
-				
+				if (pac1 == nullptr)
+					cout << "Proceso cancelado" << endl;
 			}
 
-			if (pac1->get_centro() != nullptr)
+			if (pac1 != nullptr)
 			{
 				int d = this->BSA->agregar_paciente(pac1); 
 				if (d == -1)
@@ -343,19 +346,22 @@ int cMENU::control_entradas(int inf, int sup)
 }
 cCENTRO* cMENU::verificar_centro(string nombre, string partido, ePROVINCIA provincia)
 {
-	cCENTRO* ptr = nullptr;
-	for (int i = 0; i < this->BSA->get_lista_centros().size(); i++)
+	int pos = -1;
+	int i;
+	for (i = 0; i < this->BSA->get_lista_centros().size(); i++)
 	{
 		if (this->BSA->get_lista_centros()[i].get_nombre() == nombre && this->BSA->get_lista_centros()[i].get_partido() == partido && this->BSA->get_lista_centros()[i].get_provincia() == provincia)
-			ptr = &(this->BSA->get_lista_centros()[i]);
+			pos = i;
+			
 	}
-	if (ptr == nullptr)
+	if (i== this->BSA->get_lista_centros().size())
 	{
 		cout << endl << "No se encontro el centro en la lista de centros habilitados." << endl; //que vuelva a ingresar los datos 
 		cout << endl;
+		return nullptr;
 	}
 
-	return ptr;
+	return &(this->BSA->get_lista_centros()[pos]);
 }
 
 //funciones menu principal
@@ -377,33 +383,40 @@ void cMENU::buscar_centro(cCENTRO* centro) //imprime la lista de espera del cent
 cRECEPTOR* cMENU::buscar_receptor(string dni)
 {
 
-	cRECEPTOR* receptor = nullptr;
+	int pos = -1;
+	int i;
 
-	for (int i = 0; i < this->BSA->get_lista_receptores().size(); i++)
+	for (i = 0; i < this->BSA->get_lista_receptores().size(); i++)
 	{
 		if (this->BSA->get_lista_receptores()[i].get_dni() == dni)
 		{
 			cout << "El paciente: " << endl;
 			this->BSA->get_lista_receptores()[i].imprimir(); //imprime la prioridad tmb
-			receptor = &(this->BSA->get_lista_receptores()[i]);
+			pos = i;
 		}
 	}
-	return receptor;
+	if (i == this->BSA->get_lista_receptores().size())
+		return nullptr;
+	return &(this->BSA->get_lista_receptores()[pos]);
 }
 cDONANTE* cMENU::buscar_donante(string dni)
 {
 	cDONANTE* donante = nullptr;
+	int pos = -1;
+	int i;
 
-	for (int i = 0; i < this->BSA->get_lista_donantes().size(); i++)
+	for (i = 0; i < this->BSA->get_lista_donantes().size(); i++)
 	{
 		if (this->BSA->get_lista_donantes()[i].get_dni() == dni)
 		{
 			cout << "El paciente: " << endl;
 			this->BSA->get_lista_donantes()[i].imprimir(); //
-			donante = &(this->BSA->get_lista_donantes()[i]);
+			pos = i;
 		}
 	}
-	return donante;
+	if (i == this->BSA->get_lista_donantes().size())
+		return nullptr;
+	return &(this->BSA->get_lista_donantes()[pos]);
 }
 void cMENU::imprimir_listado_donantes() // sobrecarga de <<?
 {
@@ -476,6 +489,8 @@ cPACIENTE* cMENU::escribir_donante()
 	eSEXO sex = escribir_sexo();
 
 	cCENTRO* centro = escribir_centro();
+	if (centro == nullptr)
+		return nullptr;
 	cFLUIDO* fluido = escribir_fluido();
 	string dni = escribir_dni(); //funcion escribir_paciente()? PARA NO REPETIR CODIGO
 	vector <cREGISTRO> registros = escribir_registros();
@@ -497,6 +512,9 @@ cPACIENTE* cMENU:: escribir_receptor() //sobrecarga cin era aca?
 	eSEXO sex = escribir_sexo();
 
 	cCENTRO* centro = escribir_centro();
+	if (centro == nullptr)
+		return nullptr;
+
 	cFLUIDO* fluido = escribir_fluido();
 
 	string dni = escribir_dni(); //funcion escribir_paciente()? PARA NO REPETIR CODIGO
@@ -530,7 +548,8 @@ time_t cMENU::escribir_fecha()
 	cout << "Fecha: "; cin >> dia >> dummy >> mes >> dummy >> anio; cout << endl;
 	while (dia <= 0 || mes <= 0 || anio <= 1900) //1900 porque ya todos estan muertos ahi
 	{
-		cout << "Fecha invalida, vuelva a ingresar por favor: "; cin >> dia >> dummy >> mes >> dummy >> anio;
+		cout << "Fecha invalida, vuelva a ingresar por favor: "; 
+		cin >> dia >> dummy >> mes >> dummy >> anio;
 		cout << endl;
 	}
 	struct tm f_nac;
@@ -579,11 +598,13 @@ cCENTRO* cMENU::escribir_centro()
 
 		prov = control_entradas(1, 24);
 
-		ptr = verificar_centro(nombre, partido, provincias[prov - 1]);
+		prov--;
+
+		ptr = verificar_centro(nombre, partido, provincias[prov]);
 		if (ptr == nullptr)
 		{
 			cout << "¿Desea volver a ingresar datos del centro?" << endl
-				<< "1)Si" << endl << "2)No";
+				<< "1)Si" << endl << "2)No" << endl;
 			op = control_entradas(1, 2);
 		}
 	} while (op==1);
@@ -627,8 +648,8 @@ eTIPO cMENU::escribir_tipos()
 	cout << "Tipo sanguíneo: ";
 	cout << "1)A" << endl << "2)AB" << endl << "3)B" << "4)O" << endl;
 	int type = control_entradas(1, 4);
-
-	return tipos[type - 1];
+	type--;
+	return tipos[type];
 }
 cFLUIDO* cMENU::escribir_sangre()
 {
@@ -665,7 +686,8 @@ cFLUIDO* cMENU::escribir_medula()
 	cout << "Ingrese tipo de medula:" << endl
 		<< "1)Amarilla" << endl << "2)Roja" << endl;
 	int op = control_entradas(1, 2);
-	cFLUIDO* ptr= new cMEDULA(450, colores[op-1]);
+	op--;
+	cFLUIDO* ptr= new cMEDULA(450, colores[op]);
 
 	return ptr;
 }
@@ -676,8 +698,8 @@ ePRIORIDAD cMENU::escribir_prioridad()
 	vector<ePRIORIDAD> prioridades = { uno,dos,tres,cuatro,cinco };
 	cout << "Ingrese la prioridad del paciente (del 1 al 5):" << endl;
 	int op = control_entradas(1, 5);
-
-	return prioridades[op - 1];
+	op--;
+	return prioridades[op];
 }
 eESTADO cMENU::escribir_estado()
 {
@@ -685,8 +707,8 @@ eESTADO cMENU::escribir_estado()
 	cout << "Ingrese el estado del paciente" << endl
 		<< "1)Estable" << endl << "2)Inestable" << endl << "3)Recibio" << endl;
 	int op = control_entradas(1, 3);
-
-	return estados[op - 1];
+	op--;
+	return estados[op];
 
 }
 
