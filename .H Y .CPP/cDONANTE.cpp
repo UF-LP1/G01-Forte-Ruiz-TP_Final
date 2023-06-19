@@ -61,6 +61,7 @@ string cDONANTE::to_string() const
 	struct tm aux;
 	localtime_s(&aux, &fecha);
 	stringstream ss;
+	ss << "-------------------------------" << endl;
 	ss << "Nombre: " << this->nombre << endl << "DNI: " << this->dni << endl
 		<< "Fecha de nacimiento: " << aux.tm_mday << "/" << aux.tm_mon + 1 << "/" << aux.tm_year + 1900 << endl
 		<< "Telefono: " << this->telefono << endl << "Sexo: ";
@@ -73,6 +74,7 @@ string cDONANTE::to_string() const
 	cPLASMA* ptr2 = dynamic_cast <cPLASMA*> (this->fluido);
 	cSANGRE* ptr3 = dynamic_cast <cSANGRE*> (this->fluido);
 
+	ss << "A DONAR: " << endl;
 	if (ptr1 != nullptr)
 		ss << ptr1->to_string();
 	if (ptr2 != nullptr)
@@ -84,12 +86,17 @@ string cDONANTE::to_string() const
 
 	//hasta aca es igual que paciente
 
-	ss << "Peso: " << this->peso << endl;
-	ss << this->historial->to_string();
+	ss << "Peso: " << this->peso << " kg" << endl;
+	ss << this->historial->to_string() << endl;
+	ss << "REGISTROS: " << endl;
 	for (int i = 0; i < this->registros.size(); i++)
 	{
+		ss << "-----" << endl;
 		ss << this->registros[i].to_string();
+		ss << "-----" << endl;
 	}
+
+	ss << "-------------------------------" << endl;
 	return ss.str();
 }
 void cDONANTE::imprimir()

@@ -54,7 +54,7 @@ string cREGISTRO::to_string() const
 
 	stringstream ss;
 	ss << "Donacion: " << endl;
-	ss << "Fecha extraccion: " << fecha.tm_mday << "/" << fecha.tm_mon + 1 << "/" << fecha.tm_year + 1900;
+	ss << "Fecha extraccion: " << fecha.tm_mday << "/" << fecha.tm_mon + 1 << "/" << fecha.tm_year + 1900 << endl;
 	
 	cMEDULA* ptr1 = dynamic_cast <cMEDULA*> (this->fluido);
 	cPLASMA* ptr2 = dynamic_cast <cPLASMA*> (this->fluido);

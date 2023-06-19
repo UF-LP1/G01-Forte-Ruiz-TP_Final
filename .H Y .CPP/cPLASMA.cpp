@@ -23,7 +23,7 @@ string cPLASMA::to_string() const
 
 	stringstream ss;
 	ss << "Fluido: PLASMA" << endl;
-	ss << "Volumen: " << this->volumen << endl
+	ss << "Volumen: " << this->volumen << " ml" << endl
 		<< "Tipo: " << type << endl; 
 	
 	return ss.str();

@@ -12,7 +12,7 @@ cMENU::~cMENU()
 void cMENU::ejecutar()
 {
 	int opcion=0;
-		
+	vector<int>* cont1_x_prov = new vector<int>;
 	do
 	{
 		char dummy;
@@ -279,7 +279,7 @@ void cMENU::ejecutar()
 		case 7: //imprimir informe mensual
 		{
 
-			informe_mensual();
+			informe_mensual(cont1_x_prov); 
 			getchar();
 			break;
 		}
@@ -294,6 +294,7 @@ void cMENU::ejecutar()
 		}
 		case 10: //finalizar programa
 		{
+			delete cont1_x_prov;
 			cout << "-----Finalizacion del programa-----";
 			break;
 		}
@@ -418,7 +419,7 @@ void cMENU::imprimir_listado_receptores() //se podria hacer sobrecarga del << (t
 		this->BSA->get_lista_receptores()[i].imprimir();
 	}
 }//sobrecarga <<?
-void cMENU::informe_mensual()
+void cMENU::informe_mensual(vector<int>* cont1_x_prov)
 {
 	const time_t f_actual = (const time_t)time(NULL);
 	struct tm fecha1;
@@ -429,41 +430,40 @@ void cMENU::informe_mensual()
 
 	time_t f_a = mktime(&fecha1);
 
-	vector<int> cont1_x_prov;
-	cont1_x_prov.resize(24, 0);
+	cont1_x_prov->resize(24, 0);
 
 	for (int i = 0; i < this->BSA->get_lista_donantes().size(); i++)
 	{
 		if (this->BSA->get_lista_donantes()[i].get_registros().back().get_fecha_extraccion() >= f_a)
 			prov = this->BSA->get_lista_donantes()[i].get_centro()->get_provincia();
-			cont1_x_prov[prov] += 1; //PE
+			cont1_x_prov->at(prov) += 1; //PE
 	}
 
 	cout << "-------Cantidad de donaciones por provincia-------" << endl
-		<< "Buenos Aires: " << cont1_x_prov[0] << endl
-		<< "Ciudad Autonoma de Buenos Aires: " << cont1_x_prov[1] << endl
-		<< "Catamarca: " << cont1_x_prov[2] << endl
-		<< "Chaco: " << cont1_x_prov[3] << endl
-		<< "Chubut: " << cont1_x_prov[4] << endl
-		<< "Cordoba: " << cont1_x_prov[5] << endl
-		<< "Corrientes: " << cont1_x_prov[6] << endl
-		<< "Entre Rios: " << cont1_x_prov[7] << endl
-		<< "Formosa: " << cont1_x_prov[8] << endl
-		<< "Jujuy: " << cont1_x_prov[9] << endl
-		<< "La Pampa: " << cont1_x_prov[10] << endl
-		<< "La Rioja: " << cont1_x_prov[11] << endl
-		<< "Mendoza: " << cont1_x_prov[12] << endl
-		<< "Misiones: " << cont1_x_prov[13] << endl
-		<< "Neuquen: " << cont1_x_prov[14] << endl
-		<< "Rio Negro: " << cont1_x_prov[15] << endl
-		<< "Salta: " << cont1_x_prov[16] << endl
-		<< "San Juan: " << cont1_x_prov[17] << endl
-		<< "San Luis: " << cont1_x_prov[18] << endl
-		<< "Santa Cruz: " << cont1_x_prov[19] << endl
-		<< "Santa Fe: " << cont1_x_prov[20] << endl
-		<< "Santiago del estero: " << cont1_x_prov[21] << endl
-		<< "Tierra del Fuego: " << cont1_x_prov[22] << endl
-		<< "Tucuman: " << cont1_x_prov[23] << endl;
+		<< "Buenos Aires: " << cont1_x_prov->at(0) << endl
+		<< "Ciudad Autonoma de Buenos Aires: " << cont1_x_prov->at(1) << endl
+		<< "Catamarca: " << cont1_x_prov->at(2) << endl
+		<< "Chaco: " << cont1_x_prov->at(3) << endl
+		<< "Chubut: " << cont1_x_prov->at(4) << endl
+		<< "Cordoba: " << cont1_x_prov->at(5) << endl
+		<< "Corrientes: " << cont1_x_prov->at(6) << endl
+		<< "Entre Rios: " << cont1_x_prov->at(7) << endl
+		<< "Formosa: " << cont1_x_prov->at(8) << endl
+		<< "Jujuy: " << cont1_x_prov->at(9) << endl
+		<< "La Pampa: " << cont1_x_prov->at(10) << endl
+		<< "La Rioja: " << cont1_x_prov->at(11) << endl
+		<< "Mendoza: " << cont1_x_prov->at(12) << endl
+		<< "Misiones: " << cont1_x_prov->at(13) << endl
+		<< "Neuquen: " << cont1_x_prov->at(14) << endl
+		<< "Rio Negro: " << cont1_x_prov->at(15) << endl
+		<< "Salta: " << cont1_x_prov->at(16) << endl
+		<< "San Juan: " << cont1_x_prov->at(17) << endl
+		<< "San Luis: " << cont1_x_prov->at(18) << endl
+		<< "Santa Cruz: " << cont1_x_prov->at(19) << endl
+		<< "Santa Fe: " << cont1_x_prov->at(20) << endl
+		<< "Santiago del estero: " << cont1_x_prov->at(21) << endl
+		<< "Tierra del Fuego: " << cont1_x_prov->at(22) << endl
+		<< "Tucuman: " << cont1_x_prov->at(23) << endl;
 }
 
 //funciones escribir

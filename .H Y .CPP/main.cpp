@@ -30,7 +30,7 @@ int main()
 	VECTOR<cDONANTE> lista2;
 	cHISTORIAL historial(false, 0, false);
 	vector <cREGISTRO> registros;
-	cDONANTE pac2(25, "juan perez", fecha1, "23", FEMENINO, fluid, cent, "4457", registros, 75.0, &historial);
+	cDONANTE pac2(25, "juan perez", fecha1, "23", FEMENINO, fluid, cent, "123456789", registros, 75.0, &historial);
 	
 	//lista2.push_back(pac2);
 	cBSA banco(lista2,lista1,lista3);

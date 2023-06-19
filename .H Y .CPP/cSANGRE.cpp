@@ -79,7 +79,7 @@ string cSANGRE::to_string() const
 
 	stringstream ss;
 	ss << "Fluido: SANGRE" << endl;
-	ss << "Volumen: " << this->volumen << endl
+	ss << "Volumen: " << this->volumen << " ml" << endl
 		<< "Tipo: " << type << signo << endl;
 
 	return ss.str();

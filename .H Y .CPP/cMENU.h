@@ -30,7 +30,7 @@ public:
 	cDONANTE* buscar_donante(string dni);
 	void imprimir_listado_donantes();
 	void imprimir_listado_receptores();
-	void informe_mensual();
+	void informe_mensual(vector<int>* cont_x_prov);
 	void buscar_centro(cCENTRO* centro);
 
 	//funciones imprimir

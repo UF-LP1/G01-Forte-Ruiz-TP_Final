@@ -50,17 +50,17 @@ string cHISTORIAL::to_string() const
 	localtime_s(&fecha, &this->ult_tattoo);
 
 	stringstream ss;
-	ss << "Registro: " << endl;
+	ss << "HISTORIAL: " << endl;
 	ss<<"Tiene enfermedades sanguineas: ";
 
 	if (this->get_enfermedades())
-		ss << "SI." << endl;
+		ss << "SI" << endl;
 	else
-		ss << "NO." << endl;
+		ss << "NO" << endl;
 
 	if (this->tiene_tattoo)
 	{
-		ss << "FECHA DE ULTIMO TATUAJE: "
+		ss << "Fecha de ultimo tatuaje: "
 			<< fecha.tm_mday << "/" << fecha.tm_mon + 1 << "/" << fecha.tm_year + 1900 << endl;
 	}
 

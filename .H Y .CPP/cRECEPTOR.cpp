@@ -81,6 +81,8 @@ string cRECEPTOR::to_string() const
 	localtime_s(&aux, &this->fecha_nacimiento);
 	stringstream ss;
 
+	ss << "-------------------------------" << endl;
+
 	ss << "Paciente:" << endl; //donante/recep
 
 	ss << "Nombre: " << this->nombre << endl << "DNI: " << this->dni << endl
@@ -90,7 +92,7 @@ string cRECEPTOR::to_string() const
 		ss << "Femenino" << endl;
 	else
 		ss << "Masculino" << endl;
-
+	ss << "DEBE RECIBIR: " << endl;
 	cMEDULA* ptr1 = dynamic_cast <cMEDULA*> (this->fluido);
 	cPLASMA* ptr2 = dynamic_cast <cPLASMA*> (this->fluido);
 	cSANGRE* ptr3 = dynamic_cast <cSANGRE*> (this->fluido);
@@ -115,6 +117,7 @@ string cRECEPTOR::to_string() const
 	ss << this->centro->to_string();
 	if (transplante != nullptr)
 		ss << transplante->to_string() << endl;
+	ss << "-------------------------------" << endl;
 
 	return ss.str();
 }
