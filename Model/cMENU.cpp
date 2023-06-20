@@ -24,7 +24,7 @@ void cMENU::ejecutar()
 
 		switch (opcion)	
 		{
-		case 1: //registrar paciente, podria ser funcion, mas legible el codigo
+		case 1: 
 		{
 			int op2;
 			cPACIENTE* pac1 =nullptr;
@@ -64,7 +64,7 @@ void cMENU::ejecutar()
 			getchar();
 			break;
 		}
-		case 2: //buscar centro e imprimir lista de espera
+		case 2:
 		{
 			cCENTRO* centro = escribir_centro();
 
@@ -72,11 +72,11 @@ void cMENU::ejecutar()
 			getchar();
 			break;
 		}
-		case 3: //buscar receptor (opcion modificar)
+		case 3:
 		{
 			int op2;
 			string dni;
-			cout << "Ingrese DNI del paciente que desea buscar: ";//si se quiere modificar un donante?
+			cout << "Ingrese DNI del paciente que desea buscar: ";
 			cin >> dni; cout << endl;
 			cRECEPTOR* receptor = buscar_receptor(dni);
 			if (receptor == nullptr)
@@ -102,36 +102,36 @@ void cMENU::ejecutar()
 					
 					switch (op3)
 					{
-					case 1://nombre
+					case 1:
 					{
 						string nombre = escribir_nombre();
 						receptor->set_nombre(nombre);
 						break;
 					}
-					case 2: //fecha nacimiento
+					case 2:
 					{
 						time_t f = escribir_fecha();
 						receptor->set_fecha_nacimiento(f);
 						break;
 					}
-					case 3://telefono
+					case 3:
 					{
 						string telefono = escribir_telefono();
 						receptor->set_telefono(telefono);
 						break;
 					}
-					case 4: //sexo
+					case 4:
 					{
 						eSEXO sex= escribir_sexo();
 						receptor->set_sexo(sex);
 						break;
 					}
-					case 5://fluido
+					case 5:
 					{	cFLUIDO* fluid = escribir_fluido();
 						receptor->set_fluido(fluid);
 						break;
 					}
-					case 6://centro
+					case 6:
 					{
 						cCENTRO* ptr = escribir_centro();
 						if(ptr != nullptr)
@@ -142,13 +142,13 @@ void cMENU::ejecutar()
 						
 						break;
 					}
-					case 7: //prioridad
+					case 7:
 					{
 						ePRIORIDAD prioridad = escribir_prioridad();
 						receptor->set_prioridad(prioridad);
 						break;
 					}
-					case 8: //estado
+					case 8:
 					{
 						eESTADO estado = escribir_estado();
 						receptor->set_estado(estado);
@@ -160,18 +160,17 @@ void cMENU::ejecutar()
 				while (op3 != 10);
 			}//if
 
-			//si (op2 == 2) no hace nada, deja continuar el programa que va a volver al menu principal
 			getchar();
 			break;
 		}//case 3
-		case 4: //buscar donante (opcion de modificar) //=case3, sobrecarga de funciones?
+		case 4:
 		{
 			int op2;
 			string dni;
-			cout << "Ingrese DNI del paciente que desea buscar: ";//si se quiere modificar un donante?
+			cout << "Ingrese DNI del paciente que desea buscar: ";
 			cin >> dni; cout << endl;
 			cDONANTE* donante = buscar_donante(dni);
-			//
+
 			if (donante == nullptr)
 			{
 				cout << "No se encontro al donante." << endl;
@@ -193,55 +192,55 @@ void cMENU::ejecutar()
 
 					switch (op3)
 					{
-					case 1://nombre
+					case 1:
 					{
 						string nombre = escribir_nombre();
 						donante->set_nombre(nombre);
 						break;
 					}
-					case 2: //fecha nacimiento
+					case 2:
 					{
 						time_t f = escribir_fecha();
 						donante->set_fecha_nacimiento(f);
 						break;
 					}
-					case 3://telefono
+					case 3:
 					{
 						string telefono = escribir_telefono();
 						donante->set_telefono(telefono);
 						break;
 					}
-					case 4: //sexo
+					case 4:
 					{
 						eSEXO sex = escribir_sexo();
 						donante->set_sexo(sex);
 						break;
 					}
-					case 5://fluido
+					case 5:
 					{	cFLUIDO* fluid = escribir_fluido();
 						donante->set_fluido(fluid);
 						break;
 					}
-					case 6://centro
+					case 6:
 					{
 						cCENTRO* ptr = escribir_centro();
 						if (ptr != nullptr)
 							donante->set_centro(ptr);
 						break;
 					}
-					case 7: //registros
+					case 7: 
 					{
 						vector <cREGISTRO> registros = escribir_registros();
 						donante->set_registros(registros);
 						break;
 					}
-					case 8: //historial
+					case 8: 
 					{
 						cHISTORIAL* hist= escribir_historial();
 						donante->set_historial(hist);
 						break;
 					}
-					case 9: //peso
+					case 9: 
 					{
 						float peso = escribir_peso();
 						donante->set_peso(peso);
@@ -263,24 +262,23 @@ void cMENU::ejecutar()
 					dynamic_cast<cRECEPTOR*>(pac)->imprimir();			
 
 			}
-			//if op== 3 no hace nada, deja continuar el programa que va a volver al menu principal
 			cout << endl;
 			getchar();
 			break;
 		}
-		case 5: //imprimir listado donantes
+		case 5:
 		{
 			imprimir_listado_donantes();
 			getchar();
 			break;
 		}
-		case 6: //imprimir listado receptores
+		case 6:
 		{
 			imprimir_listado_receptores();
 			getchar();
 			break;
 		}
-		case 7: //imprimir informe mensual
+		case 7:
 		{
 
 			informe_mensual(cont1_x_prov); 
@@ -289,14 +287,14 @@ void cMENU::ejecutar()
 		}
 		case 8:
 		{
-			for (int i = 0; i < this->BSA->get_lista_donantes().size(); i++)
+			for (int i = 0; i < this->BSA->lista_donantes.size(); i++)
 			{
-				this->BSA->iniciar_analisis(&(this->BSA->get_lista_donantes()[i]));
+				this->BSA->iniciar_analisis(&(this->BSA->lista_donantes[i]));
 			}
 			break;
 			getchar();
 		}
-		case 10: //finalizar programa
+		case 10:
 		{
 			delete cont1_x_prov;
 			cout << "-----Finalizacion del programa-----";
@@ -309,7 +307,6 @@ void cMENU::ejecutar()
 	return;
 }
 
-//funciones extras
 int cMENU::control_entradas(int inf, int sup)
 {
 	string aux;
@@ -351,7 +348,7 @@ cCENTRO* cMENU::verificar_centro(string nombre, string partido, ePROVINCIA provi
 	int i;
 	for (i = 0; i < this->BSA->get_lista_centros().size(); i++)
 	{
-		if (this->BSA->get_lista_centros()[i].get_nombre() == nombre && this->BSA->get_lista_centros()[i].get_partido() == partido && this->BSA->get_lista_centros()[i].get_provincia() == provincia)
+		if (this->BSA->lista_centros[i].get_nombre() == nombre && this->BSA->lista_centros[i].get_partido() == partido && this->BSA->lista_centros[i].get_provincia() == provincia)
 			pos = i;
 			
 	}
@@ -365,17 +362,17 @@ cCENTRO* cMENU::verificar_centro(string nombre, string partido, ePROVINCIA provi
 	return ptr;
 }
 
-//funciones menu principal
-void cMENU::buscar_centro(cCENTRO* centro) //imprime la lista de espera del centro
+
+void cMENU::buscar_centro(cCENTRO* centro)
 {
 	vector<cRECEPTOR> lista_espera;
 
-	for (int i = 0; i < this->BSA->get_lista_receptores().size(); i++)
-	{	if(*(this->BSA->get_lista_receptores()[i].get_centro()) == centro) //sobrecarga del ==
-			lista_espera.push_back(this->BSA->get_lista_receptores()[i]);
+	for (int i = 0; i < this->BSA->lista_receptores.size(); i++)
+	{	if(*(this->BSA->lista_receptores[i].get_centro()) == centro)
+			lista_espera.push_back(this->BSA->lista_receptores[i]);
 	}
 
-	for (int i = 0; i < lista_espera.size(); i++) //sobrecarga cout?
+	for (int i = 0; i < lista_espera.size(); i++)
 	{
 		lista_espera[i].imprimir();
 	}
@@ -387,12 +384,12 @@ cRECEPTOR* cMENU::buscar_receptor(string dni)
 	int pos = -1;
 	int i;
 
-	for (i = 0; i < this->BSA->get_lista_receptores().size(); i++)
+	for (i = 0; i < this->BSA->lista_receptores.size(); i++)
 	{
-		if (this->BSA->get_lista_receptores()[i].get_dni() == dni)
+		if (this->BSA->lista_receptores[i].get_dni() == dni)
 		{
 			cout << "El paciente: " << endl;
-			this->BSA->get_lista_receptores()[i].imprimir(); //imprime la prioridad tmb
+			this->BSA->lista_receptores[i].imprimir(); 
 			pos = i;
 		}
 	}
@@ -407,12 +404,12 @@ cDONANTE* cMENU::buscar_donante(string dni)
 	int pos = -1;
 	int i;
 
-	for (i = 0; i < this->BSA->get_lista_donantes().size(); i++)
+	for (i = 0; i < this->BSA->lista_donantes.size(); i++)
 	{
 		if (this->BSA->lista_donantes[i].get_dni() == dni)
 		{
 			cout << "El paciente: " << endl;
-			this->BSA->lista_donantes[i].imprimir(); //
+			this->BSA->lista_donantes[i].imprimir();
 			pos = i;
 		}
 	}
@@ -420,20 +417,21 @@ cDONANTE* cMENU::buscar_donante(string dni)
 		return nullptr;
 	return &(this->BSA->lista_donantes[pos]);
 }
-void cMENU::imprimir_listado_donantes() // sobrecarga de <<?
+void cMENU::imprimir_listado_donantes() 
 {
-	for (int i = 0; i < this->BSA->get_lista_donantes().size(); i++)
+	for (int i = 0; i < this->BSA->lista_donantes.size(); i++)
 	{
-		this->BSA->get_lista_donantes()[i].imprimir();
+		this->BSA->lista_donantes[i].imprimir();
 	}
 }
-void cMENU::imprimir_listado_receptores() //se podria hacer sobrecarga del << (tipo cout<<BSA.get_lista_donantes())
+void cMENU::imprimir_listado_receptores() 
 {
-	for (int i = 0; i < this->BSA->get_lista_receptores().size(); i++)
+	for (int i = 0; i < this->BSA->lista_receptores.size(); i++)
 	{
-		this->BSA->get_lista_receptores()[i].imprimir();
+		this->BSA->lista_receptores[i].imprimir();
 	}
-}//sobrecarga <<?
+}
+
 void cMENU::informe_mensual(vector<int>* cont1_x_prov)
 {
 	const time_t f_actual = (const time_t)time(NULL);
@@ -441,17 +439,17 @@ void cMENU::informe_mensual(vector<int>* cont1_x_prov)
 	localtime_s(&fecha1, &f_actual);
 	ePROVINCIA prov;
 
-	fecha1.tm_mday = 1; // Entonces así estamos en el dia uno del mes.
+	fecha1.tm_mday = 1; 
 
 	time_t f_a = mktime(&fecha1);
 
 	cont1_x_prov->resize(24, 0);
 
-	for (int i = 0; i < this->BSA->get_lista_donantes().size(); i++)
+	for (int i = 0; i < this->BSA->lista_donantes.size(); i++)
 	{
-		if (this->BSA->get_lista_donantes()[i].get_registros().back().get_fecha_extraccion() >= f_a)
-			prov = this->BSA->get_lista_donantes()[i].get_centro()->get_provincia();
-			cont1_x_prov->at(prov) += 1; //PE
+		if (this->BSA->lista_donantes[i].get_registros().back().get_fecha_extraccion() >= f_a)
+			prov = this->BSA->lista_donantes[i].get_centro()->get_provincia();
+			cont1_x_prov->at(prov) += 1;
 	}
 
 	cout << "-------Cantidad de donaciones por provincia-------" << endl
@@ -481,7 +479,6 @@ void cMENU::informe_mensual(vector<int>* cont1_x_prov)
 		<< "Tucuman: " << cont1_x_prov->at(23) << endl;
 }
 
-//funciones escribir
 cPACIENTE* cMENU::escribir_donante()
 {
 	int edad = escribir_edad();
@@ -495,7 +492,7 @@ cPACIENTE* cMENU::escribir_donante()
 	if (centro == nullptr)
 		return nullptr;
 	cFLUIDO* fluido = escribir_fluido();
-	string dni = escribir_dni(); //funcion escribir_paciente()? PARA NO REPETIR CODIGO
+	string dni = escribir_dni();
 	vector <cREGISTRO> registros = escribir_registros();
 
 	float peso = escribir_peso();
@@ -531,7 +528,6 @@ cPACIENTE* cMENU:: escribir_receptor()
 	return pac;
 }
 
-//paciente
 int cMENU::escribir_edad()
 {
 	int edad;
@@ -553,19 +549,19 @@ time_t cMENU::escribir_fecha()
 	int dia, mes, anio;
 	cout << "Formato(DD/MM/AAAA): "; cin >> dia >> dummy >> mes >> dummy >> anio; cout << endl;
 
-	while (dia <= 0 || mes <= 0 || anio <= 1900 || cin.fail()) //cin.fail por si ingreso un char, que no lo tome 
+	while (dia <= 0 || mes <= 0 || anio < 1970 || cin.fail())
 	{
 		try
 		{
-			cin.clear(); //resetea el estado del cin 
-			cin.ignore(100, '\n'); //hace que ignore todos los datos que estaban cargados anteriormente hasta el \n. La funcion hace que ignore la cantidad del parametro de la izq o hasta encontrar el \n. Como el de la izq es el maximo posible, llega primero al \n.
+			cin.clear();
+			cin.ignore(100, '\n'); 
 			ExcepcionFecha e; 
 			throw e; 
 
 		}
 		catch (ExcepcionFecha& e) 
 		{
-			cout << "EXCEPCION: Fecha invalida, vuelva a ingresar por favor: "; 
+			cout << e.what()<< endl; 
 			cin >> dia >> dummy >> mes >> dummy >> anio; 
 			cout << endl; 
 		}
@@ -573,11 +569,14 @@ time_t cMENU::escribir_fecha()
 	
 
 	struct tm f_nac;
+	f_nac.tm_sec = 0;
+	f_nac.tm_min = 0;
+	f_nac.tm_hour = 0;
 	f_nac.tm_mday = dia;
 	f_nac.tm_mon = mes - 1;
 	f_nac.tm_year = anio - 1900;
 
-	time_t f = mktime(&f_nac); //difftime(f, time(NULL))
+	time_t f = mktime(&f_nac);
 
 	return f;
 }
@@ -607,7 +606,7 @@ cCENTRO* cMENU::escribir_centro()
 	string nombre;
 	string partido;
 	int prov, op=0;
-	cCENTRO* ptr=nullptr;//temita
+	cCENTRO* ptr=nullptr;
 	while(op == 0||ptr ==nullptr)
 	{
 		cout << "Datos a ingresar del centro de salud: " << endl;
@@ -648,12 +647,12 @@ string cMENU::escribir_dni()
 	cin >> dni; cout << endl;
 	return dni;
 }
-//fluidos
+
 cFLUIDO* cMENU::escribir_fluido()
 {
 	cFLUIDO* fluid = nullptr;
 	int op4;
-	cout << "¿Que tipo de fluido es?" << endl //necesita o va a donar
+	cout << "¿Que tipo de fluido es?" << endl
 		<< "1) Sangre" << endl
 		<< "2) Medula" << endl
 		<< "3) Plasma" << endl
@@ -722,7 +721,6 @@ cFLUIDO* cMENU::escribir_medula()
 	return ptr;
 }
 
-//receptor
 ePRIORIDAD cMENU::escribir_prioridad()
 {	
 	vector<ePRIORIDAD> prioridades = { uno,dos,tres,cuatro,cinco };
@@ -742,8 +740,7 @@ eESTADO cMENU::escribir_estado()
 
 }
 
-//donante
-float cMENU::escribir_peso() //mayor a tanto (1kg) y menor a tanto(1000kg)?, 
+float cMENU::escribir_peso()
 {
 	float peso=-1.0;
 	while (peso < 1.0 || peso > 1000.0)
@@ -760,10 +757,10 @@ cHISTORIAL* cMENU::escribir_historial()
 
 	cout << "Tiene enfermedades:" << endl
 		<< "1)No" << endl << "2)Si" << endl;
-	enf = (control_entradas(1, 2) - 1); //false=0, true=1;
+	enf = (control_entradas(1, 2) - 1);
 	cout << "Tiene tatuajes:" << endl
 		<< "1)No" << endl << "2)Si" << endl;
-	tat = (control_entradas(1, 2) - 1); //false=0, true=1;
+	tat = (control_entradas(1, 2) - 1); 
 	if (tat)
 	{
 		cout << "Ingrese la fecha del ultimo tatuaje:" << endl;
@@ -774,7 +771,7 @@ cHISTORIAL* cMENU::escribir_historial()
 		const time_t fecha_act = (const time_t)time(NULL);
 		struct tm fecha;
 		localtime_s(&fecha, &fecha_act);
-		fecha.tm_mon -= 6; //le resto 6 meses a la fecha actual para que cumpla con los requitos
+		fecha.tm_mon -= 6;
 		time_t f_a = mktime(&fecha);
 		fecha1 = f_a;
 	}
@@ -782,7 +779,7 @@ cHISTORIAL* cMENU::escribir_historial()
 	return ptr;
 
 }
-vector <cREGISTRO> cMENU::escribir_registros() //tiene que dar la opcion de no ingresar ninguno
+vector <cREGISTRO> cMENU::escribir_registros()
 {
 	vector <cREGISTRO> registros;
 	cREGISTRO registro;
@@ -811,7 +808,6 @@ vector <cREGISTRO> cMENU::escribir_registros() //tiene que dar la opcion de no i
 	return registros;
 }
 
-// funciones imprimir
 void cMENU::imprimir()
 {
 	cout << "-------------------------" << endl 
@@ -825,7 +821,7 @@ void cMENU::imprimir()
 		<< endl << "6) Mostrar listado de pacientes receptores."
 		<< endl << "7) Informe mensual de donanciones en cada provincia."
 		<< endl << "8) Iniciar analisis."
-		<< endl << "10) CERRAR" << endl<< endl; //agregar opcion comenzar analisis
+		<< endl << "10) CERRAR" << endl<< endl;
 	
 }
 void cMENU::imprimir_submenu()
@@ -890,6 +886,7 @@ void cMENU:: imprimir_provincias()
 		<< "23)Tierra Del Fuego" << endl
 		<< "24)Tucuman" << endl;
 }
+
 
 /*
 void cMENU::void limpiar_pantalla()
