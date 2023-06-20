@@ -2,6 +2,7 @@
 #ifndef _VECTOR_H
 #define _VECTOR_H
 #include <vector>
+#include "Excepciones.h"
 using namespace std;
 
 template <class tipo>
@@ -19,8 +20,23 @@ public:
 	}
 	void operator+(tipo* elemento)
 	{
-		this->push_back(*elemento);
-		return;
+		try 
+		{
+			if (this->max_size() == this->size())
+			{
+				ExcepcionEspacio e;
+				throw e; 
+			}
+			else
+				this->push_back(*elemento);
+			return;
+		}
+		catch(ExcepcionEspacio& e)
+		{
+			cout << e.what() << endl;
+
+		}
+		
 	}
 };
 #endif // !VECTOR_H
