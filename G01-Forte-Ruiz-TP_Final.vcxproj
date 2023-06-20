@@ -127,48 +127,50 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include=".H Y .CPP\cBSA.cpp" />
-    <ClCompile Include=".H Y .CPP\cCENTRO.cpp" />
-    <ClCompile Include=".H Y .CPP\cDONANTE.cpp" />
-    <ClCompile Include=".H Y .CPP\cFLUIDO.cpp" />
-    <ClCompile Include=".H Y .CPP\cHISTORIAL.cpp" />
-    <ClCompile Include=".H Y .CPP\cMEDULA.cpp" />
-    <ClCompile Include=".H Y .CPP\cMENU.cpp" />
-    <ClCompile Include=".H Y .CPP\cPACIENTE.cpp" />
-    <ClCompile Include=".H Y .CPP\cPLASMA.cpp" />
-    <ClCompile Include=".H Y .CPP\cRECEPTOR.cpp" />
-    <ClCompile Include=".H Y .CPP\cREGISTRO.cpp" />
-    <ClCompile Include=".H Y .CPP\cSANGRE.cpp" />
-    <ClCompile Include=".H Y .CPP\cTRANSPLANTE.cpp" />
-    <ClCompile Include=".H Y .CPP\funciones.cpp" />
-    <ClCompile Include=".H Y .CPP\main.cpp" />
+    <ClCompile Include="Model\cBSA.cpp" />
+    <ClCompile Include="Model\cCENTRO.cpp" />
+    <ClCompile Include="Model\cDONANTE.cpp" />
+    <ClCompile Include="Model\cFLUIDO.cpp" />
+    <ClCompile Include="Model\cHISTORIAL.cpp" />
+    <ClCompile Include="Model\cMEDULA.cpp" />
+    <ClCompile Include="Model\cMENU.cpp" />
+    <ClCompile Include="Model\cPACIENTE.cpp" />
+    <ClCompile Include="Model\cPLASMA.cpp" />
+    <ClCompile Include="Model\cRECEPTOR.cpp" />
+    <ClCompile Include="Model\cREGISTRO.cpp" />
+    <ClCompile Include="Model\cSANGRE.cpp" />
+    <ClCompile Include="Model\cTRANSPLANTE.cpp" />
+    <ClCompile Include="Model\funciones.cpp" />
+    <ClCompile Include="Model\Excepciones.cpp" />
+    <ClCompile Include="Model\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include=".H Y .CPP\cBSA.h" />
-    <ClInclude Include=".H Y .CPP\cCENTRO.h" />
-    <ClInclude Include=".H Y .CPP\cDONANTE.h" />
-    <ClInclude Include=".H Y .CPP\cFLUIDO.h" />
-    <ClInclude Include=".H Y .CPP\cHISTORIAL.h" />
-    <ClInclude Include=".H Y .CPP\cMEDULA.h" />
-    <ClInclude Include=".H Y .CPP\cMENU.h" />
-    <ClInclude Include=".H Y .CPP\cPACIENTE.h" />
-    <ClInclude Include=".H Y .CPP\cPLASMA.h" />
-    <ClInclude Include=".H Y .CPP\cRECEPTOR.h" />
-    <ClInclude Include=".H Y .CPP\cREGISTRO.h" />
-    <ClInclude Include=".H Y .CPP\cSANGRE.h" />
-    <ClInclude Include=".H Y .CPP\cTRANSPLANTE.h" />
-    <ClInclude Include=".H Y .CPP\eCOLOR.h" />
-    <ClInclude Include=".H Y .CPP\eESTADO.h" />
-    <ClInclude Include=".H Y .CPP\ePRIORIDAD.h" />
-    <ClInclude Include=".H Y .CPP\ePROVINCIA.h" />
-    <ClInclude Include=".H Y .CPP\eSEXO.h" />
-    <ClInclude Include=".H Y .CPP\eTIPO.h" />
-    <ClInclude Include=".H Y .CPP\funciones.h" />
-    <ClInclude Include=".H Y .CPP\VECTOR.h" />
+    <ClInclude Include="Model\cBSA.h" />
+    <ClInclude Include="Model\cCENTRO.h" />
+    <ClInclude Include="Model\cDONANTE.h" />
+    <ClInclude Include="Model\cFLUIDO.h" />
+    <ClInclude Include="Model\cHISTORIAL.h" />
+    <ClInclude Include="Model\cMEDULA.h" />
+    <ClInclude Include="Model\cMENU.h" />
+    <ClInclude Include="Model\cPACIENTE.h" />
+    <ClInclude Include="Model\cPLASMA.h" />
+    <ClInclude Include="Model\cRECEPTOR.h" />
+    <ClInclude Include="Model\cREGISTRO.h" />
+    <ClInclude Include="Model\cSANGRE.h" />
+    <ClInclude Include="Model\cTRANSPLANTE.h" />
+    <ClInclude Include="Model\eCOLOR.h" />
+    <ClInclude Include="Model\eESTADO.h" />
+    <ClInclude Include="Model\ePRIORIDAD.h" />
+    <ClInclude Include="Model\ePROVINCIA.h" />
+    <ClInclude Include="Model\eSEXO.h" />
+    <ClInclude Include="Model\eTIPO.h" />
+    <ClInclude Include="Model\funciones.h" />
+    <ClInclude Include="Model\Excepciones.h" />
+    <ClInclude Include="Model\VECTOR.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
-    <None Include=".H Y .CPP\G01-Forte-Ruiz-TPfinal - Acceso directo.lnk" />
+    <None Include="Model\G01-Forte-Ruiz-TPfinal - Acceso directo.lnk" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
