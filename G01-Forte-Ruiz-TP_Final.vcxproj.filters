@@ -15,119 +15,125 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include=".H Y .CPP\cCENTRO.cpp">
+    <ClCompile Include="Model\cCENTRO.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include=".H Y .CPP\cDONANTE.cpp">
+    <ClCompile Include="Model\cDONANTE.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include=".H Y .CPP\cFLUIDO.cpp">
+    <ClCompile Include="Model\cFLUIDO.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include=".H Y .CPP\cHISTORIAL.cpp">
+    <ClCompile Include="Model\cHISTORIAL.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include=".H Y .CPP\cMEDULA.cpp">
+    <ClCompile Include="Model\cMEDULA.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include=".H Y .CPP\cMENU.cpp">
+    <ClCompile Include="Model\cMENU.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include=".H Y .CPP\cPACIENTE.cpp">
+    <ClCompile Include="Model\cPACIENTE.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include=".H Y .CPP\cPLASMA.cpp">
+    <ClCompile Include="Model\cPLASMA.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include=".H Y .CPP\cRECEPTOR.cpp">
+    <ClCompile Include="Model\cRECEPTOR.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include=".H Y .CPP\cREGISTRO.cpp">
+    <ClCompile Include="Model\cREGISTRO.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include=".H Y .CPP\cSANGRE.cpp">
+    <ClCompile Include="Model\cSANGRE.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include=".H Y .CPP\cTRANSPLANTE.cpp">
+    <ClCompile Include="Model\cTRANSPLANTE.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include=".H Y .CPP\main.cpp">
+    <ClCompile Include="Model\main.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include=".H Y .CPP\cBSA.cpp">
+    <ClCompile Include="Model\cBSA.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include=".H Y .CPP\funciones.cpp">
+    <ClCompile Include="Model\funciones.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\Excepciones.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include=".H Y .CPP\cBSA.h">
+    <ClInclude Include="Model\cBSA.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include=".H Y .CPP\cCENTRO.h">
+    <ClInclude Include="Model\cCENTRO.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include=".H Y .CPP\cDONANTE.h">
+    <ClInclude Include="Model\cDONANTE.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include=".H Y .CPP\cFLUIDO.h">
+    <ClInclude Include="Model\cFLUIDO.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include=".H Y .CPP\cHISTORIAL.h">
+    <ClInclude Include="Model\cHISTORIAL.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include=".H Y .CPP\cMEDULA.h">
+    <ClInclude Include="Model\cMEDULA.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include=".H Y .CPP\cPACIENTE.h">
+    <ClInclude Include="Model\cPACIENTE.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include=".H Y .CPP\cPLASMA.h">
+    <ClInclude Include="Model\cPLASMA.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include=".H Y .CPP\cRECEPTOR.h">
+    <ClInclude Include="Model\cRECEPTOR.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include=".H Y .CPP\cREGISTRO.h">
+    <ClInclude Include="Model\cREGISTRO.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include=".H Y .CPP\cSANGRE.h">
+    <ClInclude Include="Model\cSANGRE.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include=".H Y .CPP\cTRANSPLANTE.h">
+    <ClInclude Include="Model\cTRANSPLANTE.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include=".H Y .CPP\eESTADO.h">
+    <ClInclude Include="Model\eESTADO.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include=".H Y .CPP\ePRIORIDAD.h">
+    <ClInclude Include="Model\ePRIORIDAD.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include=".H Y .CPP\ePROVINCIA.h">
+    <ClInclude Include="Model\ePROVINCIA.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include=".H Y .CPP\eSEXO.h">
+    <ClInclude Include="Model\eSEXO.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include=".H Y .CPP\eTIPO.h">
+    <ClInclude Include="Model\eTIPO.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include=".H Y .CPP\funciones.h">
+    <ClInclude Include="Model\funciones.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include=".H Y .CPP\VECTOR.h">
+    <ClInclude Include="Model\VECTOR.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include=".H Y .CPP\eCOLOR.h">
+    <ClInclude Include="Model\eCOLOR.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include=".H Y .CPP\cMENU.h">
+    <ClInclude Include="Model\cMENU.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Excepciones.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
-    <None Include=".H Y .CPP\G01-Forte-Ruiz-TPfinal - Acceso directo.lnk" />
+    <None Include="Model\G01-Forte-Ruiz-TPfinal - Acceso directo.lnk" />
   </ItemGroup>
 </Project>
