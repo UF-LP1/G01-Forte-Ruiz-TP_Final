@@ -535,7 +535,7 @@ cPACIENTE* cMENU:: escribir_receptor()
 int cMENU::escribir_edad()
 {
 	int edad;
-	cout << "Ingrese edad: "; cin >> edad; cout << endl;
+	cout <<endl<< "Ingrese edad: "; cin >> edad; cout << endl;
 	return edad;
 }
 string cMENU::escribir_nombre()
@@ -629,6 +629,8 @@ cCENTRO* cMENU::escribir_centro()
 		prov--;
 
 		ptr = verificar_centro(nombre, partido, provincias[prov], ptr);
+		if (ptr != nullptr)
+			op = 2;
 		if (ptr == nullptr)
 		{
 			cout << "¿Desea volver a ingresar datos del centro?" << endl
@@ -685,7 +687,7 @@ cFLUIDO* cMENU::escribir_sangre()
 	bool sign;
 	eTIPO type = escribir_tipos();
 
-	cout << endl << "Ingresar Rh" << endl;
+	cout << endl << "Ingresar Rh(+/-):" << endl;
 	cin >> Rh; cout << endl;
 
 	while (Rh != '+' && Rh != '-')

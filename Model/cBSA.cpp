@@ -132,7 +132,7 @@ int cBSA::agregar_paciente(cPACIENTE* paciente)
 	
 	if (donante != nullptr)
 	{
-		while (a==0 && i<this->lista_donantes.size())
+		while (a != 0 && i<this->lista_donantes.size())
 		{
 			if (paciente == &(this->lista_donantes[i])) //SOLO NOS IMPORTA EL DNI
 				a = -1;
@@ -143,7 +143,7 @@ int cBSA::agregar_paciente(cPACIENTE* paciente)
 	i = 0;
 	if (receptor != nullptr && a == 0)
 	{
-		while (a != -1 || i < this->lista_receptores.size())
+		while (a != -1 && i < this->lista_receptores.size())
 		{
 			if (receptor == &(this->lista_receptores[i])) //SOBRECARGA DONDE COINCIDAN TODOS LOS ATRIBUTOS
 				a = -1;
