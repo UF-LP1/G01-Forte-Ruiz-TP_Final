@@ -319,7 +319,7 @@ int cMENU::control_entradas(int inf, int sup)
 	int c = 0;
 	do
 	{
-		c = 0;
+		
 		cin >> aux;
 		for (int i = aux.length() - 1; i >= 0; i--)
 		{
@@ -332,14 +332,17 @@ int cMENU::control_entradas(int inf, int sup)
 			else
 				c = -1;
 		}
-		if (c == -1)
+		if (c == -1 || ap<inf || ap>sup)
 		{
-			cout << "Reingrese su eleccion (unicamente validas las opciones del " << inf << " al " << sup << "): ";
+			cout << "Reingrese su eleccion (unicamente validas las opciones del " << inf << " al " << sup << "): " ;
 
 		}
 		else
+		{
 			op = ap;
-	} while (op<inf || op>sup);
+			c = 0;
+		}
+	} while (c == -1);
 
 
 	return op;
@@ -812,7 +815,7 @@ vector <cREGISTRO> cMENU::escribir_registros()
 
 void cMENU::imprimir()
 {
-	cout << "-------------------------" << endl 
+	cout <<endl<< "-------------------------" << endl 
 		 << "Banco de Sangre Argentino" << endl 
 		 << "-------------------------";
 	cout << endl << "1) Registrar paciente."
