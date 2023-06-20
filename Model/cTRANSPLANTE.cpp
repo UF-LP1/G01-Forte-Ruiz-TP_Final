@@ -35,7 +35,7 @@ string cTRANSPLANTE:: to_string() const
 {
 	stringstream ss;
 	ss << "Transplante realizado:" << endl;
-	//ss << "t/Numero de transplante realizado:" << this->num_transplante <<endl;
+	ss << "t/Numero de transplante realizado:" << this->num_transplante <<endl;
 	struct tm aux;
 	localtime_s(&aux, &this->fecha);
 	ss << "    Fecha:" << aux.tm_mday << "/" << aux.tm_mon + 1 << "/" << aux.tm_year + 1900 << endl;
@@ -45,7 +45,7 @@ string cTRANSPLANTE:: to_string() const
 	if (this->resultado)
 		ss << "EXITOSO." << endl;
 	else
-		ss << "CON COMPLICACIONES." << endl; //fallado, complicado, fracaso, deficiente
+		ss << "CON COMPLICACIONES." << endl; 
 
 	return ss.str();
 }

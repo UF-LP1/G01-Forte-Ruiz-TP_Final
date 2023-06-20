@@ -122,7 +122,6 @@ cPACIENTE* cBSA::elegir_receptor(VECTOR<cRECEPTOR*> *posibles_receptores)
 
 int cBSA::agregar_paciente(cPACIENTE* paciente)
 {
-	//FALTA VERIFICAR SI NO ESTA EN OTRA LISTA O SI YA ESTABA
 	cRECEPTOR* receptor;
 	cDONANTE* donante;
 	int a = 0;
@@ -134,7 +133,7 @@ int cBSA::agregar_paciente(cPACIENTE* paciente)
 	{
 		while (a != 0 && i<this->lista_donantes.size())
 		{
-			if (paciente == &(this->lista_donantes[i])) //SOLO NOS IMPORTA EL DNI
+			if (paciente == &(this->lista_donantes[i])) 
 				a = -1;
 			//Ya estaba en la lista de donantes
 			i++;
@@ -145,7 +144,7 @@ int cBSA::agregar_paciente(cPACIENTE* paciente)
 	{
 		while (a != -1 && i < this->lista_receptores.size())
 		{
-			if (receptor == &(this->lista_receptores[i])) //SOBRECARGA DONDE COINCIDAN TODOS LOS ATRIBUTOS
+			if (receptor == &(this->lista_receptores[i])) 
 				a = -1;
 			//Ya estaba en la lista de receptores
 			i++;
@@ -162,7 +161,7 @@ int cBSA::agregar_paciente(cPACIENTE* paciente)
 		if (b) 
 		{
 			donante->crear_registro();
-			this->lista_donantes + donante;// no se modifica la lista, se modifica la copia
+			this->lista_donantes + donante;
 		
 
 		}
@@ -177,7 +176,7 @@ int cBSA::agregar_paciente(cPACIENTE* paciente)
 	return a;
 }
 
-void cBSA::protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor) //falta sobrecarga del -
+void cBSA::protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor) 
 {
 	int i = donante->get_registros().size(); //posicion del ultimo registro
 	bool b1;
@@ -218,7 +217,7 @@ void cBSA::buscar_posibles_receptores(cDONANTE* donante, VECTOR<cRECEPTOR*> *lis
 
 	return;
 }
-cPACIENTE* cBSA::iniciar_analisis(cDONANTE* donante)// funcion madre que abarca varios metodos
+cPACIENTE* cBSA::iniciar_analisis(cDONANTE* donante)
 {
 	VECTOR<cRECEPTOR*> sublista;
 	cPACIENTE* pac = nullptr;
@@ -234,7 +233,7 @@ cPACIENTE* cBSA::iniciar_analisis(cDONANTE* donante)// funcion madre que abarca 
 			}
 		}
 		if (dynamic_cast<cRECEPTOR*>(pac)->get_transplante() == nullptr)
-			pac = nullptr;//por mas que eran compatibles, no sobrevivio el protocolo transplante
+			pac = nullptr;//por mas que eran compatibles, no sobrevivio el protocolo transplante(n se realizo ningun transplante)
 
-	return pac;//ver si anda bien esto, esta mal devolver la direccion de memoria de un objeto creado en la funcio, una direccion de memoria no es objeto pero guarda
+	return pac;
 }

@@ -18,16 +18,13 @@ cTRANSPLANTE* cCENTRO::realizar_transplante()
 	int a;
 	bool b;
 	srand(time(NULL));
-	a = rand() % 1;// los valores bool son 0 y 1, si no funciona hacer los if
+	a = rand() % 1;
 	if (a == 1)
 		b = true;
-	else if (a == 0) //HICE LO DE LOS IFS POR LAS DUDAS
+	else if (a == 0)
 		b = false;
-	//time_t t = time(NULL);//por defecto la fecha del transplante es la de hoy
-
-	 //FALTA NEW
-	//evito usar new al recibir por parametro la direccion de memoria donde guardar los datos
-	cTRANSPLANTE* trans = new cTRANSPLANTE(time(NULL), b);//va a ser deleteado en bsA
+	
+	cTRANSPLANTE* trans = new cTRANSPLANTE(time(NULL), b);
 	return trans;
 	
 }
