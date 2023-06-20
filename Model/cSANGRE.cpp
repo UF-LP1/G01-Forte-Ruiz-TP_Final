@@ -38,13 +38,12 @@ bool cSANGRE::verificar_fecha_maxima(time_t fecha_extraccion) //42 dias
 
 bool cSANGRE:: compatibilidad(cFLUIDO* donante) 
 {
-	//se tiene que hacer dynamic cast si o si, porque si cambio el parametro que recibe la funcion, ya no es virtual
-	cSANGRE* ptr = dynamic_cast<cSANGRE*>(donante);// estos se hacen en la funcion de la sobrecarga de ==, repetimos codigo
+	
+	cSANGRE* ptr = dynamic_cast<cSANGRE*>(donante);
 	if (ptr == nullptr)
 		return false;
 
-	//con el plasma hay 1° 2° 3° opcion, si lo tomamos en cuenta se vuelve complicado
-
+	
 	if (this->tipo == AB && this->Rh)//AB+ recibe todos los tipos
 		return true;
 	if (this->tipo == B && this->Rh && ptr->get_tipo() == B || ptr->get_tipo() == O) //B+ recibe B+- y O+-

@@ -42,7 +42,7 @@ string cMEDULA::to_string() const
 	const char* colores[] = {"amarillo", "rojo"};
 	ss << "Fluido: MEDULA" << endl;
 	ss << "Volumen: " << this->volumen << " ml"<< endl
-	   << "Color: " << colores[this->color]<<endl; //(:p)
+	   << "Color: " << colores[this->color]<<endl; 
 	return ss.str();
 }
 

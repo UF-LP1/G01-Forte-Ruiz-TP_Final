@@ -83,7 +83,7 @@ string cRECEPTOR::to_string() const
 
 	ss << "-------------------------------" << endl;
 
-	ss << "Paciente:" << endl; //donante/recep
+	ss << "Paciente:" << endl; 
 
 	ss << "Nombre: " << this->nombre << endl << "DNI: " << this->dni << endl
 		<< "Fecha de nacimiento: " << aux.tm_mday << "/" << aux.tm_mon + 1 << "/" << aux.tm_year + 1900 << endl
@@ -105,8 +105,6 @@ string cRECEPTOR::to_string() const
 		ss << ptr3->to_string();
 
 
-
-	//hasta aca igual que el padre
 	struct tm fecha;
 	localtime_s(&fecha, &this->fecha_ingreso);
 	string estados[3]{ "ESTABLE", "INESTABLE", "RECIBIO" };

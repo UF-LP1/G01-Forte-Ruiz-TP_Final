@@ -51,12 +51,11 @@ bool cPLASMA:: verificar_fecha_maxima(time_t fecha_extraccion) // 1 año
 }
 
 bool cPLASMA:: compatibilidad(cFLUIDO* donante) //evalua si el fluido que "recibe" es compatible con el propio
-{	//se tiene que hacer dynamic cast si o si, porque si cambio el parametro que recibe la funcion, ya no es virtual
-	cPLASMA* ptr = dynamic_cast<cPLASMA*>(donante);// estos se hacen en la funcion de la sobrecarga de ==, repetimos codigo
+{	
+	cPLASMA* ptr = dynamic_cast<cPLASMA*>(donante);
 	if (ptr == nullptr)
 		return false;
 
-	//con el plasma hay 1° 2° 3° opcion, si lo tomamos en cuenta se vuelve complicado
 	if (this->tipo == A && ptr->get_tipo() == A || ptr->get_tipo() == AB)
 		return true;
 	if (this->tipo == AB && ptr->get_tipo() == AB)
