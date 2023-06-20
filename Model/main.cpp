@@ -22,7 +22,7 @@ int main()
 	cCENTRO* centro7 = new cCENTRO("Clinica Del Valle", "Calle Principal 654", "Neuquen", Neuquen, "+54 299 2109 - 8765");
 	cCENTRO* centro8 = new cCENTRO("Hospital Publico Salta", "Avenida Principal 890", "Salta", Salta, "+54 387 8765 - 4321");
 	cCENTRO* centro9 = new cCENTRO("Centro de Salud Tucuman", "Calle Principal 432", "San Miguel de Tucuman", Tucuman, "+54 381 543 - 2109");
-	cCENTRO* centro10 = new cCENTRO("Hospital Publico Río Negro", "Avenida Principal 1098", " Viedma", RioNegro, " +54 2920 876 - 5432");
+	cCENTRO* centro10 = new cCENTRO("Hospital Publico Rio Negro", "Avenida Principal 1098", " Viedma", RioNegro, " +54 2920 876 - 5432");
 	 
 	vector<cCENTRO> lista_centros;
 	lista_centros.push_back(*centro1);
@@ -47,10 +47,10 @@ int main()
 	cFLUIDO* fluido9 = new cSANGRE(450, O, false);
 	cFLUIDO* fluido10 = new cMEDULA(450, amarillo);
 
-	cRECEPTOR* pac11 = new cRECEPTOR(32, "Maria Garcia", 811334400, "123456789", FEMENINO, fluido1, centro1, "12345678", 1703622400, tres, ESTABLE);// 25 / 02 / 2024
-	cRECEPTOR* pac12 = new cRECEPTOR(41, "Juan Gonzalez", 724310400, "987654321", MASCULINO, fluido2, centro2, "98765432", 1692979200, dos, ESTABLE);// 23 / 02 / 2023
+	cRECEPTOR* pac11 = new cRECEPTOR(32, "Maria Garcia", 811334400, "123456789", FEMENINO, fluido1, centro1, "12345678", 1703622400, tres, ESTABLE);
+	cRECEPTOR* pac12 = new cRECEPTOR(41, "Juan Gonzalez", 724310400, "987654321", MASCULINO, fluido2, centro2, "98765432", 1692979200, dos, ESTABLE);
 	cRECEPTOR* pac13 = new cRECEPTOR(28, "Laura Fernandez", 940054400, "555555555", FEMENINO, fluido3, centro3, "55555555", 1664732800, uno, ESTABLE);
-	cRECEPTOR* pac14 = new cRECEPTOR(49, "Carlos Rodriguez", 629372800, "1111111111", MASCULINO, fluido4, centro4, "11111111", 1686803200, cinco, ESTABLE);//
+	cRECEPTOR* pac14 = new cRECEPTOR(49, "Carlos Rodriguez", 629372800, "1111111111", MASCULINO, fluido4, centro4, "11111111", 1686803200, cinco, ESTABLE);
 	cRECEPTOR* pac15 = new cRECEPTOR(36, "Ana Martinez", 787046400, "999999999", FEMENINO, fluido5, centro5, "99999999", 1672406400, cuatro, ESTABLE);
 	cRECEPTOR* pac16 = new cRECEPTOR(39, "Pedro Lopez", 680851200, "777777777", MASCULINO, fluido6, centro6, "77777777", 1680576000, tres, ESTABLE);
 	cRECEPTOR* pac17 = new cRECEPTOR(45, "Andrea Ramirez", 594144000, "444444444", FEMENINO, fluido7, centro7, "44444444", 1708934400, dos, ESTABLE);
@@ -107,15 +107,68 @@ int main()
 	lista_donantes.push_back(pac10);
 
 	VECTOR<cDONANTE> lista_aux;
-	cBSA banco(lista_aux, lista_receptores, lista_centros);
+	cBSA* banco= new cBSA(lista_aux, lista_receptores, lista_centros);
 
 	for (int i = 0; i < lista_donantes.size(); i++)
 	{
-		banco.agregar_paciente(lista_donantes[i]);
+		banco->agregar_paciente(lista_donantes[i]);
 	}
 	
-	cMENU menu(&banco);
+	cMENU menu(banco);
 	menu.ejecutar();
+
+	delete banco;
+
+	for (int i = 0; i < lista_donantes.size(); i++)
+	{
+		if (lista_donantes[i] != nullptr)
+			delete lista_donantes[i];
+	}
+	
+	delete pac11;
+	delete pac12;
+	delete pac13;
+	delete pac14;
+	delete pac15;
+	delete pac16;
+	delete pac17;
+	delete pac18;
+	delete pac19;
+	delete pac20;
+
+	delete centro1;
+	delete centro2;
+	delete centro3;
+	delete centro4;
+	delete centro5;
+	delete centro6;
+	delete centro7;
+	delete centro8;
+	delete centro9;
+	delete centro10;
+
+	delete fluido1;
+	delete fluido2;
+	delete fluido3;
+	delete fluido4;
+	delete fluido5;
+	delete fluido6;
+	delete fluido7;
+	delete fluido8;
+	delete fluido9;
+	delete fluido10;
+
+	delete historial1;
+	delete historial2;
+	delete historial3;
+	delete historial4;
+	delete historial5;
+	delete historial6;
+	delete historial7;
+	delete historial8;
+	delete historial9;
+	delete historial10;
+
 	return 0;
 }
 

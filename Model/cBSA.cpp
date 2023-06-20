@@ -9,33 +9,9 @@ cBSA::cBSA(VECTOR<cDONANTE> lista_donantes, VECTOR<cRECEPTOR> lista_receptores, 
 	this->lista_centros = lista_centros;
 }
 cBSA::~cBSA()
-{ /*
-	for (int i = 0; i < lista_donantes.size(); i++)
-	{
-		if (this->lista_donantes[i].get_centro() != nullptr)
-			delete this->lista_donantes[i].get_centro();
-		if (this->lista_donantes[i].get_fluido() != nullptr)
-			delete this->lista_donantes[i].get_fluido();
-		if(this->lista_donantes[i].get_historial()!=nullptr)
-			delete this->lista_donantes[i].get_historial();
-		for (int j = 0; this->lista_donantes[i].get_registros().size(); j++)
-		{
-			if(this->lista_donantes[i].get_registros()[j].get_centro()!=nullptr)
-				delete this->lista_donantes[i].get_registros()[j].get_centro();
-			if(this->lista_donantes[i].get_registros()[j].get_fluido()!=nullptr)
-				delete this->lista_donantes[i].get_registros()[j].get_fluido();
-		}
-	}
-	for (int i = 0; i < lista_receptores.size(); i++)
-	{
-		if(this->lista_receptores[i].get_centro()!=nullptr)
-			delete this->lista_receptores[i].get_centro();
-		if(this->lista_receptores[i].get_fluido() != nullptr)
-			delete this->lista_receptores[i].get_fluido();
-		if(this->lista_receptores[i].get_transplante() !=nullptr)
-			delete this->lista_receptores[i].get_transplante();
-	}
-	*/
+{ 
+	
+
 }
 
 //setters
