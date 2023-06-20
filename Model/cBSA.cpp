@@ -184,11 +184,11 @@ void cBSA::protocolo_transplante(cDONANTE* donante, cRECEPTOR* receptor) //falta
 	time_t fecha = donante->get_registros()[i-1].get_fecha_extraccion();
 	b1 = donante->get_fluido()->verificar_fecha_maxima(fecha);//dynamic cast
 	if (!b1)
+	{
 		this->lista_donantes - donante;
+		return;
+	}
 	//se borra de la lista, sobrecarga del -
-	
-	if (!(b1 && donante->get_centro()->get_provincia() == receptor->get_centro()->get_provincia() && donante->get_centro()->get_partido() == receptor->get_centro()->get_partido()))//sobrecarga en centro del ==
-		return;//si alguna condicion es falsa, se hace verdadera y entra al if
 	
 	cTRANSPLANTE* transplante=receptor->get_centro()->realizar_transplante();
 	receptor->set_transplante(transplante);
@@ -212,7 +212,7 @@ void cBSA::buscar_posibles_receptores(cDONANTE* donante, VECTOR<cRECEPTOR*> *lis
 {
 	for (int i = 0; i < this->lista_receptores.size(); i++)
 	{
-		if (this->lista_receptores[i] == *donante)
+		if (this->lista_receptores[i] == *donante && this->lista_receptores[i].get_centro() == donante->get_centro())
 			lista->push_back(& (this->lista_receptores[i]));
 	}
 
@@ -233,9 +233,8 @@ cPACIENTE* cBSA::iniciar_analisis(cDONANTE* donante)// funcion madre que abarca 
 				protocolo_transplante(donante, ptr);
 			}
 		}
-//		else;
-			//OPCIONES: o que cargue un vector con los donantes que no tienen match y lo devuelva
-			// o que vaya imprimiendolo aca en el else.
+		if (dynamic_cast<cRECEPTOR*>(pac)->get_transplante() == nullptr)
+			pac = nullptr;//por mas que eran compatibles, no sobrevivio el protocolo transplante
 
 	return pac;//ver si anda bien esto, esta mal devolver la direccion de memoria de un objeto creado en la funcio, una direccion de memoria no es objeto pero guarda
 }

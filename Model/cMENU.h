@@ -21,7 +21,7 @@ public:
 
 	//funciones extras
 
-	cCENTRO* verificar_centro(string nombre, string partido, ePROVINCIA provincia);
+	cCENTRO* verificar_centro(string nombre, string partido, ePROVINCIA provincia, cCENTRO* ptr);
 	int control_entradas(int sup, int inf);
 	//void limpiar_pantalla();
 

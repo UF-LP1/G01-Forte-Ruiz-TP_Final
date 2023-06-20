@@ -34,6 +34,7 @@ public:
 	void buscar_posibles_receptores(cDONANTE* donante, VECTOR<cRECEPTOR*> *lista);
 	cPACIENTE* iniciar_analisis(cDONANTE* donante);
 
+	friend class cMENU;
 	//string to_string_BSA(); //PASO A STRING TODAS LAS LISTAS?
 	//void imprimir_BSA();
 };

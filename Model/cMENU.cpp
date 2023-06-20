@@ -345,7 +345,7 @@ int cMENU::control_entradas(int inf, int sup)
 
 	return op;
 }
-cCENTRO* cMENU::verificar_centro(string nombre, string partido, ePROVINCIA provincia)
+cCENTRO* cMENU::verificar_centro(string nombre, string partido, ePROVINCIA provincia, cCENTRO* ptr)
 {
 	int pos = -1;
 	int i;
@@ -355,14 +355,14 @@ cCENTRO* cMENU::verificar_centro(string nombre, string partido, ePROVINCIA provi
 			pos = i;
 			
 	}
-	if (i== this->BSA->get_lista_centros().size())
+	if (pos==-1)
 	{
 		cout << endl << "No se encontro el centro en la lista de centros habilitados." << endl; //que vuelva a ingresar los datos 
 		cout << endl;
 		return nullptr;
 	}
-
-	return &(this->BSA->get_lista_centros()[pos]);
+	ptr=&(this->BSA->lista_centros[pos]);
+	return ptr;
 }
 
 //funciones menu principal
@@ -396,9 +396,10 @@ cRECEPTOR* cMENU::buscar_receptor(string dni)
 			pos = i;
 		}
 	}
-	if (i == this->BSA->get_lista_receptores().size())
+	if (pos==-1)
 		return nullptr;
-	return &(this->BSA->get_lista_receptores()[pos]);
+
+	return &(this->BSA->lista_receptores[pos]);
 }
 cDONANTE* cMENU::buscar_donante(string dni)
 {
@@ -408,16 +409,16 @@ cDONANTE* cMENU::buscar_donante(string dni)
 
 	for (i = 0; i < this->BSA->get_lista_donantes().size(); i++)
 	{
-		if (this->BSA->get_lista_donantes()[i].get_dni() == dni)
+		if (this->BSA->lista_donantes[i].get_dni() == dni)
 		{
 			cout << "El paciente: " << endl;
-			this->BSA->get_lista_donantes()[i].imprimir(); //
+			this->BSA->lista_donantes[i].imprimir(); //
 			pos = i;
 		}
 	}
-	if (i == this->BSA->get_lista_donantes().size())
+	if (pos==-1)
 		return nullptr;
-	return &(this->BSA->get_lista_donantes()[pos]);
+	return &(this->BSA->lista_donantes[pos]);
 }
 void cMENU::imprimir_listado_donantes() // sobrecarga de <<?
 {
@@ -485,6 +486,7 @@ cPACIENTE* cMENU::escribir_donante()
 {
 	int edad = escribir_edad();
 	string nombre = escribir_nombre();
+	cout << "Ingrese fecha de nacimiento: " << endl;
 	time_t fecha = escribir_fecha();
 	string tel = escribir_telefono();
 	eSEXO sex = escribir_sexo();
@@ -508,6 +510,7 @@ cPACIENTE* cMENU:: escribir_receptor()
 {	
 	int edad = escribir_edad();
 	string nombre = escribir_nombre();
+	cout << "Ingrese fecha de nacimiento:" << endl;
 	time_t fecha = escribir_fecha();
 	string tel = escribir_telefono();
 	eSEXO sex = escribir_sexo();
@@ -535,32 +538,34 @@ int cMENU::escribir_edad()
 	cout << "Ingrese edad: "; cin >> edad; cout << endl;
 	return edad;
 }
-
 string cMENU::escribir_nombre()
 {	
+	
 	string nombre;
-	cout << "Ingrese nombre: "; cin >> nombre; cout << endl;
+	cin.ignore();
+	cout << "Ingrese nombre: "; 
+	getline(cin,nombre); cout << endl;
 	return nombre;
 }
 time_t cMENU::escribir_fecha()
 {
 	char dummy;
 	int dia, mes, anio;
-	cout << "Fecha: "; cin >> dia >> dummy >> mes >> dummy >> anio; cout << endl;
+	cout << "Formato(DD/MM/AAAA): "; cin >> dia >> dummy >> mes >> dummy >> anio; cout << endl;
 
-	while (dia <= 0 || mes <= 0 || anio <= 1900 || isalpha(dia) != 0 || isalpha(mes) != 0 || isalpha(anio) != 0) //cin.fail por si ingreso un char, que no lo tome 
+	while (dia <= 0 || mes <= 0 || anio <= 1900 || cin.fail()) //cin.fail por si ingreso un char, que no lo tome 
 	{
 		try
 		{
-			//cin.clear(); //resetea el estado del cin 
-			//cin.ignore(100, '\n'); //hace que ignore todos los datos que estaban cargados anteriormente hasta el \n. La funcion hace que ignore la cantidad del parametro de la izq o hasta encontrar el \n. Como el de la izq es el maximo posible, llega primero al \n.
+			cin.clear(); //resetea el estado del cin 
+			cin.ignore(100, '\n'); //hace que ignore todos los datos que estaban cargados anteriormente hasta el \n. La funcion hace que ignore la cantidad del parametro de la izq o hasta encontrar el \n. Como el de la izq es el maximo posible, llega primero al \n.
 			ExcepcionFecha e; 
 			throw e; 
 
 		}
 		catch (ExcepcionFecha& e) 
 		{
-			cout << e.what(); 
+			cout << "EXCEPCION: Fecha invalida, vuelva a ingresar por favor: "; 
 			cin >> dia >> dummy >> mes >> dummy >> anio; 
 			cout << endl; 
 		}
@@ -579,7 +584,9 @@ time_t cMENU::escribir_fecha()
 string cMENU::escribir_telefono()
 {
 	string telefono;
-	cout << "Ingrese telefono: "; cin >> telefono; cout << endl;
+	cout << "Ingrese telefono: "; 
+	cin.ignore();
+	getline(cin, telefono); cout << endl;
 	
 	return telefono;
 }
@@ -597,17 +604,23 @@ eSEXO cMENU::escribir_sexo()
 cCENTRO* cMENU::escribir_centro()
 {
 	vector<ePROVINCIA> provincias = { BuenosAires, CABA,Catamarca, Chaco, Chubut, Cordoba, Corrientes, EntreRios, Formosa, Jujuy, LaPampa, LaRioja, Mendoza, Misiones, Neuquen, RioNegro,Salta, SanJuan, SanLuis, SantaCruz, SantaFe, SantiagoDelEstero,TierraDelFuego,Tucuman };
-	string nombre, partido;
+	string nombre;
+	string partido;
 	int prov, op=0;
-	cCENTRO* ptr = nullptr;
-	do
+	cCENTRO* ptr=nullptr;//temita
+	while(op == 0||ptr ==nullptr)
 	{
-		cout << "Datos a ingresar del centro de salud: " << endl
-			<< "Nombre: ";
-		cin >> nombre; cout << endl;
+		cout << "Datos a ingresar del centro de salud: " << endl;
+
+		cout << "Nombre: ";
+		cin.ignore();
+		getline(cin, nombre);
+
 		cout << "Partido: ";
-		cin >> partido; cout << endl;
-		cout << "Provincia: ";
+		getline(cin, partido); 
+		
+
+		cout << "Provincia: " << endl;
 	
 		imprimir_provincias();
 
@@ -615,14 +628,14 @@ cCENTRO* cMENU::escribir_centro()
 
 		prov--;
 
-		ptr = verificar_centro(nombre, partido, provincias[prov]);
+		ptr = verificar_centro(nombre, partido, provincias[prov], ptr);
 		if (ptr == nullptr)
 		{
 			cout << "¿Desea volver a ingresar datos del centro?" << endl
 				<< "1)Si" << endl << "2)No" << endl;
 			op = control_entradas(1, 2);
 		}
-	} while (op==1);
+	};
 
 	return ptr;
 }
@@ -642,7 +655,7 @@ cFLUIDO* cMENU::escribir_fluido()
 		<< "1) Sangre" << endl
 		<< "2) Medula" << endl
 		<< "3) Plasma" << endl
-		<< "Opcion: "; cin >> op4; cout << endl;
+		<< "Opcion: ";
 	op4 = control_entradas(1, 3);
 
 	if (op4 == 1)
@@ -660,8 +673,8 @@ eTIPO cMENU::escribir_tipos()
 {
 	vector<eTIPO> tipos = { A,AB,B,O };
 
-	cout << "Tipo sanguíneo: ";
-	cout << "1)A" << endl << "2)AB" << endl << "3)B" << "4)O" << endl;
+	cout << "Tipo sanguineo: ";
+	cout << endl <<"1)A" << endl << "2)AB" << endl << "3)B" << endl << "4)O" << endl;
 	int type = control_entradas(1, 4);
 	type--;
 	return tipos[type];
@@ -718,10 +731,10 @@ ePRIORIDAD cMENU::escribir_prioridad()
 }
 eESTADO cMENU::escribir_estado()
 {
-	vector<eESTADO> estados = { ESTABLE, INESTABLE, RECIBIO };
+	vector<eESTADO> estados = { ESTABLE, INESTABLE};
 	cout << "Ingrese el estado del paciente" << endl
-		<< "1)Estable" << endl << "2)Inestable" << endl << "3)Recibio" << endl;
-	int op = control_entradas(1, 3);
+		<< "1)Estable" << endl << "2)Inestable" << endl;
+	int op = control_entradas(1, 2);
 	op--;
 	return estados[op];
 
@@ -730,12 +743,12 @@ eESTADO cMENU::escribir_estado()
 //donante
 float cMENU::escribir_peso() //mayor a tanto (1kg) y menor a tanto(1000kg)?, 
 {
-	float peso;
-	do
+	float peso=-1.0;
+	while (peso < 1.0 || peso > 1000.0)
 	{
 		cout << "Ingrese el peso del paciente en kg: ";
 		cin >> peso; cout << endl;
-	} while (peso > 1.0 && peso < 1000.0);
+	};
 	return peso;
 }
 cHISTORIAL* cMENU::escribir_historial()
@@ -775,22 +788,24 @@ vector <cREGISTRO> cMENU::escribir_registros() //tiene que dar la opcion de no i
 	cCENTRO* centro;
 	time_t fecha;
 	int op = 0;
-	do
+	while(op!=2)
 	{
-		cout << "1)Ingrese registro:" << endl;
-		cout << "2)Volver" << endl;
+		cout << "1)Ingresar registro." << endl;
+		cout << "2)No ingresar registros." << endl;
 		op = control_entradas(1, 2);
 		if (op == 1)
 		{
 			fluid = escribir_fluido();
 			centro = escribir_centro();
+
+			cout << endl << "Ingrese la fecha de la donación:" << endl;
 			fecha = escribir_fecha();
 			registro.set_fluido(fluid);
 			registro.set_fecha_extraccion(fecha);
 			registro.set_centro(centro);
 			registros.push_back(registro);
 		}
-	} while (op != 2);
+	};
 	return registros;
 }
 
@@ -848,29 +863,29 @@ void cMENU::imprimir_datos_donante()
 }
 void cMENU:: imprimir_provincias()
 {
-	cout << "1)BuenosAires" << endl
+	cout << endl<<"1)BuenosAires" << endl
 		<< "2)CABA" << endl
 		<< "3)Catamarca" << endl
 		<< "4)Chaco" << endl
 		<< "5)Chubut" << endl
 		<< "6)Cordoba " << endl
 		<< "7)Corrientes" << endl
-		<< "8)EntreRios" << endl
+		<< "8)Entre Rios" << endl
 		<< "9)Formosa" << endl
 		<< "10)Jujuy" << endl
-		<< "11)LaPampa" << endl
-		<< "12)LaRioja" << endl
+		<< "11)La Pampa" << endl
+		<< "12)La Rioja" << endl
 		<< "13)Mendoza" << endl
 		<< "14)Misiones" << endl
 		<< "15)Neuquen" << endl
-		<< "16)RioNegro" << endl
+		<< "16)Rio Negro" << endl
 		<< "17)Salta" << endl
-		<< "18)SanJuan" << endl
-		<< "19)SanLuis" << endl
-		<< "20)SantaCruz" << endl
+		<< "18)San Juan" << endl
+		<< "19)San Luis" << endl
+		<< "20)Santa Cruz" << endl
 		<< "21)SantaFe" << endl
-		<< "22)SantiagoDelEstero" << endl
-		<< "23)TierraDelFuego" << endl
+		<< "22)Santiago Del Estero" << endl
+		<< "23)Tierra Del Fuego" << endl
 		<< "24)Tucuman" << endl;
 }
 
