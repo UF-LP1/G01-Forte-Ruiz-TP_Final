@@ -289,7 +289,9 @@ void cMENU::ejecutar()
 		{
 			for (int i = 0; i < this->BSA->lista_donantes.size(); i++)
 			{
-				this->BSA->iniciar_analisis(&(this->BSA->lista_donantes[i]));
+				cPACIENTE* ptr= this->BSA->iniciar_analisis(&(this->BSA->lista_donantes[i]));
+				if (dynamic_cast<cRECEPTOR*>(ptr)->get_transplante() != nullptr)
+					i--;
 			}
 			break;
 			getchar();
